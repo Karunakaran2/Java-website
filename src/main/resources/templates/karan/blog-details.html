@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/karan-layout}">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<head>
+	<title>karan - Welcome Page</title>
+
+
+
+	<link rel="icon" type="image/x-icon" th:href="@{/website/img/favicon.png}" />
+</head>
+<main role="main" class="" layout:fragment="content">
+
+<div class="breadcrumb-banner"
+     th:style="|background-image: linear-gradient(270deg, rgba(0,0,0,.55), rgba(0,0,0,.55) 101.02%), url('/uploads/blogs/${blog.coverImage}')|">
+
+		<div class="container-fluid one ">
+			<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+				<ol class="breadcrumb-custom">
+					<li><a th:href="@{/}">Home</a></li>
+					<li class="active">Research Publications</li>
+				</ol>
+			</nav>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="banner-content">
+						<!-- <h1>
+							Building the Future of <br /> Digital Experiences
+						</h1> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="blog-details-page pt-90 mb-90">
+		<div class="container-fluid one">
+			<div class="row g-lg-4 gy-5">
+				<div class="col-lg-8">
+
+					<div class="post-tag-and-title list-style-none mb-5">
+						<ul class="tags ps-0">
+							<li>
+								<a th:href="@{/research-publications}">
+									<i class="fa-solid fa-folder"></i><span
+										th:text="${blog.category.name}">Category</span>
+								</a>
+							</li>
+							<li>
+								<a th:href="@{/research-publications}"><i class="fa-regular fa-calendar"></i>
+									<span th:text="${#temporals.format(blog.publishedAt, 'dd MMMM, yyyy')}">Date</span>
+								</a>
+							</li>
+						</ul>
+						<h2 th:text="${blog.title}">Blog Title</h2>
+					</div>
+					
+					<!-- <div class="post-thumb mb-5">
+						<div class="post-thumb mb-5">
+							<img th:src="@{'/uploads/blogs/' + ${blog.coverImage}}" style="width: 100%;"
+								alt="Cover Image">
+						</div>
+					</div> -->
+
+					<div th:utext="${blog.content}"></div>
+
+					<!--<div class="pt-5">
+
+						<div class="graph-chart">
+							<div class="chartjs-size-monitor">
+								<div class="chartjs-size-monitor-expand">
+									<div class=""></div>
+								</div>
+								<div class="chartjs-size-monitor-shrink">
+									<div class=""></div>
+								</div>
+							</div>
+							<h4>Insights from Recent Public Policy Impact Analysis</h4>
+							<canvas id="consulting-chart" width="675" height="337"
+								style="display: block; height: 377px; width: 754px;"
+								class="chartjs-render-monitor"></canvas>
+						</div>
+					</div>-->
+					<!--<blockquote>
+						<div class="quoat-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="26" height="18" viewBox="0 0 26 18">
+								<path
+									d="M20.6832 6.05443L20.4534 6.62147L21.0549 6.73371C23.6453 7.21714 25.5 9.46982 25.5 12.0337C25.5 13.573 24.8343 15.0529 23.6667 16.09C22.4982 17.1192 20.9207 17.6286 19.3329 17.4722C16.4907 17.1844 14.2846 14.6588 14.3404 11.7032C14.4201 7.67759 15.8945 5.07458 17.6289 3.38578C19.3761 1.68459 21.4158 0.884497 22.6452 0.531618L22.6591 0.527628L22.6728 0.52284C22.7152 0.507954 22.7704 0.5 22.8713 0.5C23.1425 0.5 23.3799 0.624329 23.5265 0.85037L23.5277 0.852289C23.7128 1.13485 23.6857 1.4981 23.4524 1.75822L23.4523 1.75827C22.2163 3.13698 21.2806 4.57999 20.6832 6.05443Z"
+									stroke="white" />
+								<path
+									d="M6.84136 6.05442L6.61159 6.62147L7.21303 6.73371C9.80353 7.21714 11.6582 9.46983 11.6582 12.0337C11.6582 13.573 10.9925 15.0529 9.82487 16.09C8.65615 17.1194 7.07865 17.6285 5.50008 17.4722C2.67976 17.1842 0.498651 14.7207 0.498651 11.8126V11.6985C0.579458 7.67556 2.05336 5.07393 3.7871 3.38579C5.53424 1.6846 7.574 0.884504 8.8034 0.531628L8.81731 0.527636L8.83096 0.522848C8.8734 0.507959 8.92859 0.500008 9.02944 0.500008C9.3007 0.500008 9.53807 0.624359 9.68459 0.850338L9.6859 0.852327C9.87103 1.13488 9.84386 1.49811 9.61059 1.75823L9.61054 1.75828C8.37446 3.13698 7.43881 4.57999 6.84136 6.05442Z"
+									stroke="white" />
+							</svg>
+						</div>
+						<p>The business consulting process involves a series of steps that consultants follow when
+							working with clients to address specific challenges, improve operations, or achieve
+							organizational goals.</p>
+						<cite>Manish Kulkarni</cite>
+					</blockquote>-->
+					<!--<blockquote th:if="${blog.authorName != null}">
+						<div class="quoat-icon">
+							<i class="fa-solid fa-quote-left"></i>
+						</div>
+						<p th:text="${blog.summary}"></p>
+						<cite th:text="${blog.authorName}">Author</cite>
+					</blockquote>-->
+
+					<div class="author-signature mt-5 pt-4 border-top">
+						<div class="d-flex align-items-center">
+							<div class="author-avatar me-3">
+								<img th:src="@{/website/img/inner-pages/avatar.png}" alt="Author" width="50"
+									class="rounded-circle shadow-sm">
+							</div>
+							<div class="author-info">
+								<p class="mb-0 text-muted" th:text="${blog.authorName}"></p>
+							</div>
+						</div>
+					</div>
+
+
+
+
+				</div>
+				<div class="col-lg-4 pl--95">
+					<div class="blog-sidebar">
+
+						<div class="single-widgets widget_egns_tag mb-5" style="display: none;">
+							<div class="widget-title social-area single-widgets   mb-3">
+								<a href="#" onclick="bookmarkPage();return false;"
+									class="d-flex justify-content-start align-items-center"><i
+										class="fa-regular fa-bookmark p-1"></i>
+									<p class="px-5">Save Article</p>
+								</a>
+							</div>
+							<div class="widget-title social-area single-widgets  mb-3">
+								<a href="#" onclick="printPage();return false;"
+									class="d-flex justify-content-start align-items-center"><i
+										class="p-1 fa-solid fa-print"></i>
+									<p class="px-5">Download</p>
+								</a>
+
+							</div>
+							<div class="widget-title social-area  single-widgets d-flex justify-content-between m-0">
+								<h4>Share:</h4>
+								<ul class="social-link d-flex align-items-end">
+									<li><a href="#" onclick="copyPageLink(); return false"><i
+												class="fa-solid fa-link"></i></a></li>
+									<li><a href="#" onclick="printPage();return false;"><i
+												class="fa-solid fa-print"></i></a></li>
+									<li><a href="#"><i class="fa-regular fa-file-pdf"></i></a>
+									</li>
+									<li><a a href="#" onclick="bookmarkPage(); return false;"><i
+												class="fa-regular fa-bookmark"></i></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="single-widgets widget_egns_recent_post mb-40">
+							<div class="widget-title">
+								<h4>Recent Article:</h4>
+							</div>
+
+							<div class="recent-post-wraper">
+								<div class="widget-cnt" th:each="recent : ${recentBlogs}">
+									<div class="wi">
+										<a th:href="@{'/research-publications/' + ${recent.slug}}">
+											<img th:src="@{'/uploads/blogs/thumbnails/' + ${recent.thumbnailImage}}"
+												alt="Thumbnail" />
+										</a>
+									</div>
+									<div class="wc">
+										<a class="text-decoration-none" th:href="@{'/research-publications/' + ${recent.slug}}">
+											<span
+												th:text="${#temporals.format(recent.publishedAt, 'dd MMM yyyy')}"></span>
+											/
+											<span th:text="${recent.authorName}">Author</span>
+										</a>
+										<h5 class="mt-0">
+											<a th:href="@{'/research-publications/' + ${recent.slug}}" th:text="${recent.title}">Blog
+												Title</a>
+										</h5>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Blog-details pages -->
+	<!-- <div class="container-fluid one" th:if="${featuredCaseStudies != null and #lists.size(featuredCaseStudies) > 0}">
+
+		<section class="helped-clients-section">
+			<div class="title-and-underline mb-5">
+				<h2>How We've Helped Clients</h2>
+			</div>
+
+			<div class="cards">
+				<div class="card" th:each="caseStudy : ${featuredCaseStudies}">
+					<div>
+						<small th:if="${caseStudy.author != null}" th:text="${caseStudy.author}"></small>
+						<h3 th:text="${caseStudy.title}"></h3>
+					</div>
+					<a th:href="@{/case-studies/{slug}(slug=${caseStudy.slug})}">Read case study</a>
+				</div>
+			</div>
+		</section>
+	</div> -->
+
+
+
+</main>
+
+</html>

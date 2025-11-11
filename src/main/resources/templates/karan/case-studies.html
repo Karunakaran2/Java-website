@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/karan-layout}">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<head>
+	<title>karan - Case Studies</title>
+	<link rel="icon" type="image/x-icon" th:href="@{/website/img/favicon.png}" />
+</head>
+<main role="main" class="" layout:fragment="content">
+
+
+	<div class="breadcrumb-banner"
+		style="background-image: linear-gradient(270deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0.55) 101.02%), url(../website/img/inner-pages/braadcrumb-bg3.jpg);">
+		<div class="container-fluid one">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="banner-content">
+						<h1>Case Studies</h1>
+						<!-- <ul class="breadcrumb-list">
+	                        <li><a href="index.html">Home</a></li>
+	                        <li>Case Study Slider</li>
+	                    </ul> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="breadcrumbs">
+		<div class="container-fluid one">
+			<div class="row">
+				<div class="col-lg-12">
+					<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+						<ol class="breadcrumb-custom">
+							<li><a th:href="@{/}">Home</a></li>
+							<li class="active">Case Studies</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Breadcrumb Section -->
+
+	<!-- Start Case Study Section -->
+	<!-- Show section only if there are case studies -->
+	<!-- <div class="case-study-section pt-5 mb-90" th:if="${!#lists.isEmpty(featuredCaseStudies)}">
+		<div class="container-fluid one">
+			<div class="row g-4">
+				<div class="col-lg-12 gap-lg-5 gap-4">
+					<div class="section-title1 title-and-underline one mb-50">
+						<h2>Featured Case Studies</h2>
+					</div>
+				</div>
+
+				<div class="col-lg-12 gap-lg-5 gap-4">
+					<div class="casestudy-slider overflow-hidden">
+						Loop through featured case studies
+						<div class="slide-item" th:each="caseStudy : ${featuredCaseStudies}">
+							<div class="case-study-card">
+								<div class="case-study-img">
+									<img th:src="@{'/uploads/case-studies/thumbnails/' + ${caseStudy.thumbnailImage}}"
+										alt="Case Study Image">
+								</div>
+								<div class="case-study-content">
+									<div class="catgory-and-title">
+										<h3>
+											<a th:href="@{'/case-studies/' + ${caseStudy.slug}}"
+												th:text="${caseStudy.title}">Case Study Title</a>
+										</h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+	<!-- End Case Study Section -->
+
+	<!-- Start People Section -->
+	<div class="blog-section2 mb-130">
+		<div class="container-fluid one">
+			<div class="row g-4">
+				<div
+					class="col-lg-12 gap-lg-5 gap-4 d-flex flex-lg-nowrap flex-wrap align-items-end justify-content-between mb-50">
+					<div class="section-title1 title-and-underline two">
+						<h2>Transforming Challenges into Solutions</h2>
+					</div>
+				</div>
+
+				<div class="col-lg-12">
+					<div class="row g-4">
+						<div class="col-xl-3 col-lg-4 col-sm-6 blog-wrap" th:each="card : ${caseStudyCards}">
+							<div class="blog-card2">
+								<div class="blog-img magnetic-item">
+									<img th:src="@{'/uploads/case-studies/thumbnails/' + ${card.thumbnailImage}}"
+										th:alt="${card.title}" />
+								</div>
+								<div class="blog-content">
+									<h4>
+										<a th:href="@{'/case-studies/' + ${card.slug}}" th:text="${card.title}">Case
+											Study Title</a>
+									</h4>
+									<a class="explore-btn" th:href="@{'/case-studies/' + ${card.slug}}">
+										Read More
+										<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+											viewBox="0 0 12 12">
+											<path fill-rule="evenodd" clip-rule="evenodd"
+												d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+											</path>
+										</svg>
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<!-- Fallback if no cards found -->
+						<div class="row text-center" th:if="${#lists.isEmpty(caseStudyCards)}">
+							<div class="col-12 py-5">
+								<i class="fa-solid fa-face-frown fs-1 text-secondary mb-3"></i>
+								<h4 class="text-muted">No case studies published at the moment.</h4>
+								<p class="text-muted">Please check back later for updates.</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- View More Button -->
+					<div class="row g-4 justify-content-center pt-5" th:if="${caseStudyCards.hasNext()}">
+						<div class="col-lg-12 d-flex justify-content-center">
+							<a class="primary-btn1 btn-hover"
+							   th:href="@{/case-studies(page=${caseStudyCards.number + 1})}">
+								Load More
+								<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+									<path fill-rule="evenodd" clip-rule="evenodd"
+										d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+									</path>
+								</svg>
+								<span></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</main>
+
+</html>

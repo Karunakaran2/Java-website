@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/karan-layout}">
+
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header"
+	th:content="${_csrf.headerName}" />
+
+<head>
+<title>karan - Domain Consulting</title>
+<link rel="icon" type="image/x-icon"
+	th:href="@{/website/img/favicon.png}" />
+</head>
+<main role="main" class="" layout:fragment="content">
+
+	<div class="breadcrumb-banner"
+		style="background-image: linear-gradient(270deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0.55) 101.02%), url(../website/img/banner/Service-page-banner-1.jpg);">
+		<div class="container-fluid one ">
+			<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+				<ol class="breadcrumb-custom">
+					<li><a th:href="@{/}">Home</a></li>
+					<li class="active">Services</li>
+				</ol>
+			</nav>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="banner-content">
+						<h1>
+							Transforming Governance Through <br /> Innovation and Expertise
+						</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div class="breadcrumbs">
+		<div class="container-fluid one">
+			<div class="row">
+				<div class="col-lg-12">
+					<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+						<ol class="breadcrumb-custom">
+							<li><a th:href="@{/}">Home</a></li>
+							<li class="active">Services</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<!-- End Breadcrumb Section -->
+
+	<!-- Start Service Details Section -->
+	<div class="service-details-wrapper pt-90 mb-90">
+		<div class="container-fluid one ">
+			<div class="details-page-content mb-90">
+
+				<div class="row g-4">
+					<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-0">
+						<div class="section-title1 title-and-underline two gap-0">
+							<h3 class="section-heading">Service Overview</h3>
+							<h5 class="section-heading-brief">Redefining Governance
+								through Research, Reinvention, and Restructure</h5>
+						</div>
+					</div>
+				</div>
+				<div class="row g-lg-4 gy-2">
+					<div class="col-lg-12 col-md-12 col-xl-12 col-xxl-12">
+						<p class="first-para">karan’s Domain Consulting services are
+							designed to strengthen the foundations of public administration
+							through evidence-based research, institutional reform and
+							strategic transformation. In an era where governance demands
+							adaptability and innovation, karan brings domain depth, policy
+							insight and reform-driven expertise to help government
+							departments achieve sustainable impact.</p>
+
+						<p>We collaborate with ministries, departments and public
+							institutions to diagnose systemic challenges, redesign
+							administrative frameworks and align governance models with
+							contemporary needs. Through our sectoral focus on areas such as
+							public finance, general administration, licensing and compliance
+							and digital governance, karan bridges the gap between
+							institutional vision and actionable transformation ensuring
+							efficiency, accountability and citizen-centric outcomes.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div
+			class="service-datails-card fact-and-benefits-section pt-10 mb-90">
+			<div class="container-fluid one">
+				<div class="key-differentiaters-bg">
+					<div class="row g-4">
+						<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-2">
+							<div class="section-title1 title-and-underline two ">
+								<h3 class="section-heading">Services</h3>
+								<h5 class="section-heading-brief">Transforming Governance
+									with Deep Domain Expertise.</h5>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="courses-container col-lg-6">
+							<div class="course oneS">
+								<div class="course-preview">
+									<h5>Consulting Support</h5>
+								</div>
+								<div class="course-info">
+									<p class="col-lg-10">We provide specialized expertise in
+										public administration to identify bottlenecks, redesign
+										workflows, and deliver actionable strategies that improve
+										governance efficiency and outcomes.</p>
+								</div>
+							</div>
+						</div>
+						<div class="courses-container col-lg-6">
+							<div class="course twoS">
+								<div class="course-preview">
+									<h5>Capacity-Building Programs</h5>
+								</div>
+								<div class="course-info">
+									<p class="col-lg-10">Focused training programs designed to
+										enhance the knowledge and skills of government officials and
+										public sector entities, enabling them to respond effectively
+										to emerging challenges.</p>
+								</div>
+							</div>
+						</div>
+						<div class="courses-container col-lg-6">
+							<div class="course threeS">
+								<div class="course-preview">
+									<h5>Research &amp; Publications</h5>
+								</div>
+								<div class="course-info">
+									<p class="col-lg-10">We develop data-driven reports, case
+										studies, and knowledge resources that highlight governance
+										best practices, success stories, and reform opportunities.</p>
+								</div>
+							</div>
+						</div>
+						<div class="courses-container col-lg-6">
+							<div class="course fourS">
+								<div class="course-preview">
+									<h5>Innovation Lab</h5>
+								</div>
+								<div class="course-info">
+									<p class="col-lg-10">A dedicated space for ideation and
+										experimentation, where experts and institutions collaborate to
+										design forward-looking solutions and adopt best practices for
+										public administration.</p>
+								</div>
+							</div>
+						</div>
+						<div class="courses-container col-lg-6">
+							<div class="course fiveS">
+								<div class="course-preview">
+									<h5>Business Process Reengineering (BPR)</h5>
+								</div>
+								<div class="course-info">
+									<p class="col-lg-10">Leveraging decades of domain
+										experience to radically redesign administrative and financial
+										processes, improving efficiency, transparency, and
+										performance.</p>
+								</div>
+							</div>
+						</div>
+						<div class="courses-container col-lg-6">
+							<div class="course sixS">
+								<div class="course-preview">
+									<h5>Collaborations &amp; Expert Lectures</h5>
+								</div>
+								<div class="course-info">
+									<p class="col-lg-10">Engaging with leading thinkers,
+										institutions, and practitioners through collaborations,
+										seminars, and lecture series that provide actionable insights
+										for governance transformation.</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="home5-services-section mb-100">
+			<div class="container-fluid pb-3 one">
+				<div class="row g-4">
+					<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-0">
+						<div class="section-title1 title-and-underline two gap-0">
+							<h3 class="section-heading">Our Core Domains</h3>
+							<h5 class="section-heading-brief text-white">Strengthening
+								Governance Through Specialized Domain Expertise</h5>
+						</div>
+					</div>
+				</div>
+				<div class="row g-lg-4 gy-5">
+					<div class="col-lg-6">
+						<div class="services-img">
+							<ul>
+								<li class="single-img"
+									style="background-image: url('../website/img/services/Public finance.png');">
+								</li>
+								<li class="single-img active"
+									style="background-image: url('../website/img/services/Liscensing And Compliance.png');">
+								</li>
+								<li class="single-img"
+									style="background-image: url('../website/img/services/General Administration.png');">
+								</li>
+
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-6 pl--95">
+						<div class="services-list">
+							<ul>
+								<li class="">
+									<div class="services-content">
+										<h6>
+											<a href="#">Public Finance</a>
+										</h6>
+										<p>Public Finance is a vital pillar of effective
+											governance and sustainable service delivery. At karan, we
+											apply domain expertise to strengthen all aspects of public
+											finance — from revenue mobilization and expenditure
+											management to debt sustainability and fiscal accountability.
+											Through research, reform, and capacity-building, we help
+											governments create transparent and resilient financial
+											systems that deliver measurable impact.</p>
+									</div>
+								</li>
+								<li class="active">
+									<div class="services-content">
+										<h6>
+											<a href="#">Licensing & Compliance</a>
+										</h6>
+										<p>Licensing and Compliance Management ensures regulatory
+											efficiency and institutional accountability. At karan, we
+											streamline permits, licensing, and compliance through process
+											re-engineering, policy reform, and capacity enhancement. Our
+											approach enables transparent, citizen-centric, and
+											technology-driven regulatory frameworks that bring greater
+											order and efficiency to governance.</p>
+									</div>
+								</li>
+								<li class="">
+									<div class="services-content">
+										<h6>
+											<a href="#">General Administration</a>
+										</h6>
+										<p>General Administration drives efficiency and
+											coordination across organizations and government entities. At
+											karan, we provide expertise in planning, organizing, and
+											managing administrative operations in areas like human
+											resources and financial governance. Through structural
+											reforms, process optimization, and leadership development, we
+											help institutions enhance administrative effectiveness and
+											governance outcomes.</p>
+									</div>
+								</li>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="home4-about-section mb-90">
+		<div class="container-fluid one">
+			<div class="row g-lg-4 gy-5">
+				<div class="col-xxl-8 col-lg-6 pr--95 d-flex align-items-center">
+					<div class="about-content p-0">
+						<div class="mb-30">
+							<h3 class="section-heading">Key Highlights</h3>
+							<h3 class="section-subheading">Centre for Public
+								Administration Reinvention and Transformation (karan)</h3>
+						</div>
+						<div class="mb-30">
+							<p>At karan, we empower institutions through transformative
+								solutions, strategic partnerships and deep domain expertise
+								enabling public systems to evolve into more efficient, inclusive
+								and future-ready versions of themselves.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-4 col-lg-6 d-flex align-items-center">
+					<div class="row">
+						<div class="about-img">
+							<img
+								src=" "
+								alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="pt-50">
+				<div class="statement-content">
+					<div class="details-section-title">
+						<div class="statement-content-bottom d-flex">
+
+							<ul>
+								<li>Public Finance Management and Budget Reform</li>
+								<li>Public Policy and Institutional Reform</li>
+								<!-- 										<li>Governance Capacity Building and Leadership Development</li> -->
+								<li>Digital Governance and e-Government Services</li>
+								<li>Public Service Delivery and Citizen Engagement</li>
+								<li>Monitoring, Evaluation and Outcome-Based Planning</li>
+								<li>Environment, Climate and Sustainable Development</li>
+							</ul>
+							<ul>
+								<li>Health and Family Welfare</li>
+								<li>Education and Skill Development</li>
+								<li>Labour and Employment</li>
+								<!-- 										<li>Social Welfare and Empowerment</li> -->
+								<li>Women and Child Development</li>
+								<li>Agriculture and Allied Sectors</li>
+								<li>Transparency, Accountability and Ethics in
+									Administration</li>
+
+							</ul>
+
+							<ul>
+								<li>Finance and Taxation</li>
+								<li>Urban Local Governance</li>
+								<li>Rural Development & Panchayats</li>
+
+								<li>Infrastructure and Urban Planning</li>
+								<li>Innovation and Knowledge Management in Governance</li>
+								<li>Cooperative Federalism and Decentralised Governance</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="project-section mb-90"
+		th:if="${allBlogs != null and !allBlogs.isEmpty()}">
+		<div class="container-fluid one">
+			<div class="">
+				<div
+					class="mb-2 align-items-center justify-content-between py-4 row">
+					<div class="col-lg-8 col-sm-12 title-and-underline two gap-0">
+						<h3 class="section-heading">Case Studies</h3>
+						<h5 class="section-heading-brief">From Challenges to Change -Real Stories of Governance Reinvention.</h5>
+					</div>
+					<a class="explore-btn col-lg-4 justify-content-end col-sm-12"
+						href="/research-publications"> Explore More <svg
+							xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+							viewBox="0 0 12 12">
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+							</path>
+						</svg>
+					</a>
+				</div>
+			</div>
+
+			<div class="row g-4">
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-4" th:each="blog, iterStat : ${allBlogs}"
+							th:if="${iterStat.index < 3}">
+							<div class="card-casestudy">
+
+								<div class="card-media rounded-4">
+									<img th:if="${blog.thumbnailImage != null}"
+										th:src="@{/uploads/blogs/thumbnails/{img}(img=${blog.thumbnailImage})}"
+										alt="Blog Image" /> <img
+										th:if="${blog.thumbnailImage == null}"
+										th:src="@{/website/img/default-thumbnail.jpg}"
+										alt="Default Image" />
+
+									<div class="card-overlay">
+										<span class="tag top" th:text="${blog.category.name}">Case
+											Study</span>
+										<h3 class="overlay-title">
+											<a th:text="${blog.title}"
+												th:href="@{'/research-publications/' + ${blog.slug}}"></a>
+										</h3>
+									</div>
+								</div>
+
+								<div class="card-content p-5">
+									<header class="card-header">
+										<span class="card-date" th:text="${blog.category.name}">December
+											27, 2021</span>
+										<h3>
+											<a th:text="${blog.title}"
+												th:href="@{'/research-publications/' + ${blog.slug}}">Case
+												Study Title</a>
+										</h3>
+									</header>
+									<div class="card-desc">
+										<p>Lorem ipsum dolor sit amet consectetur adipisicing
+											elit. Tempore vero natus rem necessitatibus itaque
+											perferendis nulla laborum debitis eius delectus, dolor optio.
+											Modi, laboriosam amet.</p>
+									</div>
+									<footer class="card-footer">
+										<a class="explore-btn"
+											th:href="@{'/research-publications/' + ${blog.slug}}">
+											Read More <svg xmlns="http://www.w3.org/2000/svg" width="12"
+												height="12" viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</footer>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="about-section2 mb-90">
+		<div class="associate-partners-section">
+			<div class="container-fluid one">
+				<div class="row g-4">
+					<div
+						class="col-lg-12 d-flex about-content flex-column mb-2 mt-0 align-items-center">
+						<div
+							class="section-title1 title-and-underline two gap-0 align-items-center">
+							<h3 class="section-heading">Testimonials</h3>
+							<h5 class="section-heading-brief">Professional expertise driving sustainable governance outcomes.</h5>
+						</div>
+					</div>
+				</div>
+
+				<div class="testimonial-sliderr testimonial-grid m-auto">
+					<div class="testimonial-card">
+						<div class="card-content">
+							<div class="col-lg-8">
+								<img class="testimonial-user-logo"
+									th:src="@{/website/img/icons/CMP.png}">
+							</div>
+							<div class="col-lg-8 mb-20">
+								<p>karan's consulting team helped us redefine our
+									department's workflow, ensuring better transparency and
+									improved citizen engagement. Their strategic approach made a
+									measurable difference in our public service delivery.</p>
+							</div>
+
+							<div class="col-lg-8 d-flex align-items-center">
+								<div class="pe-3 d-flex justify-content-center">
+									<img th:src="@{/website/img/inner-pages/aboutus-2.jpg}">
+								</div>
+								<div>
+									<h3>Ms. Kavya Menon</h3>
+									<span>Deputy Secretary, Govt. of Kerala</span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<div class="testimonial-card">
+						<div class="card-content">
+							<div class="col-lg-8">
+								<img class="testimonial-user-logo"
+									th:src="@{/website/img/icons/Gift.png}">
+							</div>
+							<div class="col-lg-8 mb-20">
+								<p>We partnered with karan for a governance innovation
+									pilot. Their data-backed recommendations and hands-on training
+									workshops brought real, actionable changes to our local
+									governance model.</p>
+							</div>
+
+							<div class="col-lg-8 d-flex align-items-center">
+								<div class="pe-3 d-flex justify-content-center">
+									<img th:src="@{/website/img/inner-pages/aboutus-2.jpg}">
+								</div>
+								<div>
+									<h3>Dr. Alok Verma</h3>
+									<span>IAS Officer, State Planning Board</span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+					<div class="testimonial-card">
+						<div class="card-content">
+							<div class="col-lg-8">
+								<img class="testimonial-user-logo"
+									th:src="@{/website/img/icons/asap.png}">
+							</div>
+							<div class="col-lg-8 mb-20">
+								<p>karan’s evaluation of our e-governance initiative was
+									thorough and insightful. Their feedback helped us scale the
+									system more efficiently across districts while aligning with
+									administrative priorities.</p>
+							</div>
+
+							<div class="col-lg-8 d-flex align-items-center">
+								<div class="pe-3 d-flex justify-content-center">
+									<img th:src="@{/website/img/inner-pages/aboutus-2.jpg}">
+								</div>
+								<div>
+									<h3>Mrs. Meera Radhakrishnan</h3>
+									<span>Joint Director, Digital Kerala Mission</span>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="container-fluid one ">
+			<div class="service-details-advantage">
+				<div class="row g-lg-4 gy-5">
+					<div class="col-lg-8">
+						<div class="advantage-content">
+							<div class="row g-4">
+				<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-0">
+					<div class="section-title1 title-and-underline two gap-0">
+						<h3 class="section-heading">Key Advantages</h3>
+						<h5 class="section-heading-brief">Empowering Governance through Sectoral Expertise</h5>
+					</div>
+				</div>
+			</div>
+							<p>karan’s domain consulting empowers departments with sector-specific operational
+								excellence, enabling faster decision-making, policy alignment, and sustainable
+								institutional development.</p>
+							<div class="advantage-content-bottom">
+								<ul>
+									<li>
+										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+											viewBox="0 0 14 14">
+											<path
+												d="M12.1223 3.1903C12.1631 3.23094 12.1954 3.27922 12.2174 3.33237C12.2395 3.38552 12.2508 3.4425 12.2508 3.50005C12.2508 3.5576 12.2395 3.61458 12.2174 3.66773C12.1954 3.72088 12.1631 3.76916 12.1223 3.8098L5.99731 9.9348C5.95667 9.97554 5.9084 10.0079 5.85524 10.0299C5.80209 10.052 5.74511 10.0633 5.68756 10.0633C5.63002 10.0633 5.57304 10.052 5.51988 10.0299C5.46673 10.0079 5.41845 9.97554 5.37781 9.9348L2.31531 6.8723C2.23316 6.79015 2.18701 6.67873 2.18701 6.56255C2.18701 6.44637 2.23316 6.33495 2.31531 6.2528C2.39747 6.17065 2.50889 6.1245 2.62506 6.1245C2.74124 6.1245 2.85266 6.17065 2.93481 6.2528L5.68756 9.00642L11.5028 3.1903C11.5435 3.14956 11.5917 3.11723 11.6449 3.09518C11.698 3.07312 11.755 3.06177 11.8126 3.06177C11.8701 3.06177 11.9271 3.07312 11.9802 3.09518C12.0334 3.11723 12.0817 3.14956 12.1223 3.1903Z" />
+										</svg>
+										Domain-Centric Expertise.
+									</li>
+									<li>
+										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+											viewBox="0 0 14 14">
+											<path
+												d="M12.1223 3.1903C12.1631 3.23094 12.1954 3.27922 12.2174 3.33237C12.2395 3.38552 12.2508 3.4425 12.2508 3.50005C12.2508 3.5576 12.2395 3.61458 12.2174 3.66773C12.1954 3.72088 12.1631 3.76916 12.1223 3.8098L5.99731 9.9348C5.95667 9.97554 5.9084 10.0079 5.85524 10.0299C5.80209 10.052 5.74511 10.0633 5.68756 10.0633C5.63002 10.0633 5.57304 10.052 5.51988 10.0299C5.46673 10.0079 5.41845 9.97554 5.37781 9.9348L2.31531 6.8723C2.23316 6.79015 2.18701 6.67873 2.18701 6.56255C2.18701 6.44637 2.23316 6.33495 2.31531 6.2528C2.39747 6.17065 2.50889 6.1245 2.62506 6.1245C2.74124 6.1245 2.85266 6.17065 2.93481 6.2528L5.68756 9.00642L11.5028 3.1903C11.5435 3.14956 11.5917 3.11723 11.6449 3.09518C11.698 3.07312 11.755 3.06177 11.8126 3.06177C11.8701 3.06177 11.9271 3.07312 11.9802 3.09518C12.0334 3.11723 12.0817 3.14956 12.1223 3.1903Z" />
+										</svg>
+										Cost Savings.
+									</li>
+									<li>
+										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+											viewBox="0 0 14 14">
+											<path
+												d="M12.1223 3.1903C12.1631 3.23094 12.1954 3.27922 12.2174 3.33237C12.2395 3.38552 12.2508 3.4425 12.2508 3.50005C12.2508 3.5576 12.2395 3.61458 12.2174 3.66773C12.1954 3.72088 12.1631 3.76916 12.1223 3.8098L5.99731 9.9348C5.95667 9.97554 5.9084 10.0079 5.85524 10.0299C5.80209 10.052 5.74511 10.0633 5.68756 10.0633C5.63002 10.0633 5.57304 10.052 5.51988 10.0299C5.46673 10.0079 5.41845 9.97554 5.37781 9.9348L2.31531 6.8723C2.23316 6.79015 2.18701 6.67873 2.18701 6.56255C2.18701 6.44637 2.23316 6.33495 2.31531 6.2528C2.39747 6.17065 2.50889 6.1245 2.62506 6.1245C2.74124 6.1245 2.85266 6.17065 2.93481 6.2528L5.68756 9.00642L11.5028 3.1903C11.5435 3.14956 11.5917 3.11723 11.6449 3.09518C11.698 3.07312 11.755 3.06177 11.8126 3.06177C11.8701 3.06177 11.9271 3.07312 11.9802 3.09518C12.0334 3.11723 12.0817 3.14956 12.1223 3.1903Z" />
+										</svg>
+										Change Management.
+									</li>
+									<li>
+										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+											viewBox="0 0 14 14">
+											<path
+												d="M12.1223 3.1903C12.1631 3.23094 12.1954 3.27922 12.2174 3.33237C12.2395 3.38552 12.2508 3.4425 12.2508 3.50005C12.2508 3.5576 12.2395 3.61458 12.2174 3.66773C12.1954 3.72088 12.1631 3.76916 12.1223 3.8098L5.99731 9.9348C5.95667 9.97554 5.9084 10.0079 5.85524 10.0299C5.80209 10.052 5.74511 10.0633 5.68756 10.0633C5.63002 10.0633 5.57304 10.052 5.51988 10.0299C5.46673 10.0079 5.41845 9.97554 5.37781 9.9348L2.31531 6.8723C2.23316 6.79015 2.18701 6.67873 2.18701 6.56255C2.18701 6.44637 2.23316 6.33495 2.31531 6.2528C2.39747 6.17065 2.50889 6.1245 2.62506 6.1245C2.74124 6.1245 2.85266 6.17065 2.93481 6.2528L5.68756 9.00642L11.5028 3.1903C11.5435 3.14956 11.5917 3.11723 11.6449 3.09518C11.698 3.07312 11.755 3.06177 11.8126 3.06177C11.8701 3.06177 11.9271 3.07312 11.9802 3.09518C12.0334 3.11723 12.0817 3.14956 12.1223 3.1903Z" />
+										</svg>
+										Quality Improvement.
+									</li>
+									<li>
+										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+											viewBox="0 0 14 14">
+											<path
+												d="M12.1223 3.1903C12.1631 3.23094 12.1954 3.27922 12.2174 3.33237C12.2395 3.38552 12.2508 3.4425 12.2508 3.50005C12.2508 3.5576 12.2395 3.61458 12.2174 3.66773C12.1954 3.72088 12.1631 3.76916 12.1223 3.8098L5.99731 9.9348C5.95667 9.97554 5.9084 10.0079 5.85524 10.0299C5.80209 10.052 5.74511 10.0633 5.68756 10.0633C5.63002 10.0633 5.57304 10.052 5.51988 10.0299C5.46673 10.0079 5.41845 9.97554 5.37781 9.9348L2.31531 6.8723C2.23316 6.79015 2.18701 6.67873 2.18701 6.56255C2.18701 6.44637 2.23316 6.33495 2.31531 6.2528C2.39747 6.17065 2.50889 6.1245 2.62506 6.1245C2.74124 6.1245 2.85266 6.17065 2.93481 6.2528L5.68756 9.00642L11.5028 3.1903C11.5435 3.14956 11.5917 3.11723 11.6449 3.09518C11.698 3.07312 11.755 3.06177 11.8126 3.06177C11.8701 3.06177 11.9271 3.07312 11.9802 3.09518C12.0334 3.11723 12.0817 3.14956 12.1223 3.1903Z" />
+										</svg>
+										Benchmarking and Best Practices.
+									</li>
+									<li>
+										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+											viewBox="0 0 14 14">
+											<path
+												d="M12.1223 3.1903C12.1631 3.23094 12.1954 3.27922 12.2174 3.33237C12.2395 3.38552 12.2508 3.4425 12.2508 3.50005C12.2508 3.5576 12.2395 3.61458 12.2174 3.66773C12.1954 3.72088 12.1631 3.76916 12.1223 3.8098L5.99731 9.9348C5.95667 9.97554 5.9084 10.0079 5.85524 10.0299C5.80209 10.052 5.74511 10.0633 5.68756 10.0633C5.63002 10.0633 5.57304 10.052 5.51988 10.0299C5.46673 10.0079 5.41845 9.97554 5.37781 9.9348L2.31531 6.8723C2.23316 6.79015 2.18701 6.67873 2.18701 6.56255C2.18701 6.44637 2.23316 6.33495 2.31531 6.2528C2.39747 6.17065 2.50889 6.1245 2.62506 6.1245C2.74124 6.1245 2.85266 6.17065 2.93481 6.2528L5.68756 9.00642L11.5028 3.1903C11.5435 3.14956 11.5917 3.11723 11.6449 3.09518C11.698 3.07312 11.755 3.06177 11.8126 3.06177C11.8701 3.06177 11.9271 3.07312 11.9802 3.09518C12.0334 3.11723 12.0817 3.14956 12.1223 3.1903Z" />
+										</svg>
+										Enhanced Institutional Capacity.
+									</li>
+								</ul>
+								 
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="advantage-img">
+							<img loading="lazy" th:src="@{/website/img/inner-pages/service-details-advantage-img.jpg}"
+								alt="Illustration of Domain Consulting Services">
+						</div>
+					</div>
+				</div>
+			</div>
+	</div> -->
+
+	<!-- End Service Details Section -->
+
+
+</main>
+
+</html>

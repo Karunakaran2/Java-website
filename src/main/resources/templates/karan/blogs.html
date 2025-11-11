@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/karan-layout}">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<head>
+	<title>karan - Welcome Page</title>
+	<link rel="icon" type="image/x-icon" th:href="@{/website/img/favicon.png}" />
+	<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll("#categoryTabs .nav-link");
+    const blogs = document.querySelectorAll("#blog-list [data-category]");
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            // Switch active tab styling
+            tabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            const selectedCategory = tab.getAttribute("data-category");
+
+            // Filter blogs by category
+            blogs.forEach(blog => {
+                const blogCategory = blog.getAttribute("data-category");
+                if (selectedCategory === "all" || blogCategory === selectedCategory) {
+                    blog.style.display = "block";
+                } else {
+                    blog.style.display = "none";
+                }
+            });
+        });
+    });
+});
+</script>
+</head>
+<main role="main" class="" layout:fragment="content">
+
+	<div class="breadcrumb-banner"
+		style="background-image: linear-gradient(270deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0.55) 101.02%), url(../website/img/inner-pages/braadcrumb-bg1.jpg);">
+		<div class="container-fluid one ">
+			<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+				<ol class="breadcrumb-custom">
+					<li><a th:href="@{/}">Home</a></li>
+					<li class="active">Research & Publications</li>
+				</ol>
+			</nav>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="banner-content">
+						<h1>
+							Building the Future of <br /> Digital Experiences
+						</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="breadcrumbs">
+		<div class="container-fluid one">
+			<div class="row">
+				<div class="col-lg-12">
+					<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+						<ol class="breadcrumb-custom">
+							<li><a th:href="@{/}">Home</a></li>
+							<li class="active">Blogs</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<!-- End Breadcrumb Section -->
+	<div class="portfolio-section mt-5 style-2 mb-130">
+		<div class="container-fluid one">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="portfolio-tab-area two">
+						<ul class="nav nav-tabs" id="categoryTabs" role="tablist">
+
+							<!-- "All" Tab -->
+							<li class="nav-item" role="presentation">
+								<button class="nav-link active" data-category="all"
+									type="button" role="tab">All</button>
+							</li>
+
+							<!-- Dynamic Category Tabs -->
+							<li class="nav-item" role="presentation"
+								th:each="cat : ${blogCategories}">
+								<button class="nav-link" th:text="${cat.name}"
+									th:attr="data-category=${cat.slug}" type="button" role="tab">
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-lg-12 mt-60 scroll-margin-top" id="featured-section">
+					<div class="portfolio-tab-content">
+						<div class="tab-content" id="myTabContent">
+
+							<div class="tab-pane fade active show" id="all" role="tabpanel">
+								<div class="row g-lg-4 gy-5 mb-60" id="blog-list"
+									th:if="${not #lists.isEmpty(allBlogs)}">
+									<!-- Each Blog Card -->
+									<div class="col-lg-3" th:each="blog : ${allBlogs}"
+										th:attr="data-category=${blog.category.slug}">
+										<div class="card-casestudy">
+
+											<div class="card-media">
+												<img th:if="${blog.thumbnailImage != null}"
+													th:src="@{/uploads/blogs/thumbnails/{img}(img=${blog.thumbnailImage})}"
+													alt="Blog Image" /> <img
+													th:if="${blog.thumbnailImage == null}"
+													th:src="@{/website/img/default-thumbnail.jpg}"
+													alt="Default Image" />
+
+												<div class="card-overlay">
+													<span class="tag top" th:text="${blog.category.name}">Case
+														Study</span>
+													<h3 class="overlay-title">
+														<a th:text="${blog.title}"
+															th:href="@{'/research-publications/' + ${blog.slug}}"></a>
+													</h3>
+												</div>
+											</div>
+
+											<div class="card-content">
+												<header class="card-header">
+													<span class="card-date" th:text="${blog.category.name}">December 27, 2021</span>
+													<h3>
+														<a th:text="${blog.title}"
+															th:href="@{'/research-publications/' + ${blog.slug}}">Case Study
+															Title</a>
+													</h3>
+												</header>
+												<div class="card-desc">
+													<p>Lorem ipsum dolor sit amet consectetur adipisicing
+														elit. Tempore vero natus rem necessitatibus itaque
+														perferendis nulla laborum debitis eius delectus, dolor
+														optio. Modi, laboriosam amet.</p>
+												</div>
+												<footer class="card-footer">
+													<a class="explore-btn"
+														th:href="@{'/research-publications/' + ${blog.slug}}"> Read More <svg
+															xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+															viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+																d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+													</a>
+												</footer>
+											</div>
+											<div class="card-border">
+										<span class="top"></span> <span class="right"></span> <span
+											class="bottom"></span> <span class="left"></span>
+									</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row" th:if="${hasNext}">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<a class="primary-btn1 btn-hover"
+											th:href="@{/research-publications(page=${currentPage + 1})}">
+											Load More <svg xmlns="http://www.w3.org/2000/svg" width="12"
+												height="12" viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+												</path>
+											</svg> <span></span>
+										</a>
+									</div>
+								</div>
+
+								<!-- Fallback Message -->
+								<div class="row text-center" th:if="${#lists.isEmpty(allBlogs)}">
+									<div class="col-12 py-5">
+										<i class="fa-solid fa-face-frown fs-1 text-secondary mb-3"></i>
+										<h4 class="text-muted">No blog posts available at the
+											moment.</h4>
+										<p class="text-muted">Please check back later for updates.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- <div class="tab-pane fade" id="Recent" role="tabpanel"
+								aria-labelledby="Recent-tab">
+								<div class="row g-lg-4 gy-5 mb-60">
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-01.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Technology</a>
+													<h5><a th:href="@{/blog-details}">Management Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-02.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Technology</a>
+													<h5><a th:href="@{/blog-details}">Human Resources Consulting</a>
+													</h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-03.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Marketing</a>
+													<h5><a th:href="@{/blog-details}">IT Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img1.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Marketing</a>
+													<h5><a th:href="@{/blog-details}">Marketing and Sales
+															Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img4.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Resources</a>
+													<h5><a th:href="@{/blog-details}">Compliance Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img5.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Fintech</a>
+													<h5><a th:href="@{/blog-details}">Financial Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<a class="primary-btn1 btn-hover" href="#">
+											Load More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+												</path>
+											</svg>
+											<span></span>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="technology" role="tabpanel" aria-labelledby="technology-tab">
+								<div class="row g-lg-4 gy-5 mb-60">
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-01.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Technology</a>
+													<h5><a th:href="@{/blog-details}">Management Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-02.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Technology</a>
+													<h5><a th:href="@{/blog-details}">Human Resources Consulting</a>
+													</h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-03.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Marketing</a>
+													<h5><a th:href="@{/blog-details}">IT Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img1.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Marketing</a>
+													<h5><a th:href="@{/blog-details}">Marketing and Sales
+															Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img4.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Resources</a>
+													<h5><a th:href="@{/blog-details}">Compliance Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img5.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Fintech</a>
+													<h5><a th:href="@{/blog-details}">Financial Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<a class="primary-btn1 btn-hover" href="#">
+											Load More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+												</path>
+											</svg>
+											<span></span>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="finance2" role="tabpanel" aria-labelledby="finance2-tab">
+								<div class="row g-lg-4 gy-5 mb-60">
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-01.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Technology</a>
+													<h5><a th:href="@{/blog-details}">Management Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-02.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Technology</a>
+													<h5><a th:href="@{/blog-details}">Human Resources Consulting</a>
+													</h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-03.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Marketing</a>
+													<h5><a th:href="@{/blog-details}">IT Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img1.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Marketing</a>
+													<h5><a th:href="@{/blog-details}">Marketing and Sales
+															Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img4.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Resources</a>
+													<h5><a th:href="@{/blog-details}">Compliance Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img5.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Fintech</a>
+													<h5><a th:href="@{/blog-details}">Financial Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<a class="primary-btn1 btn-hover" href="#">
+											Load More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+												</path>
+											</svg>
+											<span></span>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="management2" role="tabpanel"
+								aria-labelledby="management2-tab">
+								<div class="row g-lg-4 gy-5 mb-60">
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-01.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Technology</a>
+													<h5><a th:href="@{/blog-details}">Management Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-02.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Technology</a>
+													<h5><a th:href="@{/blog-details}">Human Resources Consulting</a>
+													</h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/blog/portfolio-img-03.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Marketing</a>
+													<h5><a th:href="@{/blog-details}">IT Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img1.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Marketing</a>
+													<h5><a th:href="@{/blog-details}">Marketing and Sales
+															Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img4.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Resources</a>
+													<h5><a th:href="@{/blog-details}">Compliance Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-6">
+										<div class="k-card3 three">
+											<div class="card-img">
+												<img th:src="@{/website/img/inner-pages/portfolio-img5.jpg}" alt="">
+											</div>
+											<div class="card-content">
+												<a class="view-btn" th:href="@{/blog-details}">
+													<img th:src="@{/website/img/inner-pages/right-arrow2.png}" alt="">
+												</a>
+												<div class="catgory-and-title">
+													<a th:href="@{/blog-details}">Fintech</a>
+													<h5><a th:href="@{/blog-details}">Financial Consulting</a></h5>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 d-flex justify-content-center">
+										<a class="primary-btn1 btn-hover" href="#">
+											Load More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+												</path>
+											</svg>
+											<span></span>
+										</a>
+									</div>
+								</div>
+							</div> -->
+							
+				
+				<div class="col-lg-12 mt-60 scroll-margin-top" id="recent-section">
+					<div class="blog-section2 "  th:if="${!allBlogs.empty}">
+						<div class="container-fluid one px-0">
+							<div class="row">
+								<div
+									class="col-lg-12 gap-lg-5 gap-4 d-flex flex-lg-nowrap flex-wrap align-items-end justify-content-between mb-60">
+									<div class="section-title1 title-and-underline two">
+										<h2>Our latest news and insights.</h2>
+									</div>
+									
+								</div>
+								<div class="col-lg-12">
+									
+									
+									<div class="row g-4">
+										    <div class="col-lg-6" th:each="blog, iter : ${allBlogs}" th:if="${iter.count <= 2}">
+											<div class="blog-card">
+												<div class="row g-0">
+													<div class="col-md-6">
+														<div class="blog-img magnetic-item">
+															<!--<img th:src="@{/website/img/blog/blog-2-1.jpg}" alt="">-->
+															<img th:src="@{/uploads/blogs/thumbnails/{img}(img=${blog.thumbnailImage})}" alt="">
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="blog-content">
+															<ul class="tags">
+																<li>
+																	<a th:href="@{'/research-publications/' + ${blog.slug}}" th:text="${blog.category.name}">
+																		<svg xmlns="http://www.w3.org/2000/svg"
+																			width="12" height="12" viewBox="0 0 12 12">
+																			<path
+																				d="M7.58455 3.09152C7.58455 3.4429 7.72414 3.7799 7.9726 4.02837C8.22107 4.27684 8.55807 4.41643 8.90946 4.41643C9.26085 4.41643 9.59785 4.27684 9.84632 4.02837C10.0948 3.7799 10.2344 3.4429 10.2344 3.09152C10.2344 2.74013 10.0948 2.40313 9.84632 2.15466C9.59785 1.90619 9.26085 1.7666 8.90946 1.7666C8.55807 1.7666 8.22107 1.90619 7.9726 2.15466C7.72414 2.40313 7.58455 2.74013 7.58455 3.09152ZM8.46782 3.09152C8.46782 2.97439 8.51435 2.86205 8.59718 2.77923C8.68 2.69641 8.79233 2.64988 8.90946 2.64988C9.02659 2.64988 9.13892 2.69641 9.22175 2.77923C9.30457 2.86205 9.3511 2.97439 9.3511 3.09152C9.3511 3.20865 9.30457 3.32098 9.22175 3.4038C9.13892 3.48662 9.02659 3.53315 8.90946 3.53315C8.79233 3.53315 8.68 3.48662 8.59718 3.4038C8.51435 3.32098 8.46782 3.20865 8.46782 3.09152Z">
+																			</path>
+																			<path
+																				d="M11.1167 0H7.06602C6.83178 5.00265e-05 6.60715 0.093142 6.44154 0.2588L0.258612 6.44173C0.0930223 6.60737 0 6.832 0 7.06621C0 7.30042 0.0930223 7.52505 0.258612 7.69068L4.30932 11.7414C4.47495 11.907 4.69958 12 4.93379 12C5.168 12 5.39263 11.907 5.55827 11.7414L11.7412 5.55846C11.9069 5.39285 11.9999 5.16822 12 4.93398V0.883276C12 0.649017 11.9069 0.424352 11.7413 0.258706C11.5756 0.0930591 11.351 0 11.1167 0ZM11.1167 4.93398L4.93379 11.1169L0.883087 7.06621L7.06602 0.883276H11.1167V4.93398Z">
+																			</path>
+																		</svg> Consulting
+																	</a>
+																</li>
+																<li>
+																	<a th:text="${#temporals.format(blog.createdAt, 'dd MMMM, yyyy')}">
+																		<svg xmlns="http://www.w3.org/2000/svg"
+																			width="12" height="12" viewBox="0 0 12 12">
+																			<g>
+																				<path
+																					d="M6 5.25C6.09946 5.25 6.19484 5.28951 6.26517 5.35984C6.33549 5.43016 6.375 5.52554 6.375 5.625V6.75H7.5C7.59946 6.75 7.69484 6.78951 7.76517 6.85983C7.83549 6.93016 7.875 7.02554 7.875 7.125C7.875 7.22446 7.83549 7.31984 7.76517 7.39017C7.69484 7.46049 7.59946 7.5 7.5 7.5H6.375V8.625C6.375 8.72446 6.33549 8.81984 6.26517 8.89017C6.19484 8.96049 6.09946 9 6 9C5.90054 9 5.80516 8.96049 5.73484 8.89017C5.66451 8.81984 5.625 8.72446 5.625 8.625V7.5H4.5C4.40054 7.5 4.30516 7.46049 4.23484 7.39017C4.16451 7.31984 4.125 7.22446 4.125 7.125C4.125 7.02554 4.16451 6.93016 4.23484 6.85983C4.30516 6.78951 4.40054 6.75 4.5 6.75H5.625V5.625C5.625 5.52554 5.66451 5.43016 5.73484 5.35984C5.80516 5.28951 5.90054 5.25 6 5.25Z">
+																				</path>
+																				<path
+																					d="M2.625 0C2.72446 0 2.81984 0.0395088 2.89016 0.109835C2.96049 0.180161 3 0.275544 3 0.375V0.75H9V0.375C9 0.275544 9.03951 0.180161 9.10983 0.109835C9.18016 0.0395088 9.27554 0 9.375 0C9.47446 0 9.56984 0.0395088 9.64017 0.109835C9.71049 0.180161 9.75 0.275544 9.75 0.375V0.75H10.5C10.8978 0.75 11.2794 0.908035 11.5607 1.18934C11.842 1.47064 12 1.85218 12 2.25V10.5C12 10.8978 11.842 11.2794 11.5607 11.5607C11.2794 11.842 10.8978 12 10.5 12H1.5C1.10218 12 0.720644 11.842 0.43934 11.5607C0.158035 11.2794 0 10.8978 0 10.5V2.25C0 1.85218 0.158035 1.47064 0.43934 1.18934C0.720644 0.908035 1.10218 0.75 1.5 0.75H2.25V0.375C2.25 0.275544 2.28951 0.180161 2.35984 0.109835C2.43016 0.0395088 2.52554 0 2.625 0ZM0.75 3V10.5C0.75 10.6989 0.829018 10.8897 0.96967 11.0303C1.11032 11.171 1.30109 11.25 1.5 11.25H10.5C10.6989 11.25 10.8897 11.171 11.0303 11.0303C11.171 10.8897 11.25 10.6989 11.25 10.5V3H0.75Z">
+																				</path>
+																			</g>
+																		</svg> 01 April, 2025
+																	</a>
+																</li>
+															</ul>
+															<div class="title-and-btn">
+																<h4><a th:href="@{'/research-publications/' + ${blog.slug}}" th:text="${blog.title}">Title</a></h4>
+																<a class="explore-btn" th:href="@{'/research-publications/' + ${blog.slug}}">
+																	Read More
+																	<svg xmlns="http://www.w3.org/2000/svg" width="12"
+																		height="12" viewBox="0 0 12 12">
+																		<path fill-rule="evenodd" clip-rule="evenodd"
+																			d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+																		</path>
+																	</svg>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+									
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</main>
+
+</html>

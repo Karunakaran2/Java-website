@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE"></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Rise">
+<link rel="icon" th:href="@{/images/ic_logo_seepz_no_bg.png}"
+	type="image/x-icon">
+
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/ui/css/public.css}" />
+<link rel="stylesheet" th:href="@{/ui/css/layout-style.css}" />
+<link rel="stylesheet" th:href="@{/ui/css/custom-rules.css}" />
+<link rel="stylesheet" th:href="@{/webjars/jquery-ui/jquery-ui.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/font-awesome/css/all.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/webjars/material-icons/iconfont/material-icons.css}" />
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/ui/js/scripts.js}"></script>
+
+
+<style>
+.material-symbols-outlined {
+	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+}
+
+.santacruz-heading {
+	text-align: left;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 24px;
+	color: rgba(1, 69, 142, 1);
+	visibility: visible;
+	margin-bottom: 2px;
+}
+
+.santacruz-para {
+	margin: 0;
+	color: #242424;
+	font-weight: 500;
+	font-size: 16px;
+}
+
+.public-body-content {
+	padding-top: 160px;
+	margin-bottom: 0px;
+	width: 100%;
+	height: auto;
+}
+
+.housebooking-user p {
+	font-size: 12px;
+	margin: 0;
+}
+
+.nav-tabs .nav-link-main-tab.active, .nav-tabs .nav-item.show .nav-link-main-tab
+	{
+	border-bottom: none;
+	border-bottom-color: currentcolor;
+	border-color: #d4dae3 #d4dae3 #f2f6fc;
+	font-weight: 550;
+	color: #fff !important;
+	background-color: #003166 !important;
+}
+
+.nav-tabs.public-tabs .nav-link-main-tab {
+	color: #ebebeb;
+}
+
+.description-text {
+	font-size: 10px;
+	color: #7a7a7a;
+}
+
+@media ( min-width : 800px) and (max-width: 1200px) {
+}
+
+@media ( min-width : 399px) and (max-width: 799px) {
+	.px-10.conference-card {
+		padding: 0 10px !important;
+	}
+	.col-sm-12.mobile-add {
+		padding-top: 0rem !important;
+	}
+	.px-10.banner-image {
+		padding: 0 10px !important;
+	}
+	.px-15.grievance-card {
+		padding: 15px 20px !important;
+	}
+	.form-group.custom-form-group.mobile-attachment {
+		margin: 0;
+	}
+	.mobile-add {
+		padding-top: 0rem !important;
+	}
+	.santacruz-heading {
+		text-align: left !important;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 16px !important;
+		color: rgba(1, 69, 142, 1);
+		visibility: visible;
+	}
+	.santacruz-para {
+		margin: 0;
+		color: #242424;
+		font-size: 14px;
+	}
+	.conference-card img {
+		width: 100px !important;
+		height: auto !important;
+	}
+	.kran-neela.conference-card.px-10 {
+		height: 50px !important;
+	}
+	.nav-link-main-tab {
+		padding: 0.55rem 1rem 0.3rem 1rem !important;
+		font-size: 0.7rem !important;
+	}
+	.public-body-content {
+		padding-top: 190px !important;
+	}
+}
+
+@media ( min-width : 350px) and (max-width: 550px) {
+	.px-10.conference-card {
+		padding: 0 10px !important;
+	}
+	.px-15.grievance-card {
+		padding: 15px 20px !important;
+	}
+	.col-sm-12.mobile-add {
+		padding-top: 0rem !important;
+	}
+	.px-10.banner-image {
+		padding: 0 10px 10px 10px !important;
+	}
+	.form-group.custom-form-group.mobile-attachment {
+		margin: 0;
+	}
+	.santacruz-heading {
+		text-align: left !important;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 16px !important;
+		color: rgba(1, 69, 142, 1);
+		visibility: visible;
+	}
+	.santacruz-para {
+		margin: 0;
+		color: #242424;
+		font-size: 14px;
+	}
+	.conference-card img {
+		width: 100px !important;
+		height: auto !important;
+	}
+	.kran-neela.conference-card.px-10 {
+		height: 50px !important;
+	}
+	.nav-link-main-tab {
+		padding: 0.55rem 1rem 0.3rem 1rem !important;
+		font-size: 0.7rem !important;
+	}
+	.public-body-content {
+		padding-top: 190px !important;
+	}
+}
+
+.nav {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.nav>.nav-header {
+	flex: 0.95;
+	padding-left: 1rem;
+}
+
+.nav>.nav-header>.nav-title {
+	font-size: 22px;
+	color: #fff;
+}
+
+.nav>.nav-list {
+	display: flex;
+	margin: 0;
+	height: 100%;
+	margin: 0;
+}
+
+.nav>.nav-list>li {
+	list-style-type: none;
+}
+
+.nav>.nav-list>li a {
+	text-decoration: none;
+	color: #efefef;
+	cursor: pointer;
+}
+
+.nav>#nav-check {
+	display: none;
+}
+
+@media ( max-width : 480px) {
+	.nav {
+		padding: 1rem;
+	}
+	.nav>.nav-btn {
+		display: inline-block;
+		position: absolute;
+		right: 10px;
+		top: 127px;
+		padding-top: 0;
+		height: 18px;
+		width: 26px;
+	}
+	.nav>.nav-btn>label {
+		display: inline-block;
+		height: 18px;
+		width: 26px;
+		padding: 0;
+	}
+	.nav>.nav-btn>label>span {
+		display: block;
+		width: 25px;
+		height: 7px;
+		border-top: 2px solid #eee;
+	}
+	.nav>.nav-list {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		background-color: #01458e;
+		height: 0;
+		transition: all 0.3s ease-in;
+		top: 159px;
+		left: 0;
+		overflow: hidden;
+	}
+	.nav>.nav-list>li {
+		width: 100%;
+		margin-top: 0.5rem;
+	}
+	.nav>#nav-check:checked ~ .nav-list {
+		height: auto;
+	}
+	.nav>.nav-list>li a {
+		font-size: 14px !important;
+		padding: 10px 20px !important;
+	}
+}
+</style>
+</head>
+
+<body>
+	<header th:replace="fragments/public-header :: public-header">THIS
+		HEADER CONTENT IS GOING TO BE REPLACED.</header>
+	<!-- Page content -->
+	<main role="main" class="container text-align-middle pb-5"
+		layout:fragment="content"></main>
+
+	<footer th:replace="fragments/public-footer :: public-footer">THIS
+		FOOTER CONTENT IS GOING TO BE REPLACED.</footer>
+
+	<th:block layout:fragment="pagescript"></th:block>
+
+</body>

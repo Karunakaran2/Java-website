@@ -1,0 +1,204 @@
+/*Created By HAri*/
+
+		.form-wrapper-outer{
+            padding: 30px;
+            border-radius: 8px;
+            margin: auto;
+            width: 380px;
+            border: 1px solid #DADCE0;
+            background-color: #fff;
+            padding-top: 20px;
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+        .form-wrapper-outer .form-logo{
+            padding: 0px auto 1px;
+             width: 100%;
+        }
+		
+        .form-wrapper-outer .form-logo img{
+            height: 50px;
+        }
+		
+        .form-greeting{
+            text-align: center;
+            font-size: 22px;
+            padding-bottom: 15px;
+			color: #202124;
+			font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
+			font-size: 24px;
+			font-weight: 400;
+			line-height: 1.3333;
+			word-break: break-word;
+        }
+
+		.field-wrapper{
+			z-index: 0;
+            position: relative;
+            margin-bottom: 15px;
+        }
+		
+        .field-wrapper input{
+			
+            border: 1px solid #DADCE0;
+            padding: 15px;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        .field-wrapper .field-placeholder{
+            font-size: 16px;
+            position: absolute;
+            bottom: 15px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            color: #80868b;
+            left: 0px;
+            padding: 0 8px;
+            /* Standard Syntax */
+transition: 170ms ease all;
+
+/* Vendor Prefixes */
+-webkit-transition: 170ms ease all; /* Safari and Chrome */
+-moz-transition: 170ms ease all; /* Firefox */
+-ms-transition: 170ms ease all; /* Internet Explorer/Edge */
+-o-transition: 170ms ease all; /* Opera */
+           /*  -webkit-transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1);
+            transition: transform 150ms cubic-bezier(0.4,0,0.2,1),opacity 150ms cubic-bezier(0.4,0,0.2,1); */
+            text-align: left;
+            width: 100%;
+            pointer-events: none;
+        }        
+        
+        .field-wrapper .field-placeholder span{
+            background: #ffffff;
+            padding: 0px 8px;
+            font-family: 'Nunito', sans-serif !important;
+        }
+
+.field-wrapper input:focus, .field-wrapper textarea:focus, .field-wrapper input:focus-visible{
+    outline: none;
+    border: 2px solid #1976d2;
+}
+
+        .field-wrapper input:not([disabled]):focus~.field-placeholder
+        {
+            color:#1A73E8;
+        }
+		
+        .field-wrapper input:not([disabled]):focus~.field-placeholder,
+        .field-wrapper.hasValue input:not([disabled])~.field-placeholder
+        {
+            -webkit-transform: scale(.75) translateY(-39px) translateX(-45px);
+            transform: scale(.75) translateY(-39px) translateX(-45px);
+            
+        }	
+        .field-wrapper input:valid + .field-placeholder {
+    transform: scale(.75) translateY(-39px) translateX(-45px);
+}
+ .field-wrapper #captcha:valid + .field-placeholder {
+  transform: scale(.75) translateY(-39px) translateX(-20px);
+}
+         .field-wrapper #captcha:not([disabled]):focus~.field-placeholder,
+        .field-wrapper.hasValue #captcha:not([disabled])~.field-placeholder
+        {
+           left: 20px; 
+            transform: scale(.75) translateY(-39px) translateX(-45px);
+            
+        }	
+        
+        .captcha-view {
+		background-color: #e9ecef;
+		border: 1px solid #ced4da;
+		border-radius: .25rem;
+	 	padding: 14.8px;
+	 	width: 100%;
+	 	text-align: center;
+		}
+		.url-without-ul{
+			text-decoration: none;
+			font-weight: bolder;
+		}
+		.push-end{
+			display: flex;
+    		float: right;
+    		justify-content: flex-end;
+    		margin-left: auto;
+		}
+		.wrapper-shadow{
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+		}
+		
+.login-button{
+	width: 100px;
+  height: auto;
+}		
+
+.toggle {
+	display: flex;
+        flex-wrap: wrap;
+  
+}
+.toggle>* {
+          flex: 0 0 50%;
+      }
+.toggle input {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: -9999px;
+}
+.toggle input + label {
+  margin: 0;
+  padding: 0.75rem 1.85rem;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-block;
+  border: solid 1px #DDD;
+  background-color: #FFF;
+  font-size: 1rem;
+  line-height: 140%;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+  /* ADD THESE PROPERTIES TO SWITCH FROM AUTO WIDTH TO FULL WIDTH */
+  /*flex: 0 0 50%; display: flex; justify-content: center; align-items: center;*/
+  /* ----- */
+}
+.toggle input + label:first-of-type {
+  border-radius: 6px 0 0 6px;
+  border-right: none;
+}
+.toggle input + label:last-of-type {
+  border-radius: 0 6px 6px 0;
+  border-left: none;
+}
+.toggle input:hover + label {
+  border-color: #213140;
+}
+.toggle input:checked + label {
+  background-color: #01458E;
+  color: #FFF;
+  border-color: #01458E;
+  z-index: 1;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+/*.toggle input:focus + label {*/
+/*  outline: dotted 1px #CCC;*/
+/*  outline-offset: 0.2rem;*/
+/*}*/
+@media (max-width: 800px) {
+  .toggle input + label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.topheader {
+    font-size: 1rem !important;
+  }
+		
+	.vertical-align{
+		-ms-transform: translateY(10%);
+  transform: translateY(10%);
+  }

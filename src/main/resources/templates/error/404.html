@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karan - Page Not Found</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #C80808;
+            --dark-grey: #333333;
+            --medium-grey: #555555;
+            --light-grey-bg: #f7f7f7;
+            --white: #ffffff;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+            --red-shadow-light: rgba(200, 8, 8, 0.15);
+            --red-shadow-medium: rgba(200, 8, 8, 0.3);
+        }
+
+        body {
+            background-color: var(--light-grey-bg);
+            color: var(--dark-grey);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .error-container {
+            background: var(--white);
+            border-radius: 0;
+            box-shadow: 0 10px 40px var(--shadow-light);
+            padding: 48px 40px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(200, 8, 8, 0.08);
+            box-sizing: border-box;
+            transform: translateY(0);
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 28px auto;
+            color: var(--primary-red);
+            display: block;
+        }
+
+        .error-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        h1 {
+            font-size: 3.8em;
+            margin: 0 0 16px 0;
+            color: var(--primary-red);
+            font-weight: 700;
+            letter-spacing: -2px;
+            line-height: 1;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin: 0 0 40px 0;
+            color: var(--medium-grey);
+        }
+
+        .primary-btn3 {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 32px;
+            background-color: var(--primary-red);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 0;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 20px var(--red-shadow-light);
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .primary-btn3:hover {
+            background-color: #b00707;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--red-shadow-medium);
+        }
+
+        .primary-btn3 svg {
+            fill: var(--white);
+            width: 18px;
+            height: 18px;
+            transition: transform 0.2s ease;
+        }
+
+        .primary-btn3:hover svg {
+            transform: translateX(2px);
+        }
+
+        .error-code {
+            margin-top: 40px;
+            font-size: 0.85em;
+            color: #999999;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        @media (max-width: 600px) {
+            .error-container {
+                padding: 30px 25px;
+                margin: 0 15px;
+            }
+
+            h1 {
+                font-size: 3.2em;
+            }
+
+            p {
+                font-size: 1em;
+                margin-bottom: 30px;
+            }
+
+            .primary-btn3 {
+                padding: 12px 25px;
+                font-size: 1em;
+                width: 100%;
+            }
+
+            .error-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-container">
+       
+        <h1>404</h1>
+        <p>Oops! It looks like this page took a wrong turn. <br> Let's get you back on track to where you need to be.</p>
+
+        <a href="/" class="primary-btn3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M5 12l14 0"></path>
+                <path d="M13 18l6 -6"></path>
+                <path d="M13 6l6 6"></path>
+            </svg>
+            Go to Homepage
+        </a>
+
+        <div class="error-code">Error Code: Karan-404</div>
+    </div>
+</body>
+
+</html>

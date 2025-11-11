@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+	<title>karan Admin - Case Studies</title>
+	<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+	<link rel="icon" type="image/x-icon" th:href="@{/website/img/favicon.png}" />
+</head>
+
+<main layout:fragment="content" class="pt-5 mt-5">
+	<div class="container mt-4">
+		<div class="p-4 rounded shadow-sm bg-light mb-4 border border-1">
+			<div class="d-flex justify-content-between align-items-center flex-wrap">
+				<h3 class="mb-0">📘 Case Studies</h3>
+				<button class="btn btn-primary mt-2 mt-md-0" data-bs-toggle="modal" data-bs-target="#addCaseStudyModal">
+					<i class="bi bi-plus-circle me-1"></i> Add Case Study
+				</button>
+			</div>
+		</div>
+
+		<div class="table-responsive">
+			<table class="table table-bordered align-middle text-center">
+				<thead class="table-dark">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col" class="text-start">Title</th>
+						<th scope="col">Published</th>
+						<th scope="col">Views</th>
+						<th scope="col">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:if="${#lists.isEmpty(casestudies)}">
+						<td colspan="5" class="text-center text-muted">No case studies available.</td>
+					</tr>
+					<tr th:each="cs : ${casestudies}">
+						<td th:text="${cs.id}"></td>
+						<td class="text-start" th:text="${cs.title}"></td>
+						<td>
+							<span
+								th:class="'badge rounded-pill px-3 py-2 fw-semibold ' + (${cs.published} == 'Y' ? 'bg-success' : 'bg-secondary')"
+								th:text="${cs.published} == 'Y' ? 'Published' : 'Draft'">
+							</span>
+						</td>
+						<td>
+							<span class="text-primary fw-bold" th:text="${cs.viewCount}">0</span>
+						</td>
+						<td>
+							<div class="d-flex flex-wrap gap-2 justify-content-center">
+								<a class="btn btn-sm btn-outline-info" th:href="@{'/case-studies/' + ${cs.slug}}"
+									target="_blank" title="View">
+									<i class="fas fa-eye"></i>
+								</a>
+
+								<button class="btn btn-sm btn-outline-warning open-edit-modal-btn" th:data-id="${cs.id}"
+									title="Edit">
+									<i class="fas fa-edit"></i>
+								</button>
+
+								<button class="btn btn-sm"
+									th:classappend="${cs.published == 'Y'} ? 'btn-success' : 'btn-secondary'"
+									th:onclick="'togglePublish(' + ${cs.id} + ')'"
+									th:text="${cs.published == 'Y'} ? 'Published' : 'Unpublished'">
+								</button>
+
+								<button class="btn btn-sm"
+									th:classappend="${cs.featuredStatus == 'Y'} ? 'btn-warning' : 'btn-outline-warning'"
+									th:onclick="'toggleFeature(' + ${cs.id} + ')'"
+									th:text="${cs.featuredStatus == 'Y'} ? 'Featured' : 'Set Featured'">
+								</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+
+	<!-- Add Case Study Modal -->
+	<div class="modal fade" id="addCaseStudyModal" tabindex="-1" aria-labelledby="addCaseStudyModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<form class="modal-content" th:action="@{/admin/case-studies/add}" method="post"
+				enctype="multipart/form-data">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addCaseStudyModalLabel">Add Case Study</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						<label class="form-label">Title</label>
+						<input type="text" class="form-control" name="title" required />
+					</div>
+
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<label class="form-label">Author Name</label>
+							<input type="text" class="form-control" name="authorName" required />
+						</div>
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<label class="form-label">Upload Thumbnail Image</label>
+							<input type="file" class="form-control" name="thumbnailImage" accept="image/*" />
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">Upload PDF Report</label>
+							<input type="file" class="form-control" name="pdfFile" accept="application/pdf" required />
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Body</label>
+						<textarea class="form-control" name="body" id="addContentArea" rows="6"></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">In Brief</label>
+						<textarea class="form-control" name="inBrief" id="addBriefArea" rows="4"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-success" type="submit">Submit</button>
+					<button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<!-- Edit Case Study Modal -->
+	<div class="modal fade" id="editCaseStudyModal" tabindex="-1" aria-labelledby="editCaseStudyModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<form class="modal-content" id="editCaseStudyForm" th:action="@{/admin/case-studies/edit}" method="post"
+				enctype="multipart/form-data">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editCaseStudyModalLabel">Edit Case Study</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" name="id" id="editId" />
+					<div class="mb-3">
+						<label class="form-label">Title</label>
+						<input type="text" class="form-control" name="title" id="editTitle" required />
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<label class="form-label">Author Name</label>
+							<input type="text" class="form-control" name="authorName" id="editAuthorName" required />
+						</div>
+
+					</div>
+					<div class="row mb-3">
+						<div class="col-md-6">
+							<label class="form-label">Current Thumbnail</label>
+							<div id="editThumbPreview" class="mb-2"></div>
+							<input type="file" class="form-control" name="thumbnailImage" accept="image/*" />
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">Current PDF Report</label>
+							<div id="editPdfPreview" class="mb-2"></div>
+							<input type="file" class="form-control" name="pdfFile" accept="application/pdf" />
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Body</label>
+						<textarea class="form-control" name="body" id="editContentArea" rows="6"></textarea>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">In Brief</label>
+						<textarea class="form-control" name="inBrief" id="editBriefArea" rows="4"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="submit">Update</button>
+					<button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+
+	<script>
+
+
+
+
+
+		const csrfToken = document.querySelector('meta[id="_csrf"]').getAttribute('content');
+		const csrfHeader = document.querySelector('meta[id="_csrf_header"]').getAttribute('content');
+
+		document.querySelectorAll('.open-edit-modal-btn').forEach(btn => {
+			btn.addEventListener('click', () => {
+				const slug = btn.getAttribute('data-id');
+				openEditModal(slug);
+			});
+		});
+
+		$('#addCaseStudyModal').on('shown.bs.modal', function () {
+		  if (!CKEDITOR.instances.addContentArea) {
+		    CKEDITOR.replace('addContentArea');
+		  }
+		  if (!CKEDITOR.instances.addBriefArea) {
+		    CKEDITOR.replace('addBriefArea');
+		  }
+		});
+
+		$('#addCaseStudyModal').on('hidden.bs.modal', function () {
+		  if (CKEDITOR.instances.addContentArea) {
+		    CKEDITOR.instances.addContentArea.destroy(true);
+		  }
+		  if (CKEDITOR.instances.addBriefArea) {
+		    CKEDITOR.instances.addBriefArea.destroy(true);
+		  }
+		});
+		
+		function openEditModal(id) {
+			fetch(`/admin/case-studies/${id}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					[csrfHeader]: csrfToken
+				}
+			})
+				.then(response => {
+					if (!response.ok) throw new Error("Failed to fetch case study");
+					return response.json();
+				})
+				.then(data => {
+					document.getElementById("editId").value = data.id;
+					document.getElementById("editTitle").value = data.title;
+					document.getElementById("editAuthorName").value = data.author;
+
+
+					if (CKEDITOR.instances['editContentArea']) {
+						CKEDITOR.instances['editContentArea'].destroy(true);
+					}
+					if (CKEDITOR.instances['editBriefArea']) {
+						CKEDITOR.instances['editBriefArea'].destroy(true);
+					}
+
+					document.getElementById("editContentArea").value = data.body || '';
+					document.getElementById("editBriefArea").value = data.brief || '';
+
+					CKEDITOR.replace('editContentArea');
+					CKEDITOR.replace('editBriefArea');
+
+					const editModal = new bootstrap.Modal(document.getElementById('editCaseStudyModal'));
+					editModal.show();
+				})
+				.catch(error => {
+					console.error("Failed to load case study:", error);
+					alert("Could not load case study for editing.");
+				});
+		}
+
+		function togglePublish(id) {
+			fetch('/admin/case-studies/publish/' + id, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					[csrfHeader]: csrfToken
+				}
+			})
+				.then(res => res.text())
+				.then(msg => {
+					if (msg === 'success') location.reload();
+					else alert('Failed to update publish status.');
+				});
+		}
+		function toggleFeature(id) {
+			fetch('/admin/case-studies/feature/' + id, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					[csrfHeader]: csrfToken
+				}
+			})
+				.then(res => res.text())
+				.then(msg => {
+					if (msg === 'success') location.reload();
+					else alert('Failed to update feature status.');
+				});
+		}
+	</script>
+
+</main>
+
+</html>

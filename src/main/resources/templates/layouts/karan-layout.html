@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE"></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="karan">
+<link rel="icon" th:href="@{/website/img/favicon.png}"
+	type="image/x-icon">
+
+<link rel="stylesheet" th:href="@{/website/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/website/css/bootstrap-icons.css}" />
+<link rel="stylesheet" th:href="@{/website/css/swiper-bundle.min.css}" />
+<link rel="stylesheet" th:href="@{/website/css/slick.css}" />
+<!-- <link rel="stylesheet" th:href="@{/website/css/slick-theme.css}" /> -->
+<link rel="stylesheet" th:href="@{/website/css/animate.min.css}" />
+<link rel="stylesheet" th:href="@{/website/css/jquery.fancybox.min.css}" />
+<link rel="stylesheet" th:href="@{/website/css/boxicons.min.css}" />
+<link rel="stylesheet" th:href="@{/website/css/style.css}" />
+<link rel="stylesheet" th:href="@{/website/css/additional-styles.css}" />
+<link rel="stylesheet" th:href="@{/website/css/fonts/all.min.css}" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+
+<script th:src="@{/website/js/jquery-3.6.0.min.js}"></script>
+<style>
+@font-face {
+	font-family: 'Montserrat';
+	src:
+		url('../../website/css/fonts/Montserrat/static/Montserrat-Medium.ttf')
+		format('truetype');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	src:
+		url('../../website/css/fonts/Montserrat/static/Montserrat-Medium.ttf')
+		format('truetype');
+	font-weight: 700;
+	font-style: normal;
+}
+
+#sk-loader-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: #fff;
+	z-index: 9999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: opacity 0.3s ease;
+}
+</style>
+</head>
+
+<body id="body" class="">
+	<div id="sk-loader-wrapper">
+		<div id="sk-loader" style="width: 200px; height: 200px;"></div>
+	</div>
+
+	<header th:replace="fragments/karan-header :: public-header">THIS
+		HEADER CONTENT IS GOING TO BE REPLACED.</header>
+	<!-- Page content -->
+	<main id="main-content	" role="main"
+		class="container text-align-middle pb-5" layout:fragment="content"></main>
+
+	<footer th:replace="fragments/public-footer :: public-footer">THIS
+		FOOTER CONTENT IS GOING TO BE REPLACED.</footer>
+
+	<th:block layout:fragment="pagescript"></th:block>
+
+
+	<script th:src="@{/website/js/bootstrap.min.js}"></script>
+	<script th:src="@{/website/js/popper.min.js}"></script>
+	<script th:src="@{/website/js/swiper-bundle.min.js}"></script>
+	<script th:src="@{/website/js/slick.min.js}"></script>
+	<script th:src="@{/website/js/waypoints.min.js}"></script>
+	<script th:src="@{/website/js/jquery.counterup.min.js}"></script>
+	<script th:src="@{/website/js/isotope.pkgd.min.js}"></script>
+	<script th:src="@{/website/js/jquery.fancybox.min.js}"></script>
+	<script th:src="@{/website/js/gsap.min.js}"></script>
+	<script th:src="@{/website/js/simpleParallax.min.js}"></script>
+	<script th:src="@{/website/js/TweenMax.min.js}"></script>
+	<script th:src="@{/website/js/lottie.min.js}"></script>
+
+	<!-- <script th:src="@{/website/js/owl.carousel.min.js}"></script>
+	<script th:src="@{/website/js/jquery.min.js}"></script>
+	<script th:src="@{/website/js/slick.js}"></script>
+	<script th:src="@{/website/js/jquery-2.2.0.min.js}"></script> -->
+
+	<script th:src="@{/website/js/chart.min.js}"></script>
+	<script th:src="@{/website/js/chart-custom.js}"></script>
+	<script th:src="@{/website/js/main.js}"></script>
+	<script th:src="@{/website/js/custom.js}"></script>
+	<script th:src="@{/website/js/all.min.js}"></script>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			if (window.location.pathname === "/") {
+				lottie.loadAnimation({ //By kk
+					container: document.getElementById('sk-loader'),
+					renderer: 'svg',
+					loop: true,
+					autoplay: true,
+					path: '../website/js/karanLoader-sgk.json'
+				});
+
+				const loader = document.getElementById("sk-loader-wrapper");
+				const content = document.getElementById("main-content");
+
+				window.addEventListener("load", function () {
+					const minLoadingTime = 2000;
+					const startTime = performance.now();
+
+					const elapsed = performance.now() - startTime;
+					const delay = Math.max(0, minLoadingTime - elapsed);
+
+					setTimeout(() => {
+						loader.style.transition = "opacity 0.5s ease";
+						loader.style.opacity = "0";
+
+						setTimeout(() => {
+							loader.style.display = "none";
+							content.style.display = "block";
+						}, 300); // fade duration
+					}, delay);
+				});
+			} else {
+				const loader = document.getElementById("sk-loader-wrapper");
+				const content = document.getElementById("main-content");
+
+				if (loader) loader.style.display = "none";
+				if (content) content.style.display = "block";
+			}
+		});
+		
+		/* const copy = document.querySelector(".logos-slide").cloneNode(true);
+		document.querySelector(".logos").appendChild(copy); */
+		
+		$(".sliderr").slick({
+			  // dots: true,
+			  infinite: true,
+			  autoplay: true,
+			  autoplaySpeed: 1000,
+			  speed: 800,
+			  slidesToShow: 5,
+// 			  slidesToScroll: 1,
+			  prevArrow:
+			    '<button class="slick-prev" aria-label="Previous" type="button"></button>',
+			  nextArrow:
+			    '<button class="slick-next" aria-label="Next" type="button"></button>',
+			  responsive: [
+			    {
+			      breakpoint: 1024,
+			      settings: {
+			        slidesToShow: 3,
+			        slidesToScroll: 3,
+			        infinite: true,
+// 			        dots: true
+			      }
+			    },
+			    {
+			      breakpoint: 600,
+			      settings: {
+			        slidesToShow: 2,
+			        slidesToScroll: 2
+			      }
+			    },
+			    {
+			      breakpoint: 480,
+			      settings: {
+			        slidesToShow: 1,
+			        slidesToScroll: 1
+			      }
+			    }
+			  ]
+			});
+		
+		$(document).ready(function () {
+		    $('.banner-slider').slick({
+		      dots: true,
+		      infinite: true,
+		      speed: 700,
+		      slidesToShow: 1,
+		      slidesToScroll: 1,
+		      autoplay: true,
+		      autoplaySpeed: 4000,
+		      arrows: false,
+		      pauseOnHover: false,
+		      fade: false, // disable fade
+		      cssEase: 'ease-in-out', // smooth slide motion
+		    });
+		  });
+
+		var swiper = new Swiper('.blog-slider', {
+		    spaceBetween: 30,
+		    effect: 'fade',
+		    loop: true,
+		    mousewheel: {
+		        invert: false,
+		    },
+		    autoplay: {
+		        delay: 500000,
+		        disableOnInteraction: false,
+		    },
+		    // autoHeight: true,
+		    pagination: {
+		        el: '.blog-slider__pagination',
+		        clickable: true,
+		    }
+		});
+
+		
+		$(".news-sliderr").slick({
+			  // dots: true,
+			  infinite: true,
+			  autoplay: true,
+			  autoplaySpeed: 1000,
+			  speed: 2000,
+			  slidesToShow: 3,
+//			  slidesToScroll: 1,
+			  prevArrow:
+			    '<button class="slick-prev" aria-label="Previous" type="button"></button>',
+			  nextArrow:
+			    '<button class="slick-next" aria-label="Next" type="button"></button>',
+			  responsive: [
+			    {
+			      breakpoint: 1024,
+			      settings: {
+			        slidesToShow: 3,
+			        slidesToScroll: 3,
+			        infinite: true,
+//			        dots: true
+			      }
+			    },
+			    {
+			      breakpoint: 600,
+			      settings: {
+			        slidesToShow: 2,
+			        slidesToScroll: 2
+			      }
+			    },
+			    {
+			      breakpoint: 480,
+			      settings: {
+			        slidesToShow: 1,
+			        slidesToScroll: 1
+			      }
+			    }
+			  ]
+			});
+		
+		$(".testimonial-sliderr").slick({
+			  dots: true,
+			  infinite: true,
+			  autoplay: true,
+			  autoplaySpeed: 1000,
+			  speed: 2000,
+			  slidesToShow: 1,
+//			  slidesToScroll: 1,
+			  prevArrow:
+			    '<button class="slick-prev" aria-label="Previous" type="button"></button>',
+			  nextArrow:
+			    '<button class="slick-next" aria-label="Next" type="button"></button>',
+			  responsive: [
+			    {
+			      breakpoint: 1024,
+			      settings: {
+			        slidesToShow: 1,
+			        slidesToScroll: 1,
+			        infinite: true,
+//			        dots: true
+			      }
+			    },
+			    {
+			      breakpoint: 600,
+			      settings: {
+			        slidesToShow: 1,
+			        slidesToScroll: 1
+			      }
+			    },
+			    {
+			      breakpoint: 480,
+			      settings: {
+			        slidesToShow: 1,
+			        slidesToScroll: 1
+			      }
+			    }
+			  ]
+			});
+	</script>
+	
+	<script type="text/javascript">
+const accordions = document.querySelectorAll(
+		  ".accordion-highlights .accordion"
+		);
+		const accordionImages = document.querySelector(
+		  ".accordion-highlights .accordion_images"
+		);
+
+		// Function to open an accordion
+		const openAccordion = (accordion) => {
+		  accordion.classList.add("accordion_active");
+		};
+
+		// Function to close an accordion
+		const closeAccordion = (accordion) => {
+		  accordion.classList.remove("accordion_active");
+		};
+
+		// Function to activate images
+		const activateImages = (index) => {
+		  const images = accordionImages.querySelectorAll(".accordion_contentt");
+		  images.forEach((div, i) => {
+		    if (i === index) {
+		      div.classList.add("active");
+		    } else {
+		      div.classList.remove("active");
+		    }
+		  });
+		};
+
+		// Function to toggle an accordion
+		const toggleAccordion = (accordion, index) => {
+		  if (accordion.classList.contains("accordion_active")) {
+		    // If the clicked accordion is already open, do nothing
+		    return;
+		  }
+		  accordions.forEach((acc) => closeAccordion(acc)); // Close all accordions
+		  openAccordion(accordion); // Open the clicked accordion
+		  activateImages(index);
+		};
+
+		// Add click event listener to each accordion
+		accordions.forEach((accordion, index) => {
+		  const intro = accordion.querySelector(".accordion_intro");
+
+		  intro.onclick = () => {
+		    toggleAccordion(accordion, index);
+		  };
+		});
+
+		// Default: open the first accordion
+		const firstAccordion = document.querySelectorAll(".accordion_intro")[0];
+		openAccordion(firstAccordion, 0);
+
+		</script>
+
+</body>

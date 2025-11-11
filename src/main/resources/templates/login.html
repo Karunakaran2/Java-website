@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header"
+	th:content="${_csrf.headerName}" />-->
+
+<head>
+	<meta charset="utf-8">
+	<title>Login</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+	<link rel="icon" type="image/x-icon" th:href="@{/website/img/favicon.png}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/ui/css/styles.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/ui/css/form_styles.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/ui/css/layout-style.css}" />
+	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+	<!--	under this line import used for plus and remove icon.it should replace-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		integrity="your-integrity-hash" crossorigin="anonymous" />
+	<!--<link rel="stylesheet" type="text/css" th:href="@{/ui/css/iconmin.css}" />-->
+	<!--<link rel="stylesheet" type="text/css" th:href="@{/ui/css/iconminfont.css}" />-->
+
+	<style>
+		.bg-img {
+			background-image: url('/website/img/karan/stairs.jpg');
+			  background-position: center;
+			  background-repeat: initial;
+			  background-blend-mode: overlay;
+			  background-size: cover;
+			  background-color: rgba(0, 0, 0, 0.5);
+			  backdrop-filter: blur(5px);
+			  -webkit-backdrop-filter: blur(5px);
+		}
+	</style>
+</head>
+
+<body>
+	<header class="fixed-header">
+		<div class="container-fluid p-0">
+			<div class="d-flex flex-row" style="height: 55px; background-color: #01458E;">
+				<div class="d-flex align-items-center justify-content-end px-5">
+					<div class=" d-none d-sm-block d-md-block text-white topheader"> <img class=" img-fluid px-2 "
+							th:src="@{/website/img/logo.png}" style="height: 38px; filter: drop-shadow(0px 0px 0.7px rgb(255, 255, 255));"> Admin Pannel</div>
+				</div>
+			</div>
+			<div class="d-flex flex-row" style="height: 10px; background-color: #FBC104"></div>
+		</div>
+	</header>
+	<main role="main" class="body-content-login d-flex justify-content-center align-items-center container-fluid bg-img">
+		<!--style="background-image: url(../website/img/inner-pages/case-06.jpg); background-repeat: no-repeat; background-size: cover;"-->
+		<div class="row d-flex justify-content-center align-items-center m-auto">
+			<!--<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-7 d-none d-lg-block">
+				<div class="row">
+						<div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 text-center">
+						<img class=" img-fluid  " th:src="@{/website/img/logo.png}"
+							style="width: 120px; height: 200px;">
+					</div>
+					<div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 text-center">
+						<div class="rise_santa_body_caption">
+							<span>karan Admin Pannel</span>
+						</div>
+					</div>
+				</div>
+			</div>-->
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" align="right">
+
+				<div class="form-wrapper-outer wrapper-shadow col-lg-10 col-md-12 col-sm-12 col-xl-10 col-xxl-10">
+					<div class="form-logo text-center  pt-0"><h3>Login</h3></div>
+					<div class="form-greeting"></div>
+					<form class="login-form" th:action="@{/admin/login}" method="post">
+						<!--                                     	<input type="hidden" name="domain" value="U1">-->
+						<!--<div class="mb-3 field-wrapper">
+							<div class="toggle">
+								<input type="radio" name="domain" value="U" id="domainId" checked="checked" /> <label
+									for="domainId">Others</label>
+								<input type="radio" name="domain" value="O" id="officeId" /> <label for="officeId">Admin
+									User</label>
+							</div>
+						</div>-->
+						<div class="mb-3 field-wrapper">
+							<input id="inputUsername" type="text" placeholder="" class="" name="username" required
+								autofocus />
+							<div class="field-placeholder">
+								<span>Username</span>
+							</div>
+						</div>
+						<div class="field-wrapper">
+							<input type="password" name="password" class="" placeholder="" required>
+							<div class="field-placeholder">
+								<span>Password</span>
+							</div>
+						</div>
+
+						<div style="width: 48%; display: inline-block;">
+							<label class="captcha-view" for="captcha"> <img id="captchaIdentifier" alt="..."
+									th:src="@{/captcha/getCaptcha}">
+								<i style="cursor: pointer;" class="fa fa-sync-alt reloadCaptcha"></i>
+							</label>
+						</div>
+						<div class="field-wrapper" style="width: 50%; display: inline-block;">
+							<input type="text" name="captcha" id="captcha" placeholder="" required>
+							<div class="field-placeholder">
+								<span>Captcha</span>
+							</div>
+						</div>
+
+						<span style="font-size: 0.8rem;" class="pb-2 font-weight-normal text-danger"
+							th:if='${param.error}' th:switch="${param.error[0]}"> <span th:case="'1'">Invalid Session.
+								Please try again.</span> <span th:case="'2'">Invalid Captcha</span> <span
+								th:case="'3'">Invalid
+								User Credentials</span> <span th:case="'4'">Too many Failed
+								Login Attempts. Try again after 10 minutes.</span> <span th:case="'5'">User
+								Session Expired. Please login again.</span> <span th:case="'6'">Password
+								Reset Successfully. Please login again.</span> <span th:case="*">Something
+								went wrong. Please try again.</span>
+						</span>
+						<div class="mt-2 mb-0">
+							<div class="row ">
+								<div class="col-12 text-center">
+									<button class="btn btn-kranblue login-button" type="submit">Login</button>
+								</div>
+							</div>
+						</div>
+						<div class="mt-2 mb-0">
+							<div class="row ">
+								<div class="col-12  text-center">
+									<a class="small url-without-ul text-danger"
+										th:href="@{/global/forgotPassword}">Forgot Password?</a>
+								</div>
+								<!--<div class="col-7 ">
+									<div class="row ">-->
+								<!--										<div class="col-12  otr-fs">-->
+								<!--											<a class="small url-without-ul text-primary" onclick="openReg()"-->
+								<!--												style="cursor: pointer;">One Time-->
+								<!--												Registration</a>-->
+								<!--										</div>-->
+								<!--</div>
+								</div>-->
+							</div>
+						</div>
+
+						<div class="row ">
+							<div class="col-12  otr-fs text-center">Go to
+								<a class="small url-without-ul text-success" href="/" style="cursor: pointer;">karan
+									Website</a>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
+	<div class="fixed-footer">
+		<div class="container-fluid">
+			<div class="row" style="height: 100%;">
+				<div class="col-8 text-white d-flex justify-content-start align-items-center ps-3">
+					<span style="font-size: 0.75rem;">Version 0.1</span>
+				</div>
+				<div class="col-4 text-white d-flex align-items-center justify-content-end px-3">
+					<a href="#" target="_blank" rel="noopener noreferrer"
+						class="justify-content-center d-flex align-items-center"> <img
+							th:src=" " style="width: 50px; height: 11px;" />
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+</body>
+<script type="text/javascript">
+	function modalXLIdClose() {
+		$("#modalXLId").modal("hide");
+		window.location.reload();
+	}
+</script>
+
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/feather-icons/4.28.0/dist/feather.min.js}"></script>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/ui/js/capcha.js}"></script>
+<script th:src="@{/ui/js/form_styles.js}"></script>
+<script th:src="@{/ui/js/noback.js}"></script>
+<script th:src="@{/ui/js/custom/ajaxprefilter.js}"></script>
+
+</html>

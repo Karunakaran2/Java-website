@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE"></title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Rise">
+
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/ui/css/styles.css}" />
+	<link rel="stylesheet" th:href="@{/ui/css/layout-style.css}" />
+	<link rel="stylesheet" th:href="@{/ui/css/custom-rules.css}" />
+	<link rel="stylesheet" th:href="@{/webjars/jquery-ui/jquery-ui.min.css}" />
+	<link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.min.css}" />
+	<link rel="stylesheet" th:href="@{/webjars/material-icons/iconfont/material-icons.css}" />
+
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/js/ckeditor4/ckeditor4/ckeditor.js}"></script>
+
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+	<script th:src="@{/ui/js/scripts.js}"></script>
+
+	<script type="text/javascript">
+
+
+		window.history.forward();
+
+		function noBack() {
+			window.history.forward();
+		}
+
+		$(document).ready(function (data) {
+			$('#profile').popover({
+				html: true,
+				content: function () {
+					return $('#popover-content').html();
+				}
+			});
+
+			$('body').on('click', function (e) {
+				$('[data-toggle=popover]').each(function () {
+					if (!$(this).is(e.target)
+						&& $(this).has(e.target).length === 0
+						&& $('.popover').has(e.target).length === 0) {
+						$(this).popover('hide');
+					}
+				});
+			});
+
+
+			$('#mectrl_main_trigger').click(function (event) {
+				event.stopPropagation(); // Prevent event bubbling
+				$('#mectrl_main_body').toggleClass('expanded');
+			});
+
+			$(document).click(function (event) {
+				if (!$(event.target).closest('#mectrl_main_body').length &&
+					!$(event.target).is('#mectrl_main_trigger')) {
+					$('#mectrl_main_body').removeClass('expanded');
+				}
+			});
+
+
+		});
+
+		$(function () {
+
+			var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+			var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+				return new bootstrap.Popover(popoverTriggerEl)
+			})
+
+
+			var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+			var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+				return new bootstrap.Tooltip(tooltipTriggerEl)
+			})
+
+		});
+
+		$(document).on('load', 'body', function (event) {
+			noBack();
+		});
+
+		$(document).on('pageshow', 'body', function (event) {
+			if (event.persisted)
+				noBack();
+		});
+
+		$(document).ready(function (data) {
+			$('#profile').popover({
+				html: true,
+				content: function () {
+					return $('#popover-content').html();
+				}
+			});
+
+			$('body').on('click', function (e) {
+				$('[data-toggle=popover]').each(function () {
+					if (!$(this).is(e.target)
+						&& $(this).has(e.target).length === 0
+						&& $('.popover').has(e.target).length === 0) {
+						$(this).popover('hide');
+					}
+				});
+			});
+
+
+		});
+
+		function showToast(message, type = 'success') {
+			const toastEl = document.getElementById('globalToast');
+			const toastBody = document.getElementById('globalToastBody');
+
+			if (!toastEl || !toastBody) return;
+
+			toastBody.textContent = message;
+
+			// Set color: 'success', 'danger', 'warning', 'info'
+			const classMap = {
+				success: 'bg-success',
+				error: 'bg-danger',
+				warning: 'bg-warning text-dark',
+				info: 'bg-info text-dark'
+			};
+
+			// Remove old bg classes
+			toastEl.className = 'toast align-items-center text-white border-0';
+			toastEl.classList.add(...(classMap[type] || classMap.success).split(' '));
+
+			// Show the toast
+			const toast = new bootstrap.Toast(toastEl, {delay: 3000});
+			toast.show();
+		}
+	</script>
+</head>
+
+<body>
+	<header th:replace="fragments/header :: header">THIS HEADER CONTENT IS GOING TO BE REPLACED.</header>
+
+	<!-- Page content -->
+	<main role="main" class="container text-align-middle pb-5" layout:fragment="content"></main>
+
+	<footer th:replace="fragments/footer :: footer">THIS FOOTER CONTENT IS GOING TO BE REPLACED.</footer>
+
+	<div id="myModalTSG" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-xl">
+			<!-- Adjust modal-lg for width -->
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header bg-primary" style="color: black;">
+					<h6 class="modal-title large text-light fw-600">
+						<span class="text-light modelHeader-center">Tech Support</span>
+					</h6>
+					<button type="button" id="clearButton" class="btn btn-sm btn-light " title="Close"
+						th:onclick="closeModal1()">
+						<i class="fa fa-times"></i>
+					</button>
+				</div>
+				<div class="modal-body" style="height: 600px; width: 100%;">
+					<!-- Adjust height as needed -->
+					<iframe width="100%" height="100%" id="modalframe" src="about:blank" frameborder="0"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Global Toast Container -->
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+		<div id="globalToast" class="toast align-items-center text-white border-0" data-bs-dev="sgk125" role="alert" aria-live="assertive"
+			aria-atomic="true">
+			<div class="d-flex">
+				<div id="globalToastBody" class="toast-body">
+					<!-- Toast message will be injected here -->
+				</div>
+				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+					aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
+
+	<th:block layout:fragment="pagescript"></th:block>
+
+</body>

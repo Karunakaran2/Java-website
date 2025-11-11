@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/karan-layout}">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<head>
+	<title>karan - Welcome Page</title>
+	<link rel="icon" type="image/x-icon" th:href="@{/website/img/favicon.png}" />
+</head>
+<main role="main" class="" layout:fragment="content">
+
+
+	<div class="breadcrumb-banner"
+		style="background-image: linear-gradient(270deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0.55) 101.02%), url(../website/img/inner-pages/braadcrumb-bg5.jpg);">
+		<div class="container-fluid one">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="banner-content">
+						<h1>Whitepapers</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="breadcrumbs">
+		<div class="container-fluid one">
+			<div class="row">
+				<div class="col-lg-12">
+					<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+						<ol class="breadcrumb-custom">
+							<li><a th:href="@{/}">Home</a></li>
+							<li class="active">Whitepapers</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Breadcrumb Section -->
+
+
+
+	<section class="whitepapers-section mt-5 mb-130">
+		<div class="container-fluid one">
+			<div class="row g-lg-4 gy-5">
+				<div class="col-xxl-12 col-lg-12 justify-content-center d-flex">
+					<div class=" title-and-underline">
+						<h2>
+							Published Whitepapers
+						</h2>
+					</div>
+				</div>
+				<div class="col-xxl-12 col-lg-12 justify-content-center d-flex"></div>
+				<div class="whitepaper-grid">
+					<div class="whitepaper-card" th:each="paper : ${whitepapers}">
+						<!-- image -->
+						<img th:src="@{'/whitepapers/image/' + ${paper.id}}" alt="Whitepaper Image" />
+
+						<!-- content -->
+						<div class="card-content">
+							<h3 th:text="${paper.title}">Whitepaper Title</h3>
+							<p th:text="${paper.description}">Short description of the whitepaper.</p>
+
+							<a class="explore-btn p-2" th:href="@{'/whitepapers/pdf/' + ${paper.slug}}" target="_blank">
+								View PDF
+								<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+									<path fill-rule="evenodd" clip-rule="evenodd"
+										d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+									</path>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="row text-center" th:if="${#lists.isEmpty(whitepapers)}">
+					<div class="col-12 py-5">
+						<i class="fa-solid fa-face-frown fs-1 text-secondary mb-3"></i>
+						<h4 class="text-muted">No whitepapers available at the moment.</h4>
+						<p class="text-muted">Please check back later for updates.</p>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</section>
+	
+	<section class="accordion_two_section mb-90 container-fluid one">
+		 <div class="row g-4">
+						<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-2">
+							<div class=" ">
+								<h3 class="section-heading">Services</h3>
+								<h5 class="section-heading-brief">The Centre for Enterprise
+									Services and Process Excellence</h5>
+							</div>
+						</div>
+					</div>
+					
+		<div class=" mt-4">
+			<div class="blog-slider">
+				<div class="blog-slider__wrp swiper-wrapper statement-content">
+					<div class="blog-slider__item swiper-slide row">
+						<div class="blog-slider__img col-lg-6 px-0">
+							<img
+								th:src="@{/website/img/inner-pages/aboutus-2.jpg}"
+								alt="">
+						</div>
+						<div class="blog-slider__content statement-content-bottom col-lg-6">
+							 
+							 <div class="mb-30">
+							<p>At karan, we empower institutions through transformative
+								solutions, strategic partnerships, and deep domain
+								expertise—enabling public systems to evolve into more efficient,
+								inclusive, and future-ready versions of themselves.</p>
+						</div>
+						
+							<ul class="list-bullets-service saarathi-solution">
+								<li>Electronics and Gadgets</li>
+								<li>Fashion and Accessories</li>
+								<li>Home Decor and Furniture</li>
+								<li>Health and Wellness Products</li>
+							</ul>
+
+						</div>
+					</div>
+					<div class="blog-slider__item swiper-slide row">
+						<div class="blog-slider__img col-lg-6 px-0">
+							<img
+								th:src="@{/website/img/inner-pages/aboutus-1.jpg}"
+								alt="">
+						</div>
+						<div class="blog-slider__content statement-content-bottom col-lg-6">
+							 
+							 <div class="mb-30">
+							<p>At karan, we empower institutions through transformative
+								solutions, strategic partnerships, and deep domain
+								expertise—enabling public systems to evolve into more efficient,
+								inclusive, and future-ready versions of themselves.</p>
+						</div>
+						
+							<ul class="list-bullets-service saarathi-solution">
+								<li>Introduction to Economics</li>
+								<li>Understanding Market Trends</li>
+								<li>Agriculture and Sustainable Farming</li>
+								<li>Mastering Industrial Analysis</li>
+							</ul>
+
+						</div>
+					</div>
+
+				</div>
+				<div class="blog-slider__pagination"></div>
+			</div>
+		</div>
+	</section>
+	
+
+</main>
+
+</html>

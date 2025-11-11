@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/karan-layout}">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<head>
+	<title th:text="'karan - ' + ${job.title}">Apply Position</title>
+	<link rel="icon" type="image/x-icon" th:href="@{/website/img/favicon.png}" />
+	<style>
+		.job-summary-row {
+			display: flex;
+			align-items: flex-start;
+			margin-bottom: 0.5rem;
+		}
+
+		.label-col {
+			width: 140px;
+			text-align: left;
+			padding-right: 5px;
+			font-weight: 500;
+		}
+
+		.colon-col {
+			width: 10px;
+			text-align: center;
+		}
+
+		.value-col {
+			padding-left: 10px;
+			flex: 1;
+			text-align: left;
+		}
+	</style>
+</head>
+<main role="main" class="" layout:fragment="content">
+
+
+	<div class="breadcrumb-banner"
+		style="background-image: linear-gradient(270deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0.55) 101.02%), url(../../website/img/inner-pages/braadcrumb-bg5.jpg);">
+		<div class="container-fluid one ">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="banner-content">
+						<h1>Senior Consulatnt</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="breadcrumbs">
+		<div class="container-fluid one">
+			<div class="row">
+				<div class="col-lg-12">
+					<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+						<ol class="breadcrumb-custom">
+							<li><a th:href="@{/}">Home</a></li>
+							<li><a th:href="@{/careers}">Careers</a></li>
+							<li class="active"><span th:text="${job.title}">Apply</span></li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Breadcrumb Section -->
+
+	<!-- Start Apply Position Section -->
+	<div class="apply-position-section pt-5 mt-3 mb-130">
+		<div class="container-fluid one ">
+			<div class="row g-lg-4 gy-5">
+				<div class="col-lg-8 pr--95">
+					<div class="job-description mb-30">
+						<p><strong>Job Role:&nbsp;</strong><span th:text="${job.title}"></span></p>
+					</div>
+
+					<div class="job-description mb-30">
+						<p><strong>Location:&nbsp;</strong><span th:text="${job.location}"></span></p>
+					</div>
+
+					<div class="job-description mb-30">
+						<p><strong>Job Description: &nbsp;</strong></p>
+						<div th:utext="${job.jobDescription}"></div>
+					</div>
+
+					<div class="job-responsibility mb-30">
+						<p><strong>Job Responsibility: &nbsp;</strong></p>
+						<div th:utext="${job.responsibilities}"></div>
+					</div>
+
+					<div class="job-responsibility mb-130">
+						<p><strong>Educational Requirements: &nbsp;</strong></p>
+						<div th:utext="${job.education}"></div>
+					</div>
+
+					<div class="position-apply-form">
+						<div class="section-title1 two mb-60">
+							<h2>Apply for this Position</h2>
+							<p>Please submit your resume and a cover letter outlining your relevant experience.</p>
+						</div>
+						<div class="contact-form-area two three">
+							<form th:action="@{'/careers/apply/' + ${job.id}}" th:object="${applicationForm}"
+								method="post" enctype="multipart/form-data" id="applyForm">
+								<input type="hidden" th:field="*{careerId}" />
+								<div class="row">
+
+									<div class="col-lg-6 mb-25">
+										<div class="form-inner">
+											<label>Full Name</label>
+											<input type="text" th:field="*{fullName}" placeholder="Your Name">
+											<div th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"
+												class="text-danger"></div>
+										</div>
+									</div>
+
+									<div class="col-lg-6 mb-25">
+										<div class="form-inner">
+											<label>Position</label>
+											<input type="text" th:value="${job.title}" disabled class="form-control">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6 mb-25">
+										<div class="form-inner">
+											<label>Your Email*</label>
+											<input type="email" th:field="*{email}" placeholder="example@email.com">
+											<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+												class="text-danger"></div>
+										</div>
+									</div>
+									<div class="col-lg-6 mb-25">
+										<div class="form-inner">
+											<label>Phone Number</label>
+											<input type="text" th:field="*{phone}" placeholder="+91- ***** *****">
+											<div th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
+												class="text-danger"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 mb-25">
+										<div class="form-inner">
+											<label>Cover Letter*</label>
+											<textarea th:field="*{coverLetter}"
+												placeholder="Write cover letter"></textarea>
+											<div th:if="${#fields.hasErrors('coverLetter')}" th:errors="*{coverLetter}"
+												class="text-danger"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 mb-20">
+										<div class="upload-file-area form-inner">
+											<label>Upload Resume(.pdf only)*</label>
+											<!--<div class="upload-field-title">
+												<h6></h6>
+											</div>-->
+											<div class="custom-upload-field">
+												<div class="upload-pdf-icon">
+													<img th:src="@{/website/img/inner-pages/upload-pdf-icon.svg}"
+														alt="">
+												</div>
+												<input type="file" id="resume" th:field="*{resume}"
+													class="custom-upload" />
+
+											</div>
+											<div th:if="${#fields.hasErrors('resumeUploaded')}"
+												th:errors="*{resumeUploaded}" class="text-danger"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-inner">
+											<button class="primary-btn1 btn-hover" type="submit">Submit</button>
+										</div>
+									</div>
+								</div>
+							</form>
+							<div class="container mt-4" th:if="${message}">
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									<strong th:text="${message}">Something went wrong.</strong>
+									<hr />
+									<a class="primary-btn1 btn-hover" th:href="@{/careers}">
+										← Back to Careers
+									</a>
+									<button type="button" class="btn-close" data-bs-dismiss="alert"
+										aria-label="Close"></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="job-summary-area">
+						<ul class="list-unstyled">
+
+							<li class="job-summary-row">
+								<div class="label-col">Job Posted</div>
+								<div class="colon-col">:</div>
+								<div class="value-col" th:text="${#temporals.format(job.postingDate, 'dd MMM yyyy')}">
+								</div>
+							</li>
+
+							<li class="job-summary-row">
+								<div class="label-col">Vacancy</div>
+								<div class="colon-col">:</div>
+								<div class="value-col" th:text="${job.noOfVacancies}"></div>
+							</li>
+
+							<li class="job-summary-row">
+								<div class="label-col">Experiences</div>
+								<div class="colon-col">:</div>
+								<div class="value-col" th:utext="${job.experience}"></div>
+							</li>
+
+							<li class="job-summary-row"
+								th:if="${job.genderPreference != null and !#strings.isEmpty(job.genderPreference)}">
+								<div class="label-col">Gender</div>
+								<div class="colon-col">:</div>
+								<div class="value-col" th:utext="${job.genderPreference}"></div>
+							</li>
+
+							<li class="job-summary-row"
+								th:if="${job.education != null and !#strings.isEmpty(job.education)}">
+								<div class="label-col">Education</div>
+								<div class="colon-col">:</div>
+								<div class="value-col" th:utext="${job.education}"></div>
+							</li>
+
+							<li class="job-summary-row">
+								<div class="label-col">Deadline</div>
+								<div class="colon-col">:</div>
+								<div class="value-col" th:text="${#temporals.format(job.lastDate, 'dd MMM yyyy')}">
+								</div>
+							</li>
+
+						</ul>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const form = document.getElementById("applyForm");
+
+			form.addEventListener("submit", function (e) {
+				let valid = true;
+				const fullName = form.querySelector("[name='fullName']");
+				const email = form.querySelector("[name='email']");
+				const phone = form.querySelector("[name='phone']");
+				const coverLetter = form.querySelector("[name='coverLetter']");
+				const resume = form.querySelector("[name='resume']");
+
+				// Clear previous errors
+				form.querySelectorAll(".text-danger").forEach(el => el.innerText = "");
+
+				// Full Name
+				if (!fullName.value.trim()) {
+					showError(fullName, "Full name is required");
+					valid = false;
+				}
+
+				// Email
+				if (!email.value.trim()) {
+					showError(email, "Email is required");
+					valid = false;
+				} else if (!/^\S+@\S+\.\S+$/.test(email.value)) {
+					showError(email, "Enter a valid email");
+					valid = false;
+				}
+
+				// Phone
+				if (!phone.value.trim()) {
+					showError(phone, "Phone number is required");
+					valid = false;
+				} else if (!/^[0-9+\-\(\) ]{10,20}$/.test(phone.value)) {
+					showError(phone, "Enter a valid phone number");
+					valid = false;
+				}
+
+				// Cover Letter
+				if (!coverLetter.value.trim()) {
+					showError(coverLetter, "Cover letter is required");
+					valid = false;
+				}
+
+				// Resume
+				if (!resume.files.length) {
+					showError(resume, "Please upload a resume (.pdf)");
+					valid = false;
+				} else if (!resume.files[0].name.toLowerCase().endsWith(".pdf")) {
+					showError(resume, "Only PDF files are allowed");
+					valid = false;
+				}
+
+				if (!valid) {
+					e.preventDefault(); // Stop form from submitting
+				}
+
+				function showError(input, message) {
+					const errorDiv = document.createElement("div");
+					errorDiv.className = "text-danger";
+					errorDiv.innerText = message;
+					input.closest(".form-inner").appendChild(errorDiv);
+				}
+			});
+		});
+	</script>
+
+</main>
+
+</html>

@@ -1,0 +1,127 @@
+<header class="fixed-header">
+	<!--<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+	<meta id="_csrf_header" name="_csrf_header"
+		th:content="${_csrf.headerName}" />-->
+	<div class="container-fluid p-0">
+		<div class="d-flex flex-row kran-neela" style="height: 55px;">
+			<div class="d-flex align-items-center">
+				<div class=" ps-3 pe-1">
+					<img alt="" th:src="@{/website/img/logo.png}" class="img-fluid"
+						style="height: 40px; filter: drop-shadow(0px 0px 0.7px rgb(255, 255, 255));">
+				</div>
+				<div class="pt-3 d-none d-sm-block d-md-block text-white topheader"> Admin Pannel</div>
+			</div>
+			<div class="ms-auto d-flex pt-2 mobile-profile align-items-center">
+				<a th:href="@{/}" target="_blank" title="Website" class="pe-2"><i
+						class="material-icons text-white fs-1">language</i></a>
+				<a class="pe-2"
+					th:href="${setuptab == null} ? @{/admin/setup/goto-blog-category-setup} : @{/admin/dashboard}"
+					th:title="${setuptab == null} ? 'Go to Setup' : 'Go to Dashboard'">
+					<i class="material-icons fs-1 text-white" data-sgk-cms="v1.0"
+						th:text="${setuptab == null} ? 'settings' : 'dashboard'"></i>
+				</a>
+
+				<a class="pe-3" id="mectrl_main_trigger" type="button" aria-expanded="false"><i
+						class="material-icons fs-1 text-white">person</i></a>
+
+				<div class="mectrl_dropdown mectrl_sk mectrl_mainDropdown ">
+					<div id="mectrl_main_body" class="mectrl_dropdownbody border rounded-bottom"
+						style="inset: 23px auto auto -335px;">
+						<div class="mectrl_body">
+							<div class="mectrl_currentAccount">
+								<div class="mectrl_accountInfo">
+									<div id="mectrl_currentAccount_picture" class="mectrl_profilepic_button">
+										<div id="mectrl_currentAccount_picture_profile_picture"
+											class="mectrl_profilepic mectrl_profilepic_initials" aria-hidden="true"
+											role="presentation">
+											<i class="fa fa-user" aria-hidden="true"></i>
+										</div>
+									</div>
+									<div class="mectrl_accountDetails">
+										<div id="mectrl_currentAccount_primary" class="mectrl_name mectrl_truncate"
+											aria-label="Sivanand G K">
+										</div>
+										<div id="mectrl_currentAccount_secondary" class="mectrl_truncate">
+										</div>
+									</div>
+								</div>
+								<a class="mectrl_resetStyle mectrl_password mectrl_truncate" role="button"
+									href="#">Update Password</a><a href="/admin/logout"
+									class="mectrl_resetStyle mectrl_signout mectrl_truncate" role="button">Logout</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="d-flex flex-row kran-manja position-relative pt-0" style="height: 25px;">
+			<!-- For Tab Listing -->
+			<div class="navbar-collapse ps-3">
+
+				<ul class="nav nav-tabs" th:if="${setuptab} == null">
+					<li class="nav-item" title="Dashboard"><a id="dashboard" class="nav-link-main-tab"
+							th:classappend="${activeTab} == 'dashboard' ? ' active' : ''"
+							th:href="@{/admin/dashboard}">Dashboard</a></li>
+
+					<li class="nav-item" title="Contact Applications"><a id="contact" class="nav-link-main-tab"
+							th:classappend="${activeTab} == 'contacts' ? ' active' : ''"
+							th:href="@{/admin/contact-applications}">Contact Applications</a></li>
+
+					<li class="nav-item" title="Whitepapers Published"><a id="whitepapers" class="nav-link-main-tab"
+							th:classappend="${activeTab} == 'whitepapers' ? ' active' : ''"
+							th:href="@{/admin/whitepapers}">White Papers</a></li>
+
+					<li class="nav-item" title="Events"><a id="events" class="nav-link-main-tab"
+							th:classappend="${activeTab} == 'events' ? ' active' : ''"
+							th:href="@{/admin/events}">Events</a></li>
+
+					<li class="nav-item" title="Gallery"><a id="gallery" class="nav-link-main-tab"
+							th:classappend="${activeTab} == 'gallery' ? ' active' : ''"
+							th:href="@{/admin/gallery}">Gallery</a></li>
+
+					<li class="nav-item" title="Blogs"><a id="blogs" class="nav-link-main-tab"
+							th:classappend="${activeTab} == 'blogs' ? ' active' : ''"
+							th:href="@{/admin/blogs}">Blogs</a></li>
+
+					<li class="nav-item" title="CaseStudies"><a id="casestudies" class="nav-link-main-tab"
+							th:classappend="${activeTab} == 'casestudies' ? ' active' : ''"
+							th:href="@{/admin/case-studies}">Case Studies</a></li>
+
+					<li class="nav-item" title="Job Posting"><a id="jobPosting" class="nav-link-main-tab"
+							th:classappend="${activeTab} == 'jobs' ? ' active' : ''" th:href="@{/admin/job-posting}">Job
+							Posting</a></li>
+
+					<li class="nav-item" title="Job Applications"><a id="jobApplications" class="nav-link-main-tab"
+							th:classappend="${activeTab} == 'jobApplications' ? ' active' : ''"
+							th:href="@{/admin/job-applications}">Job
+							Applications</a></li>
+				</ul>
+				<ul class="nav nav-tabs" th:if="${setuptab} != null">
+					<li class="nav-item" title="Blog Categories"><a id="blogCategories" class="nav-link-main-tab"
+							th:classappend="${activeTab} == 'blogCategories' ? ' active' : ''"
+							th:href="@{/admin/setup/goto-blog-category-setup}">Blog Categories</a></li>
+
+					<li class="nav-item" title="Team Setup"><a id="memberSetups" class="nav-link-main-tab"
+							th:classappend="${activeTab} == 'memberSetups' ? ' active' : ''"
+							th:href="@{/admin/setup/teams}">Team Members</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- For sub tab Listing -->
+		<div>
+			<div class="row">
+				<div class="col-12 px-5" style="background-color: white;">
+					<div class="navbar-collapse">
+
+
+					</div>
+
+				</div>
+			</div>
+			<!-- Sub tab Listing End -->
+		</div>
+	</div>
+
+</header>

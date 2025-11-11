@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/karan-layout}">
+
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<head>
+	<title>karan - Events</title>
+	<link rel="icon" type="image/x-icon" th:href="@{/website/img/favicon.png}" />
+</head>
+<main role="main" class="" layout:fragment="content">
+
+
+	<div class="breadcrumb-banner"
+		style="background-image: linear-gradient(270deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0.55) 101.02%), url(../website/img/inner-pages/braadcrumb-bg1.jpg);">
+		<div class="container-fluid one">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="banner-content">
+						<h1>Events</h1>
+
+					</div>
+				</div>
+				<div class="col-lg-12">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="breadcrumbs">
+		<div class="container-fluid one">
+			<div class="row">
+				<div class="col-lg-12">
+					<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+						<ol class="breadcrumb-custom">
+							<li><a th:href="@{/}">Home</a></li>
+							<li class="active">Events</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Breadcrumb Section -->
+
+	<div class="home4-about-section">
+		<div class="container-fluid one">
+			<div class="row g-lg-4 gy-5">
+				<div class="col-xxl-12 col-lg-12 justify-content-center d-flex">
+					<div class="accordion-container-custom pb-5 mt-5">
+						<div class="header-section title-and-underline">
+							<h2>
+								Upcoming Events
+							</h2>
+						</div>
+						<div class="accordion" id="serviceDetailsAccordion">
+
+							<div th:if="${#lists.size(events) > 0}">
+								<div th:each="event, iterStat : ${events}" class="accordion-item-custom">
+									<h2 class="accordion-header" th:id="'headingService' + ${event.id}">
+										<button class="accordion-button-custom" type="button" data-bs-toggle="collapse"
+											th:data-bs-target="'#collapseService' + ${event.id}" th:attr="aria-expanded=${iterStat.index == 0}"
+											th:aria-controls="'collapseService' + ${event.id}">
+											<div class="accordion-icon-circle">
+												<i th:attr="class=${event.iconPathName != null} ? ${event.iconPathName} : 'fas fa-calendar-alt'"></i>
+
+											</div>
+											<div class="accordion-content-main">
+												<div class="accordion-title" th:text="${event.title}">Event Title</div>
+												<div class="accordion-short-description" th:text="${event.brief}">Short
+													description here</div>
+											</div>
+											<span class="view-more-text">View More</span>
+										</button>
+									</h2>
+
+									<div th:id="'collapseService' + ${event.id}" class="accordion-collapse collapse"
+									th:classappend="${iterStat.index == 0} ? ' show' : ''"
+										th:attr="aria-labelledby='headingService' + ${event.id}"
+										data-bs-parent="#serviceDetailsAccordion">
+										<div class="accordion-body-custom">
+
+											<div class="detail-row">
+												<div class="detail-label">Add to Outlook</div>
+												<div class="detail-value">
+													<a th:href="@{'/calendar.ics?eventId=' + ${event.id}}"
+														target="_blank" title="Add to Calendar">Add to Calendar</a>
+												</div>
+											</div>
+
+											<div class="detail-row">
+												<div class="detail-label">Presentation</div>
+												<div class="detail-value" th:text="${event.type}">Webinar</div>
+											</div>
+
+											<div class="detail-row">
+												<div class="detail-label">Location</div>
+												<div class="detail-value" th:text="${event.location}">
+													Dial-in or venue details here.
+												</div>
+											</div>
+
+											<div class="detail-row">
+												<div class="detail-label">Description</div>
+												<div class="detail-value"
+													th:utext="${#strings.replace(event.description, '\n', '<br/>')}">
+													Detailed description of the event here.
+												</div>
+											</div>
+
+											<div class="detail-row" th:if="${event.methodologies != null}">
+												<div class="detail-label">Areas of Expertise</div>
+												<div class="detail-value" th:text="${event.methodologies}">Domain tags
+													or
+													skills</div>
+											</div>
+
+											<div class="detail-row" th:if="${event.supportContact != null}">
+												<div class="detail-label">Support Contact</div>
+												<div class="detail-value" th:text="${event.supportContact}">Email/phone
+												</div>
+											</div>
+
+											<div class="detail-row">
+												<div class="detail-label">Event Date</div>
+												<div class="detail-value"
+													th:text="${#temporals.format(event.eventDate, 'MMMM dd, yyyy HH:mm a')}">
+													July 15, 2025 10:00
+												</div>
+											</div>
+											<div class="detail-row" th:if="${event.registrationUrl != null and !#strings.isEmpty(event.registrationUrl)}">
+												<div class="detail-label">Register Here</div>
+												<div class="detail-value">
+													<a th:href="${event.registrationUrl}" target="_blank" rel="noopener noreferrer">Click to Register</a>
+												</div>
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+							<div th:if="${#lists.isEmpty(events)}" class="text-center py-5">
+								<p class="text-muted fs-5">No upcoming events found at the moment.</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</main>
+
+</html>

@@ -1,0 +1,78 @@
+<header th:fragment="public-header" class="fixed-header">
+	<!--	Disable csrf token for working in server-->
+		<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+		<meta id="_csrf_header" name="_csrf_header"
+			th:content="${_csrf.headerName}" />
+	<div class="container-fluid p-0">
+		<div class="d-flex flex-row conference-card px-10" style="height: 110px; background-color: #fff;">
+			<div class="d-flex align-items-center col-lg-6 px-0">
+				<div class="">
+					<img alt="" th:src="@{/images/seepz_round_logo.png}" class="img-fluid" style="height: 85px;">
+				</div>
+				<div class="mx-3 topheader justify-content-center mx-1 flex-column d-flex">
+					<h5 class="santacruz-heading">Greivance Redressal</h5>
+					<p class="santacruz-para">Santacruz Electronic Export Processing Zone</p>
+				</div>
+			</div>
+			<div class="col-lg-6 d-flex justify-content-end align-items-center">
+				<img alt="" th:src="@{/images/Government_of_India_logo.png}" class="img-fluid" style="height: 55px;">
+			</div>
+		</div>
+		<div class="d-flex flex-row kran-neela conference-card px-10" style="height: 50px;">
+			<!-- 			<div class="navbar-collapse"> -->
+			<!-- 				<ul class="nav nav-tabs public-tabs h-100"> -->
+			<!-- 					<li class="nav-item" title="All Grievances"><a -->
+			<!-- 						class="nav-link-main-tab h-100 d-flex align-items-center" -->
+			<!-- 						th:classappend="${tab?.equals('guidelines')} ? 'active' : ''" -->
+			<!-- 						th:href="@{/public/gotoGuidelines}">Guidelines</a></li> -->
+			<!-- 					<li class="nav-item" title="Dashboard"><a id="dashboard" -->
+			<!-- 						class="nav-link-main-tab h-100 d-flex align-items-center" -->
+			<!-- 						th:classappend="${tab?.equals('grievancerequest')} ? 'active' : ''" -->
+			<!-- 						th:href="@{/public/gotoPublicGrievanceRequest}">Register Your -->
+			<!-- 							Grievance</a></li> -->
+			<!-- 					<li class="nav-item" title="Received Grievances"><a -->
+			<!-- 						class="nav-link-main-tab h-100 d-flex align-items-center" -->
+			<!-- 						th:classappend="${tab?.equals('trackgreivance')} ? 'active' : ''" -->
+			<!-- 						th:href="@{/public/trackApplicationDetails}">Track Your -->
+			<!-- 							Grievance</a></li> -->
+			<!-- 					<li class="nav-item" title="forward"><a -->
+			<!-- 						class="nav-link-main-tab h-100 d-flex align-items-center" -->
+			<!-- 						th:classappend="${tab?.equals('faq')} ? 'active' : ''" -->
+			<!-- 						th:href="@{/public/gotoFaq}">FAQ</a></li> -->
+			<!-- 				</ul> -->
+			<!-- 			</div> -->
+
+
+			<nav class="nav">
+				<input type="checkbox" id="nav-check">
+				<div class="nav-btn">
+					<label for="nav-check"> <span></span> <span></span> <span></span>
+					</label>
+				</div>
+
+				<ul class="nav-list nav-tabs px-0">
+					<li class="nav-item" title="Homes"><a class="nav-link-main-tab h-100 d-flex align-items-center"
+							th:href="@{/seepz}">Home</a></li>
+					<li class="nav-item" title="All Grievances"><a
+							class="nav-link-main-tab h-100 d-flex align-items-center"
+							th:classappend="${tab?.equals('guidelines')} ? 'active' : ''"
+							th:href="@{/public/gotoGuidelines}">About</a></li>
+					<li class="nav-item" title="Dashboard"><a id="dashboard"
+							class="nav-link-main-tab h-100 d-flex align-items-center"
+							th:classappend="${tab?.equals('grievancerequest')} ? 'active' : ''"
+							th:href="@{/public/gotoPublicGrievanceRequest}">Register Your
+							Grievance</a></li>
+					<li class="nav-item" title="Received Grievances"><a
+							class="nav-link-main-tab h-100 d-flex align-items-center"
+							th:classappend="${tab?.equals('trackgreivance')} ? 'active' : ''"
+							th:href="@{/public/trackApplicationDetails}">Track Your
+							Grievance</a></li>
+					<li class="nav-item" title="forward"><a class="nav-link-main-tab h-100 d-flex align-items-center"
+							th:classappend="${tab?.equals('faq')} ? 'active' : ''" th:href="@{/public/gotoFaq}">FAQ</a>
+					</li>
+				</ul>
+			</nav>
+
+		</div>
+	</div>
+</header>

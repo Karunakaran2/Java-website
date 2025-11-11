@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<head>
+    <link rel="stylesheet" th:href="@{/ui/js/datatables/datatables.css}" />
+	<title>Rise</title>
+</head>
+<main role="main" class="container-fluid body-content" layout:fragment="content">
+		<div class="row px-2  ">
+			<div class="col-12 col-xxl-12 col-xl-12 col-md-12  px-4 pb-1"> <a class="btn btn-sm btn-primary float-end"
+								id="addToggle" href="javascript:void(0);" data-bs-toggle="collapse,tooltip" data-bs-target="#collapseAddHCard"
+								aria-expanded="false" aria-controls="collapseAddHCard" title="Add Sample Tab">
+								<div id="addbutton-arrow" class="addbutton-collapse-arrow  "><i class="fas fa-plus"></i>
+								</div>
+							</a>
+						</div>
+			<div class="col-xxl-12 col-xl-12 px-4 pt-1 ">
+				<div class="  p-0">
+						<div id="collapseAddHCard" class="card no-shadow collapse ">
+						<div class="col-12 card-body " id="inputTaker"> </div>
+					</div>
+						<div class="row">
+							<div class="col-12 mt-2 mb-2 table-responsive ">
+								<table id="tableData" class="table  table-striped  table-bordered table-hover "
+									style="width: 100%">
+									<thead >
+										<tr>
+											<th style="width:5%">#</th>
+											<th style="width:15%">Name</th>
+											<th style="width:15%">Remarks</th>
+											<th style="width:10%">Action</th>
+
+										</tr>
+									</thead>
+								</table>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/feather-icons/4.28.0/dist/feather.min.js}"></script>
+	<script th:src="@{/ui/js/datatables/datatables.js}"></script>
+	<script th:src="@{/ui/js/custom/fielderror.js}"></script>
+	<script th:src="@{/ui/js/custom/displaytoast.js}"></script>
+	<script th:src="@{/js/sample/sampletab/activesampletab/viewactivesampletab.js}"></script>
+</main>
+
+</html>
+
+
+
+
+	

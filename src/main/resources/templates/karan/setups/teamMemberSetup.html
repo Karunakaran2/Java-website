@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}" lang="en">
+
+<head>
+	<title>Team Members</title>
+</head>
+
+<main layout:fragment="content" class="pt-5 mt-5">
+	<div class="container pt-5 mt-5">
+		<!-- Header -->
+		<div class="p-4 rounded shadow-sm bg-light border mb-4 d-flex justify-content-between align-items-center">
+			<h3 class="mb-0">👥 Team Members Setup</h3>
+			<a href="/admin/dashboard" class="btn btn-outline-secondary btn-sm">
+				<i class="bi bi-box-arrow-left me-1"></i> Exit Setup
+			</a>
+		</div>
+
+		<!-- Flash message -->
+		<div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+			<span th:text="${success}"></span>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+
+		<!-- Form -->
+		<div class="p-4 rounded shadow-sm bg-white border mb-4">
+			<!-- Set this on the controller as: model.addAttribute("isEdit", true/false) -->
+			<form th:action="@{${isEdit} ? '/admin/setup/update-team-member' : '/admin/setup/add-team-member'}"
+				method="post" enctype="multipart/form-data" th:object="${newMember}">
+
+				<div class="row g-3">
+					<input type="hidden" th:field="*{id}" />
+					<div class="col-md-4">
+						<label>Name</label>
+						<input type="text" class="form-control" th:field="*{name}" required />
+					</div>
+					<div class="col-md-4">
+						<label>Position</label>
+						<input type="text" class="form-control" th:field="*{position}" required />
+					</div>
+					<div class="col-md-4">
+						<label>Email</label>
+						<input type="email" class="form-control" th:field="*{email}" />
+					</div>
+					<div class="col-md-4">
+						<label>Phone</label>
+						<input type="text" class="form-control" th:field="*{phone}" />
+					</div>
+					<div class="col-md-4">
+						<label>LinkedIn</label>
+						<input type="url" class="form-control" th:field="*{linkedinUrl}" />
+					</div>
+					<div class="col-md-4">
+						<label>X.com</label>
+						<input type="url" class="form-control" th:field="*{twitterUrl}" />
+					</div>
+					<div class="col-md-4">
+						<label>Upload Photo</label>
+						<input type="file" class="form-control" name="image" />
+					</div>
+					<div class="col-md-3">
+						<label>Level (0=CEO, etc)</label>
+						<input type="number" class="form-control" th:field="*{level}" />
+					</div>
+					<div class="col-md-3">
+						<label>Sort Order</label>
+						<input type="number" class="form-control" th:field="*{sortOrder}" />
+					</div>
+					<div class="col-md-12 text-end">
+						<button type="submit" class="btn btn-success"
+							th:text="${isEdit} ? 'Update Member' : 'Save Member'"></button>
+						<a th:if="${isEdit}" href="/admin/setup/teams" class="btn btn-outline-secondary ms-2">Cancel</a>
+					</div>
+
+				</div>
+			</form>
+		</div>
+
+		<!-- Table -->
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped shadow-sm bg-white text-center align-middle">
+				<thead class="table-primary">
+					<tr>
+						<th>#</th>
+						<th>Photo</th>
+						<th>Name</th>
+						<th>Position</th>
+						<th>Email</th>
+						<th>Status</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="member, iStat : ${team}">
+						<td th:text="${iStat.count}"></td>
+						<td><img th:src="@{${member.photoUrl}}" width="60" /></td>
+						<td th:text="${member.name}"></td>
+						<td th:text="${member.position}"></td>
+						<td th:text="${member.email}"></td>
+						<td>
+							<span th:text="${member.isActive == 'Y' ? 'Active' : 'Inactive'}"
+								th:classappend="${member.isActive == 'Y'} ? 'text-success' : 'text-danger'"></span>
+						</td>
+						<td>
+							<a th:href="@{'/admin/setup/edit-team-member/' + ${member.id}}"
+								class="btn btn-sm btn-warning"
+								th:classappend="${member.isDeleted == 'Y'} ? ' disabled' : ''"
+								th:attr="aria-disabled=${member.isDeleted == 'Y'}"
+								th:onclick="${member.isDeleted == 'Y'} ? 'return false;' : null">Edit</a>
+
+							<form th:action="@{'/admin/setup/toggle-team-member/' + ${member.id}}" method="post"
+								style="display:inline;">
+								<button class="btn btn-sm btn-secondary" type="submit"
+									th:disabled="${member.isDeleted == 'Y'}"
+									th:text="${member.isActive == 'Y' ? 'Deactivate' : 'Activate'}"></button>
+							</form>
+
+
+							<form th:action="@{'/admin/setup/delete-team-member/' + ${member.id}}" method="post"
+								style="display:inline;">
+								<button class="btn btn-sm"
+									th:classappend="${member.isDeleted == 'Y'} ? 'btn-secondary' : 'btn-danger'"
+									th:disabled="${member.isDeleted == 'Y'}"
+									th:text="${member.isDeleted == 'Y'} ? 'Deleted' : 'Delete'">
+								</button>
+							</form>
+
+
+						</td>
+
+					</tr>
+					<tr th:if="${#lists.isEmpty(team)}">
+						<td colspan="7" class="text-muted">No team members yet.</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</main>

@@ -1,0 +1,98 @@
+<!--<header th:fragment="public-header" class="header-topbar-area">
+--> <!--	Disable csrf token for working in server-->
+<!--	<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />-->
+<!--	<meta id="_csrf_header" name="_csrf_header"-->
+<!--		th:content="${_csrf.headerName}" />-->
+
+<nav class="navbar navbar-expand-xl sk-navbar" th:fragment="public-header">
+	<!-- Changed navbar-expand-lg to navbar-expand-xl -->
+	<div class="container-fluid one">
+		<!-- Brand/Logo -->
+		<a class="navbar-brand sk-navbar-brand" th:href="@{/}">
+			karan</a> <!-- Added sk-navbar-brand -->
+
+		<!-- Toggler for mobile view -->
+		<button class="navbar-toggler sk-navbar-toggler" type="button" data-bs-toggle="collapse"
+			data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<div class="sk-hamburger-icon">
+				<span class="sk-bar"></span>
+				<span class="sk-bar"></span>
+				<span class="sk-bar"></span>
+			</div>
+		</button>
+
+		<!-- Navbar links and external link button -->
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="sk-nav-link" th:href="@{/about-us}">About Us</a></li>
+				<li class="nav-item">
+					<a class="sk-nav-link" th:href="@{/service-details}">
+						Services
+					</a>
+				</li>
+				<!-- <li class="nav-item dropdown">
+					<a class="sk-nav-link dropdown-toggle" th:href="@{/services}" role="button"
+						data-bs-toggle="dropdown" aria-expanded="false">
+						Services <i class="fa-solid fa-angle-down sk-dropdown-icon"></i>
+					</a>
+					<ul class="dropdown-menu sk-dropdown-menu">
+						<li><a class="dropdown-item" th:href="@{/service-details}">Domain Consulting</a></li>
+						<li><a class="dropdown-item" th:href="@{/service-details}">Training & Capacity Building</a></li>
+						<li><a class="dropdown-item" th:href="@{/service-details}">Digital Governance</a></li>
+						<li><a class="dropdown-item" th:href="@{/service-details}">Policy Advisory</a></li>
+					</ul>
+				</li> -->
+				<!-- <li class="nav-item dropdown">
+					<a class="sk-nav-link dropdown-toggle" th:href="@{/case-studies}" role="button"
+						data-bs-toggle="dropdown" aria-expanded="false">
+						Research & Publications <i class="fa-solid fa-angle-down sk-dropdown-icon"></i>
+					</a>
+					<ul class="dropdown-menu sk-dropdown-menu">
+						<li><a class="dropdown-item" th:href="@{/whitepapers}">White Papers</a></li>
+						<li><a class="dropdown-item" th:href="@{/case-studies}">Case Studies</a></li>
+					</ul>
+				</li> -->
+				<!-- <li class="nav-item">
+					<a class="sk-nav-link" th:href="@{/events}">
+						Events
+					</a>
+				</li> -->
+				<li class="nav-item">
+					<a class="sk-nav-link" th:href="@{/gallery}">
+						Gallery
+					</a>
+				</li>
+				<!-- <li class="nav-item">
+					<a class="sk-nav-link" th:href="@{/blogs}">
+						Blogs
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="sk-nav-link" th:href="@{/careers}">
+						Careers
+					</a>
+				</li> -->
+				<li class="nav-item">
+					<a class="sk-nav-link" th:href="@{/contact-us}">
+						Contact Us
+					</a>
+				</li>
+			</ul>
+			<!-- External Link Button -->
+			<div class="d-flex align-items-center justify-content-center mt-3 mt-xl-0">
+				<!-- Changed mt-lg-0 to mt-xl-0 -->
+				<a href="#" class="primary-btn3 btn-hover" target="_blank">
+					karan
+					<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+						<path fill-rule="evenodd" clip-rule="evenodd"
+							d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+					</svg>
+					<span></span>
+				</a>
+				<div class="sidebar-button mobile-menu-btn ">
+					<span></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE"></title>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Rise">
+	<link rel="icon" th:href="@{/images/ic_logo_seepz_no_bg.png}" type="image/x-icon">
+
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/ui/css/styles.css}" />
+	<link rel="stylesheet" th:href="@{/ui/css/layout-style.css}" />
+	<link rel="stylesheet" th:href="@{/ui/css/custom-rules.css}" />
+	<link rel="stylesheet" th:href="@{/webjars/jquery-ui/jquery-ui.min.css}" />
+	<link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.min.css}" />
+	<link rel="stylesheet" th:href="@{/webjars/material-icons/iconfont/material-icons.css}" />
+
+	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+	<script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
+	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+	<script th:src="@{/ui/js/scripts.js}"></script>
+
+	<script type="text/javascript">
+	
+	
+		window.history.forward();
+
+		function noBack() {
+			window.history.forward();
+		}
+		
+		$(document).ready(function(data){
+			$('#profile').popover({
+				html: true,
+				content: function () {
+					return $('#popover-content').html();
+				}
+			});
+
+			$('body').on('click', function (e) {
+				$('[data-toggle=popover]').each(function () {
+					if (!$(this).is(e.target)
+						&& $(this).has(e.target).length === 0
+						&& $('.popover').has(e.target).length === 0) {
+						$(this).popover('hide');
+					}
+				});
+			});
+			
+			
+			$('#mectrl_main_trigger').click(function (event) {
+				event.stopPropagation(); // Prevent event bubbling
+				$('#mectrl_main_body').toggleClass('expanded');
+			});
+
+			$(document).click(function (event) {
+				if (!$(event.target).closest('#mectrl_main_body').length &&
+					!$(event.target).is('#mectrl_main_trigger')) {
+					$('#mectrl_main_body').removeClass('expanded');
+				}
+			});
+			
+			
+		});
+
+		$(function () {
+
+			var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+			var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+				return new bootstrap.Popover(popoverTriggerEl)
+			})
+
+
+			var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+			var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+				return new bootstrap.Tooltip(tooltipTriggerEl)
+			})
+
+		});
+
+		$(document).on('load', 'body', function (event) {
+			noBack();
+		});
+
+		$(document).on('pageshow', 'body', function (event) {
+			if (event.persisted)
+				noBack();
+		});
+
+		$(document).ready(function (data) {
+			$('#profile').popover({
+				html: true,
+				content: function () {
+					return $('#popover-content').html();
+				}
+			});
+
+			$('body').on('click', function (e) {
+				$('[data-toggle=popover]').each(function () {
+					if (!$(this).is(e.target)
+						&& $(this).has(e.target).length === 0
+						&& $('.popover').has(e.target).length === 0) {
+						$(this).popover('hide');
+					}
+				});
+			});
+
+
+		});
+
+		function gotoHelpDisk() {
+			var pageTitle = document.title;
+
+			var userName = "[[${session.userBean.userName}]]";
+			var seatName = "[[${session.userBean.hierarchyCode}]]";
+			var controllingOffice = "[[${session.userBean.hierarchyName}]]";
+			var seatUserAllotId = "[[${session.userBean.seatUserAllotId}]]";
+			var mobile = "[[${session.userBean.mobile}]]";
+			var email = "[[${session.userBean.email}]]";
+
+			var myJSON = {
+				"userName": userName,
+				"seatName": seatName,
+				"controllingOffice": controllingOffice,
+				"seatUserAllotId": seatUserAllotId,
+				"pageTitle": pageTitle,
+				"mobile": mobile,
+				"email": email
+			};
+			var strJSON = encodeURIComponent(JSON.stringify(myJSON));
+			$('#modalframe').attr('src',
+			'http://localhost:8080/helpdesk/gotoHDeskFromApp?strJSON=' + strJSON);
+			$('#myModalTSG').modal('show');
+		}
+
+		function closeModal1() {
+			$("#myModalTSG").modal("hide");
+			window.location.reload();
+		}
+
+	</script>
+</head>
+
+<body>
+	<header th:replace="fragments/header :: header">THIS HEADER CONTENT IS GOING TO BE REPLACED.</header>
+
+	<!-- Page content -->
+	<main role="main" class="container text-align-middle pb-5" layout:fragment="content"></main>
+
+	<footer th:replace="fragments/footer :: footer">THIS FOOTER CONTENT IS GOING TO BE REPLACED.</footer>
+
+	<div id="myModalTSG" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-xl">
+			<!-- Adjust modal-lg for width -->
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header bg-primary" style="color: black;">
+					<h6 class="modal-title large text-light fw-600">
+						<span class="text-light modelHeader-center">Tech Support</span>
+					</h6>
+					<button type="button" id="clearButton" class="btn btn-sm btn-light " title="Close"
+						th:onclick="closeModal1()">
+						<i class="fa fa-times"></i>
+					</button>
+				</div>
+				<div class="modal-body" style="height: 600px; width: 100%;">
+					<!-- Adjust height as needed -->
+					<iframe width="100%" height="100%" id="modalframe" src="about:blank" frameborder="0"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<th:block layout:fragment="pagescript"></th:block>
+</body>

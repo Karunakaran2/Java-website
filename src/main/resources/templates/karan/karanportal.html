@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/karan-layout}">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header"
+	th:content="${_csrf.headerName}" />
+
+<head>
+<title>karan - Welcome Page</title>
+
+
+<!-- <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+	rel="stylesheet"> -->
+<script
+	src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+
+<link rel="icon" type="image/x-icon"
+	th:href="@{/website/img/favicon.png}" />
+
+
+<!-- Script to rotate 3 cards at a time -->
+<script>
+ window.addEventListener("DOMContentLoaded", () => {
+	    const bannerCards = document.querySelectorAll('.banner-card');
+	    const floatingCards = Array.from(document.querySelectorAll('.floating-card'));
+
+	    const animationTypes = ['zoom-in'];
+
+	    // Utility: pick N random unique items
+	    function pickarandomItems(arr, n) {
+	        const copy = [...arr];
+	        const result = [];
+	        for (let i = 0; i < n && copy.length > 0; i++) {
+	            const idx = Math.floor(Math.random() * copy.length);
+	            result.push(copy.splice(idx, 1)[0]);
+	        }
+	        return result;
+	    }
+
+	    // Animations
+	    function animateIn(el, type = 'zoom-in') {
+	        el.style.transition = "none";
+	        if (type === 'zoom-in') {
+	            el.style.transform = "scale(0.7)";
+	            el.style.opacity = "0";
+	            void el.offsetWidth; // force reflow
+	            el.style.transition = "transform 0.4s ease, opacity 0.4s ease";
+	            el.style.transform = "scale(0.9)";
+	            el.style.opacity = "1";
+	        }
+	    }
+
+	    function animateOut(el, type = 'zoom-in', callback) {
+	        if (type === 'zoom-in') {
+	            el.style.transition = "transform 0.4s ease, opacity 0.4s ease";
+	            el.style.transform = "scale(0.7)";
+	            el.style.opacity = "0";
+	            setTimeout(() => {
+	                if (callback) callback();
+	            }, 400);
+	        }
+	    }
+
+	    // Step 1: Place 9 random floating cards initially
+	    const initialCards = pickRandomItems([...floatingCards], bannerCards.length);
+	    let unusedCards = floatingCards.filter(c => !initialCards.includes(c));
+
+	    bannerCards.forEach((banner, i) => {
+	        banner.innerHTML = "";
+	        if (initialCards[i]) {
+	            banner.appendChild(initialCards[i]);
+	            animateIn(initialCards[i]);
+	        }
+	    });
+
+	    function cycleUnusedCard() {
+	        if (unusedCards.length === 0) return; // nothing left to swap
+
+	        // pick 1 random banner card
+	        const bannerIdx = Math.floor(Math.random() * bannerCards.length);
+	        const banner = bannerCards[bannerIdx];
+	        const currentCard = banner.querySelector('.floating-card');
+	        if (!currentCard) return;
+
+	        // pick 1 unused card
+	        const unusedIdx = Math.floor(Math.random() * unusedCards.length);
+	        const newCard = unusedCards.splice(unusedIdx, 1)[0];
+
+	        const anim = animationTypes[0];
+
+	        // animate out current → then replace with new
+	        animateOut(currentCard, anim, () => {
+	            banner.innerHTML = "";
+	            banner.appendChild(newCard);
+	            animateIn(newCard, anim);
+
+	            // put the old card into unused pool
+	            unusedCards.push(currentCard);
+	        });
+	    }
+
+	    // Run every 3s
+	    setInterval(cycleUnusedCard, 3000);
+	});
+
+  
+  document.addEventListener("DOMContentLoaded", function() {
+	  particlesJS("particles-js", {
+	    "particles": {
+	      "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+	      "color": { "value": "#c80808" },
+	      "opacity": { "value": 0.2, "random": true },
+	      "size": { "value": 3, "random": true },
+	      "line_linked": {
+	        "enable": true,
+	        "distance": 150,
+	        "color": "#c80808",
+	        "opacity": 0.2,
+	        "width": 1
+	      },
+	      "move": { "enable": true, "speed": 1, "out_mode": "out" }
+	    },
+	    "interactivity": {
+	      "events": {
+	        "onhover": { "enable": true, "mode": "repulse" },
+	        "onclick": { "enable": true, "mode": "push" }
+	      },
+	      "modes": { "repulse": { "distance": 100, "duration": 0.4 } }
+	    },
+	    "retina_detect": true
+	  });
+	});
+  
+/*   document.addEventListener("DOMContentLoaded", function () {
+	  const swiper = new Swiper(".project-slider", {
+	    slidesPerView: 3,
+	    spaceBetween: 20,
+	    rewind: true,            // instead of loop:true
+	    speed: 800,              // smooth transition
+	    autoplay: {
+	      delay: 4000,           // 4s reading time
+	      disableOnInteraction: false,
+	    },
+	    navigation: {
+	      nextEl: ".project-slider .swiper-button-next",
+	      prevEl: ".project-slider .swiper-button-prev",
+	    },
+	  });
+	}); */
+
+
+</script>
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+	rel="stylesheet">
+</head>
+<main role="main" class="" layout:fragment="content">
+
+	<section class="banner container-fluid">
+		<div id="particles-js"></div>
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6 banner-content">
+					<div class="banner-slider">
+						<div class="carousal">
+							<h1>
+								Simplifying Public Administration,<br> <span>Transforming
+									Governance</span>
+							</h1>
+							<p>We partner with experts and institutions to deliver simple
+								solutions that bridge strategy, technology, and policy for
+								public sector challenges.</p>
+							<a class="primary-btn1 btn-hover" href="/service-details">
+								Read More <svg xmlns="http://www.w3.org/2000/svg" width="12"
+									height="12" viewBox="0 0 12 12">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+										d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z"></path>
+        </svg>
+							</a>
+						</div>
+
+						<div class="carousal">
+							<h1>
+								Empowering Fiscal Futures through<br> <span>Smart
+									Finance and Intelligent Policy</span>
+							</h1>
+							<p>karan’s vision of strengthening governance through modern
+								financial management, technology-driven efficiency and
+								data-backed fiscal policymaking.</p>
+							<a class="primary-btn1 btn-hover" href="/service-details">
+								Read More <svg xmlns="http://www.w3.org/2000/svg" width="12"
+									height="12" viewBox="0 0 12 12">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+										d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z"></path>
+        </svg>
+							</a>
+						</div>
+
+						<div class="carousal">
+							<h1>
+								Incubating Ideas and<br> <span>Implementing
+									Innovations</span>
+							</h1>
+							<p>Turning research-driven concepts into actionable reforms
+								that enhance governance efficiency and public service delivery.</p>
+							<a class="primary-btn1 btn-hover" href="/service-details">
+								Read More <svg xmlns="http://www.w3.org/2000/svg" width="12"
+									height="12" viewBox="0 0 12 12">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+										d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z"></path>
+        </svg>
+							</a>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-md-6 banner-image position-relative">
+					<div class="banner-cards-container">
+						<div class="banner-card float-card-1"></div>
+						<div class="banner-card float-card-2"></div>
+						<div class="banner-card float-card-3"></div>
+						<div class="banner-card float-card-4"></div>
+						<div class="banner-card float-card-5"></div>
+						<div class="banner-card float-card-6"></div>
+						<div class="banner-card float-card-7"></div>
+						<div class="banner-card float-card-8"></div>
+						<div class="banner-card float-card-9"></div>
+
+						<div class="floating-card card-1">
+							<img th:src="@{website/img/banner/Consulting Support.png}" alt="">
+							Consulting </br> Support
+						</div>
+
+						<div class="floating-card card-2">
+							<img
+								th:src="@{website/img/banner/business process reengineering.png}"
+								alt=""> Business Process Reengineering (BPR)
+						</div>
+
+						<div class="floating-card card-3">
+							<img
+								th:src="@{website/img/banner/Change Management Advisory.png}"
+								alt=""> Change Management Advisory
+						</div>
+
+						<div class="floating-card card-4">
+							<img th:src="@{website/img/banner/Policy Design & Review.png}"
+								alt=""> Policy Design & Review
+						</div>
+
+						<div class="floating-card card-5">
+							<img
+								th:src="@{website/img/banner/Capacity-Building Programs.png}"
+								alt=""> Capacity-Building Programs
+						</div>
+
+						<div class="floating-card card-6">
+							<img th:src="@{website/img/banner/Workshops & Seminars.png}"
+								alt=""> Workshops & </br>Seminars
+						</div>
+
+						<div class="floating-card card-7">
+							<img th:src="@{website/img/banner/Lecture Series by Experts.png}"
+								alt=""> Lecture <br />Series by Experts
+						</div>
+
+						<div class="floating-card card-8">
+							<img
+								th:src="@{website/img/banner/Knowledge Sharing Platforms.png}"
+								alt=""> Knowledge Sharing Platforms
+						</div>
+
+						<div class="floating-card card-9">
+							<img th:src="@{website/img/banner/Research & Publications.png}"
+								alt=""> Research & </br>Publications
+						</div>
+
+						<div class="floating-card card-10">
+							<img th:src="@{website/img/banner/Applied Case Studies.png}"
+								alt=""> Applied </br>Case Studies
+						</div>
+
+						<div class="floating-card card-11">
+							<img
+								th:src="@{website/img/banner/Performance Assessment & Evaluation.png}"
+								alt=""> Performance Assessment & Evaluation
+						</div>
+
+						<div class="floating-card card-12">
+							<img th:src="@{website/img/banner/Innovation Lab.png}" alt="">
+							Innovation </br>Lab
+						</div>
+
+						<div class="floating-card card-13">
+							<img
+								th:src="@{website/img/banner/Digital Transformation Support.png}"
+								alt=""> Digital Transformation Support
+						</div>
+
+						<div class="floating-card card-14">
+							<img th:src="@{website/img/banner/Citizen-Centric Solutions.png}"
+								alt=""> Citizen-Centric Solutions
+						</div>
+
+						<div class="floating-card card-15">
+							<img
+								th:src="@{website/img/banner/Individual & Institutional Collaboratio.png}"
+								alt=""> Institutional & Individual Collaboration
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="banner2-section pb-2" style="display: none;">
+		<div class="swiper banner2-slider">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<div class="banner-wrapper"
+						style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url(../website/img/karan/DomainConsulting.jpg);">
+						<div class="container-fluid one">
+							<div class="row g-lg-4 gy-5 pt-5 mt-2">
+								<div class="col-lg-7">
+									<div class="banner-left-content">
+
+										<h1>Driving Public Sector Transformation Through
+											Strategic Consulting.</h1>
+										<!--<a class="primary-btn1 btn-hover" th:href="@{/blog-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+												</path>
+											</svg>
+											<span style="top: 240.594px; left: 153.5px;"></span>
+										</a>-->
+									</div>
+								</div>
+								<div class="col-lg-5 d-flex align-items-end">
+									<div class="banner-right-content  ">
+										<h5>Empowering governments with innovative frameworks and
+											digital tools for responsive and inclusive governance.</h5>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner-wrapper"
+						style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url(../website/img/karan/training.jpg);">
+						<div class="container-fluid one  ">
+							<div class="row g-lg-4 gy-5 pt-5 mt-2">
+								<div class="col-lg-7">
+									<div class="banner-left-content">
+
+										<h1>Empowering Institutions With Tailored Capacity
+											Building Programs.</h1>
+										<!--<a class="primary-btn1 btn-hover" th:href="@{/blog-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+												</path>
+											</svg>
+											<span
+										style="top: 240.594px; left: 153.5px;"></span> </a>-->
+									</div>
+								</div>
+								<div class="col-lg-5 d-flex align-items-end">
+									<div class="banner-right-content  ">
+										<h5>We deliver impactful training and skill-building
+											solutions to upskill civil servants and stakeholders in
+											governance.</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner-wrapper"
+						style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url(../website/img/karan/webinars.jpg);">
+						<div class="container-fluid one  ">
+							<div class="row g-lg-4 gy-5 pt-5 mt-2">
+								<div class="col-lg-7">
+									<div class="banner-left-content">
+
+										<h1>Innovative Policy Research That Shapes Future
+											Governance.</h1>
+										<!--<a class="primary-btn1 btn-hover" th:href="@{/blog-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+												</path>
+											</svg>
+											<span style="top: 240.594px; left: 153.5px;"></span>
+										</a>-->
+									</div>
+								</div>
+								<div class="col-lg-5 d-flex align-items-end">
+									<div class="banner-right-content  ">
+										<h5>Our evidence-based research supports data-driven
+											decision making for governments and public institutions.</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-slide">
+					<div class="banner-wrapper"
+						style="background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url('../website/img/karan/researchAndPublications.jpg');">
+
+						<div class="container-fluid one  ">
+							<div class="row g-lg-4 gy-5 pt-5 mt-2">
+								<div class="col-lg-7">
+									<div class="banner-left-content">
+
+										<h1>Reinventing Public Systems for a Resilient and Agile
+											Future.</h1>
+										<!--<a
+											class="primary-btn1 btn-hover" th:href="@{/blog-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+												</path>
+											</svg>
+											<span style="top: 240.594px; left: 153.5px;"></span>
+										</a>-->
+									</div>
+								</div>
+								<div class="col-lg-5 d-flex align-items-end">
+									<div class="banner-right-content  ">
+										<h5>We partner with institutions to redesign services,
+											processes, and frameworks for better citizen outcomes.</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+	</div>
+
+
+	<!--
+	<div class="why-choose-section pb-5 pt-5 bg-lightblue">
+		<div class="container-fluid one pb-2 pt-2 ">
+			<div class="row g-xl-4 gy-5 g-4">
+				<div class="col-xl-7 ">
+					<div class="choose-content">
+						<div class="section-title1 title-and-underline  mb-50">
+							<h2 class="">Who We Are</h2>
+						</div>
+						<div class="who-we-are-section mb-50">
+							<h2>Research, Restructure, and Reinvent</h2>
+							<p>We don’t just support governance — <strong>we shape its future.</strong> As strategic
+								partners to the
+								public sector, we bring deep expertise, actionable insight, and collaborative drive to
+								the frontlines of transformation. From evidence-based research to targeted capacity
+								building and institutional partnerships, we help public systems evolve with clarity,
+								resilience, and measurable impact.
+							</p>
+						</div>
+					</div>
+					<div class="row ">
+						<div class="col-sm-6 ">
+							<div class="mission-area">
+
+								<div class=" mission-vision-header ">
+									<h3>Our Mission</h3>
+
+								</div>
+								<div class="mission-vision-desc1">
+									<p>To empower organizations to
+										thrive and achieve their full potential by providing strategic insights,
+										innovative solutions, and expert guidance. We partner </p>
+									<p>To empower organizations to
+										thrive and achieve
+										their full potential.</p>
+
+
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-6 ">
+							<div class="vision-area">
+								<div class="mission-vision-header">
+									<h3>Our Vision</h3>
+
+								</div>
+								<div class="mission-vision-desc1">
+									<p>To empower organizations to
+										thrive and achieve
+										their full potential by providing
+										strategic insights, innovative solutions, and expert guidance. We partner
+									</p>
+									<p>To empower organizations to
+										thrive and achieve
+										their full potential.
+									</p>
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="choose-content mt-5">
+						<a class="explore-btn btn-hover" th:href="@{/about-us}">
+							<strong> Get to Know Us</strong>
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+								<path fill-rule="evenodd" clip-rule="evenodd"
+									d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+							</svg>
+						</a>
+					</div>
+				</div>
+				<div class="col-xl-5 d-flex align-items-center">
+					<div class="banner-img ">
+						<img th:src="@{/website/img/karan/karan_circle_only.png}" class="pl--95" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>-->
+
+	<div class="about-section-v2 pt-5">
+
+		<div class="container-fluid one pb-2">
+			<!-- <div class="row g-4">
+				<div class="col-lg-12 d-flex about-content flex-column mb-2">
+					<div class="section-title1 title-and-underline two ">
+						<h2>Who We Are</h2>
+					</div>
+				</div>
+			</div> -->
+
+			<div class="main-content-card mb-0 pb-3 ">
+				<div style="background: transparent; flex: 1;">
+					<!-- 				class=" image-col" style="background-image: url('../website/img/inner-pages/aboutus-2.jpg');"> -->
+					<svg id="animated-about-illustration"
+						xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6000 4000"
+						width="100%" height="auto">
+							<defs>
+								<style>
+.about-illus {
+	fill: none;
+	stroke: #000;
+	stroke-miterlimit: 10;
+	stroke-width: 8.08px;
+}
+</style>
+							</defs> <text x="0" y="0" font-size="0.1" fill="transparent"
+							data-dev="sgk125">Developed by
+								karan</text>
+							<path id="animated-path" class="about-illus svg-elem-1"
+							d="M253.13,3168.09s865.59-12.38,869.71-33.01-107.3-309.51,0-517.91,366.25-96.98,429.18-95.95c62.93,1.03,110.73-7.22,177.45,20.29,66.72,27.51,138.25,61.21,253.8,61.21s155.78-23.73,163.01-33.01c7.22-9.29,70.15-155.44,50.9-158.19-19.26-2.75-65.68-6.53-71.19-8.25-5.5-1.72-16.85-21.67-17.88-18.91-1.03,2.75-94.57,199.8-84.94,201.87,9.63,2.06,88.55-170.74,88.55-179.51s-60.87-72.22-82.79-98.78c-21.92-26.57-42.3-31.72-41.01-44.62,1.29-12.9,21.15-13.41,24.93-11.69,3.78,1.72,106.26,96.98,98.35,97.32-7.91.34-96.63-78.06-95.6-84.6,1.03-6.53,11.35-28.2,31.29-23.04,19.95,5.16,83.14,41.87,82.11,48.06-1.03,6.19-1.03,14.19,10.32,20.63,11.35,6.45,92.08,23.21,113.74,23.21s36.88-12.12,35.34-12.9-26.82,8.77-59.06,4.13c-32.24-4.64-86.4-12.9-89.76-23.99-3.35-11.09,1.29-24.24,20.12-25.53,18.83-1.29,106.26,2.84,137.73-2.32,31.47-5.16,180.03-35.08,200.15-29.4,20.12,5.67,35.59,44.36,73.25,41.78,37.66-2.58,40.75-14.96,44.88-9.8,4.13,5.16,9.8,59.84,52.62,71.19,42.82,11.35,44.36-2.06,47.97-10.32s-11.86-119.68-16.51-106.26c-4.64,13.41,6.19,115.55,25.28,120.71,19.09,5.16,79.96,1.03,86.15-12.9s-18.05-149.59-23.73-136.18c-5.67,13.41,31.98,135.67,27.34,143.92s-28.37,13.41-26.82,18.57c1.55,5.16,33.01,11.35,55.2,2.58,22.18-8.77,60.35-45.91,60.35-60.87s-31.47-156.82-35.08-138.25,10.42,66.75,16.51,69.64c6.09,2.89,56.74,27.34,69.12,40.24,12.38,12.9,56.06,85.11,79.78,84.43,23.73-.69,34.73-16.51,32.67-30.26-2.06-13.76-62.25-109.36-80.82-126.55-18.57-17.19-100.42-90.79-126.9-96.63-26.48-5.85-259.99-8.25-284.06-8.25s-409.58-106.61-411.3-112.8c-1.72-6.19-7.57-63.96,11.35-68.44,18.91-4.47,33.7,16.51,39.55,29.58,5.85,13.07,39.89,27,54.16,35.25s34.22,34.56,28.72,34.91c-5.5.34-222.84-65-251.39-73.94-28.54-8.94-126.55-.52-195.16,92.85-68.61,93.37-63.96,148.05-53.65,161.98,10.32,13.93,182.44,62.59,179.69,58.81-2.75-3.78-156.64-77.38-168.17-68.09-11.52,9.29,1.38,35.08-19.95,32.33-21.32-2.75-94.92-70.84-123.8-125.87-28.89-55.02-44.71-93.2-29.23-116.92,15.48-23.73,173.84-146.5,235.74-155.79,61.9-9.29,154.75,23.73,165.07,35.59,10.32,11.86,48.49,76.35,25.79,77.89-22.7,1.55-59.32-10.32-124.83,7.74-65.51,18.05-136.7,137.21-148.56,175.39-11.86,38.17-9.46,71.36-18.05,71.19-8.6-.17-105.5-111.94-110.78-142.89-5.28-30.95-10.95-154.41-26.77-148.22-15.82,6.19-314.32,60.53-349.4,118.3-35.08,57.77-148.56,519.97-141.34,519.97s90.79-57.77,124.83-67.06c34.05-9.29,214.59,28.89,222.84,0,8.25-28.89,196.02-298.16,199.12-283.71,3.1,14.44-164.04,297.13-173.32,296.09-9.29-1.03-21.67-77.38-6.19-154.75,15.48-77.38,115.55-395.14,119.68-513.78,4.13-118.64,3-274.77,30.56-354.56,27.56-79.78,146.55-149.94,287.55-157.5s343.9-77.72,341.15-70.84c-2.75,6.88-69.47,58.46-66.72,158.19,2.75,99.73,46.08,273.74,55.02,270.3,8.94-3.44,194.82-114.35,200.49-114.35s41.27,3.61,47.97,11.86,10.32,19.6,10.32,25.79-13.93,51.24-15.3,60.18-45.39,10.66-44.36,11.69,47.8,5.16,50.21,10.32c2.41,5.16-11.18,400.12-15.3,402.7-4.13,2.58-127.41-29.92-127.93-40.24-.52-10.32,72.99-363.67,69.9-377.08-3.09-13.41-33.27-56.91-32.07-59.49s53.3-40.06,53.48-32.15c.17,7.91-54.68,40.58-53.65,53.99,1.03,13.41-101.11,367.28-118.64,346.65-17.54-20.63-61.9-56.74-96.98-66.03-35.08-9.29-126.9-38.52-154.41-57.77-27.51-19.26-50.21-9.63-55.02-35.08-4.81-25.45-73.59-279.24-54.34-259.99,19.26,19.26,57.77,255.17,79.78,248.98,22.01-6.19,62.25-56.06,41.61-161.29-20.63-105.23-57.77-135.67-45.91-154.75,11.86-19.09,196.02-30.95,195.51-54.68-.52-23.73-2.58-79.96,20.12-128.45,22.7-48.49,80.99-79.96,82.54-69.12s-14.96,91.3,28.37,158.88c43.33,67.58,113.49,150.11,126.38,149.59,12.9-.52,52.1.52,87.18,17.54,35.08,17.02,88.21,29.92,117.61,5.67,29.4-24.24,63.96-102.82,86.32-132.06,22.35-29.23,64.65-38.17,79.1-70.15,14.44-31.98,19.95-97.32,28.89-110.39,8.94-13.07,48.83-35.08,52.96-62.25,4.13-27.17,3.44-181.92-7.57-186.05-11-4.13-20.63,14.44-57.77-7.57-37.14-22.01-133.09-106.26-180.55-98.01-47.46,8.25-55.71,117.61-72.91,132.06-17.19,14.44-91.48,61.21-96.98,77.03-5.5,15.82-2.06,64.65-9.63,72.91-7.57,8.25-49.52-34.39-48.15-61.21,1.38-26.82-2.24-125.35-37.83-118.64-35.59,6.71-67.58,66.03-50.04,126.9,17.54,60.87,40.75,110.39,63.45,87.18,22.7-23.21,16.51-136.18,8.25-160.94-8.25-24.76-40.75-31.98-50.55-11.35-9.8,20.63,15.48,115.55,10.32,123.8-5.16,8.25-52.62,64.48-63.96,50.04-11.35-14.44,17.54-198.08,22.7-251.73,5.16-53.65,120.71-208.4,172.81-202.73,52.1,5.67,163.52,109.87,137.21,108.84-26.31-1.03-128.33-83.99-127.93-95.43.4-11.44,27.86-78.92,184.16-46.43,156.3,32.5,281.12,165.63,242.96,239.87-38.16,74.24-67.58,83.57-148.05,46.43-80.47-37.14-139.28-134.12-188.8-111.42-49.52,22.7-45.39,91.82-82.54,125.87-37.14,34.05-76.35,51.07-74.28,82.02,2.06,30.95-40.24,127.41-29.92,195.51,10.32,68.09,107.61,244.56,163.01,256.37,55.4,11.81,95.43-17.54,135.15-61.9,39.72-44.36,103.68-112.97,123.29-112.97s58.29,44.88,70.15,84.08c11.86,39.2,40.41,168.68,39.72,194.82-.69,26.14-13.76,68.09-55.71,88.73-41.96,20.63-218.03,77.72-212.53,58.46,5.5-19.26,131.37-308.13,125.87-261.36-5.5,46.77-113.83,244.17-103.17,245.2s194.3-69.12,208.23-84.25c13.93-15.13,33.19-8.25,9.11,39.2-24.07,47.46,32.84,139.11,14.27,233.51-18.57,94.4,19.09,172.29.52,169.2-18.57-3.09-75.31-60.35-127.41-73.25s-175.9,34.56-188.8,6.19c-12.9-28.37-19.09-108.84-10.32-143.92,8.77-35.08,50.04-111.94,51.58-91.3,1.55,20.63-37.14,117.1-41.27,145.98-4.13,28.89,6.71,77.2,5.67,81.68-1.03,4.47-92.85,2.06-126.55,47.8-33.7,45.74-21.32,131.71-30.26,137.21-8.94,5.5-92.85,6.88-104.54,19.26-11.69,12.38-22.01,35.77-32.33,53.65-10.32,17.88-59.15,79.1-85.97,81.85-26.82,2.75-61.21.69-56.4-6.88,4.81-7.57,63.28-8.94,87.35-37.83,24.07-28.89,42.72-73.55,55.02-66.72,12.31,6.84,114.86,44.02,114.86,53.65s-159.57,734.56-166.79,740.75c-7.22,6.19-26.82-54.68-19.6-103.17,7.22-48.49,84.6-664.41,89.76-637.58,5.16,26.82,4.13,157.85-6.19,179.51-10.32,21.67-170.23,78.41-244.51,103.17-74.28,24.76-442.08-77.38-496.24-77.38s236.77,123.8,232.13,194.99c-4.64,71.19-242.96,321.89-184.16,298.67,58.81-23.21,307.69-129.63,475.09-69.64,167.4,59.99,262.05,58.81,289.9,40.24s190.86-213.56,151.66-197.05c-39.2,16.51-138.25,193.96-142.37,222.84-4.13,28.89,88.73,35.08,146.5,35.08s296.09,0,302.28-13.41c6.19-13.41,99.04-479.74,91.82-531.32-7.22-51.58-87.69-165.07-224.91-164.04-137.21,1.03-312.6,103.17-308.48,103.68,4.13.52,165.59-39.72,156.82-51.58-8.77-11.86-132.06-52.1-122.77-59.32,9.29-7.22,132.06,45.91,141.34,44.36,9.29-1.55,174.84-35.08,229.55-9.29s98.64,149.69,110.91,133.09c12.26-16.61,12.38-121.74,40.24-131.02s1027.56-78.41,1027.56-63.96-50.55,780.99-66.03,807.81c-15.48,26.82-1006.93,122.08-1018.62,115.89-11.69-6.19,57.77-826.73,67.4-834.98,9.63-8.25,989.73-74.97,991.8-65.34,2.06,9.63-46.77,756.57-69.47,769.98-22.7,13.41-953.28,97.32-970.48,95.95-17.19-1.38-492.46-86.66-486.96-99.04,5.5-12.38,459.27-51.07,459.27-42.3s-5.67,116.07-8.77,117.61c-3.1,1.55-455.49-84.6-457.04-81.5-1.55,3.1,3.09,44.36,8.25,47.97,5.16,3.61,461.51,108.16,474.23,105.75,12.72-2.41,80.82-819.16,91.13-828.45s208.4-8.25,210.46-21.67c2.06-13.41-36.11-53.65-24.76-100.07,11.35-46.43,132.06-141.34,175.39-242.45,43.33-101.11,105.23-217.69,117.61-290.94,12.38-73.25,87.01-199.12,104.2-212.18,17.19-13.07,107.3,4.81,156.82-70.5,49.52-75.31,73.25-184.67,65-258.95-8.25-74.28-47.46-128.45-33.01-180.03,14.44-51.58,53.65-25.79,71.19-2.58,17.54,23.21,28.37,99.04,9.29,128.45-19.09,29.4-34.05,39.2-40.24,27.86-6.19-11.35-33.01-118.82-26.82-142.89,6.19-24.07,39.59-13.07,37.83-23.39-1.76-10.32-19.26-185.02-114.17-255.86-94.92-70.84-209.78-16.51-255.86,6.19-46.08,22.7-208.4,94.23-251.04,108.67-42.64,14.44-47.46,127.93,49.52,139.62,96.98,11.69,277.87-179.51,317.07-165.76,39.2,13.76,55.02,44.02,51.58,94.23s.69,96.29,23.39,96.98c22.7.69,65.34,31.64,74.97,67.4s24.76,83.91,35.77,64.65-12.38-108.67,2.06-150.63c14.44-41.96,41.27-36.45,33.7-72.91s-59.15-165.76-158.88-179.51c-99.73-13.76-152,59.15-218.03,98.35-66.03,39.2-152.69,75.66-160.26,99.04-7.57,23.38,39.2,193.27,66.72,245.54,27.51,52.27,117.61,182.27,137.56,206.34,19.95,24.07,91.48,121.05,115.55,110.73,24.07-10.32,86.66-22.01,88.73-18.57,2.06,3.44,49.52,88.73,70.84,70.15,21.32-18.57,146.5-345.96,143.75-372.78-2.75-26.82-6.88-62.25-12.04-52.62-5.16,9.63,3.1,54.68,4.13,55.02s111.08,59.15,109.02,70.5c-2.06,11.35-67.58,355.93-74.28,359.03-6.71,3.1-139.28-53.13-155.27-44.36-15.99,8.77-37.31,1.38-43.5,12.72-6.19,11.35-13.07,145.47-3.44,144.44,9.63-1.03,81.16-27.86,83.57-19.6,2.41,8.25,73.25,540.26,57.77,548.51-15.48,8.25-152.35,17.19-154.41,9.63-2.06-7.57,3.44-166.45-6.19-145.81-9.63,20.63-42.64,142.37-56.4,149.25-13.76,6.88-210.46,19.26-224.22,6.19-13.76-13.07-62.59-44.71-94.92-42.64-32.33,2.06-102.48,63.28-102.48,51.58s21.67-117.27,119.68-111.08c98.01,6.19,164.04,98.87,166.1,95.78,2.06-3.09,153.38-13.58,159.91-18.4,6.53-4.81,26.48-83.22,32.67-112.11,6.19-28.89,21.67-393.42,25.45-400.3,3.78-6.88,83.22-15.48,87.35-30.95,4.13-15.48,22.7-102.65,8.77-111.94s-35.08-12.38-35.08-10.83,105.24,45.89,114,36.62c8.76-9.26,77.38-352.84,83.57-367.8,6.19-14.96,210.81,32.33,276.84,49.52,66.03,17.19,274.6,205.82,293.17,250.7,18.57,44.88-159.4,947.09-215.11,984.23-55.71,37.14-336.67,42.99-338.05,31.98-1.38-11,25.45-289.56,38.52-307.44,13.07-17.88,59.67-171.6,45.74-331.86-13.93-160.26-60.35-383.1,38.69-482.14,99.04-99.04,376.05,46.43,464.26,185.7,88.21,139.28,236.77,436.4,259.99,586.52,23.21,150.11,83.57,278.56,41.78,324.98-41.78,46.43-244.51-58.81-301.77-57.26-57.26,1.55-191.38,26.82-190.35-9.29,1.03-36.11,121.74-533.38,129.99-510.69,8.25,22.7,193.96,329.11,209.43,405.45,15.48,76.34,153.72,210.46,148.56,246.57-5.16,36.11-176.42-56.74-320.86-19.6-144.44,37.14-262.05,125.87-321.89,238.32-59.84,112.45-93.88,187.77-123.8,189.83-29.92,2.06-173.32,7.22-165.07-6.19,8.25-13.41,161.98-22.7,166.1-12.38,4.13,10.32-4.64,52.62-28.89,54.16-24.24,1.55-146.5-4.13-115.03-8.25,31.47-4.13,624.17,43.33,667.5,80.47,43.33,37.14,24.76,66.11,32.5,71.74,7.74,5.63,415.91,36.07,483.42-29.96,67.5-66.03,265.59-930.58,214-1134.86-51.58-204.27-612.82-177.45-612.82-154.75s35.08,144.44,63.96,123.8c28.89-20.63,262.05-47.46,383.79,37.14,121.74,84.6,51.58,474.58,18.57,550.92-33.01,76.35-177.97,88.73-397.72,51.58-219.75-37.14-351.29,23.21-459.62,117.61-108.33,94.4-128.45,266.18-117.61,270.82,10.83,4.64,468.9,21.67,464.26,66.54-4.64,44.88,58.81,78.92,88.21,77.38,29.4-1.55,911.5,0,911.5,0" />
+						</svg>
+				</div>
+				<div class="text-col pl--55">
+					<h3 class="section-heading">About Us</h3>
+					<h2>
+						Centre for Public Administration Reinvention <br /> and
+						Transformation (karan)
+					</h2>
+					<p class="pe-4">Based in Thiruvananthapuram, Kerala, karan is
+						dedicated to strengthening governance and the public sector. With
+						deep expertise and strong institutional partnerships, we deliver
+						practical, citizen-centric solutions through consulting, capacity
+						building, research, and innovation—bridging strategy, technology,
+						and policy to drive efficiency, transparency, and impactful
+						transformation.</p>
+					<!-- <p>From evidence-based research to targeted capacity building
+						and institutional partnerships, we help public systems evolve with
+						clarity, resilience, and measurable impact. Our approach ensures
+						that governance structures become more effective, responsive, and
+						future-ready.</p> -->
+					<div class="choose-content">
+						<a class="explore-btn btn-hover" th:href="@{/about-us}"> <strong>
+								Get to Know Us</strong> <svg xmlns="http://www.w3.org/2000/svg"
+								width="12" height="12" viewBox="0 0 12 12">
+								<path fill-rule="evenodd" clip-rule="evenodd"
+									d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="bottom-cards-container">
+				<div class="bottom-card">
+					<div class="vision-content">
+						<!--<span class="color-label">#C80808</span>-->
+						<h3>Our Vision</h3>
+						<p class="text-white">To lead the transformation of public
+							administration by fostering institutional collaboration,
+							excelling in the domain, and conducting world-class
+							research—ensuring effective governance that addresses real
+							challenges and promotes overall excellence.</p>
+					</div>
+					<div class="mission-content">
+						<h3>Our Mission</h3>
+						<p class="text-white">To empower government and public sector
+							enterprises through strategic insights and collaborative action,
+							driving transformative improvements in governance and service
+							delivery while ensuring inclusiveness, effectiveness,
+							transparency, and accountability.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Why Choose Section Section -->
+
+
+	<div class="about-section pt-90 bg-white" style="background: #fff;">
+		<div class="container d-flex justify-content-center">
+			<div class="g-xl-4 gy-5 row" style="max-width: 1200px; width: auto;">
+				<div class="col-xl-8 d-flex align-items-center">
+					<div class="about-content p-5 ps-0">
+						<div class=" title-and-underline two mb-20 gap-0">
+							<h3 class="section-heading">Domain Expertise Driving Governance</h3>
+							<h3 class="section-subheading section-subheading-coe">
+								KRAN has setup three exclusive </br> Centres of Excellence
+							</h3>
+							<p class="pt-4">karan, the sister concern of karan, extends
+								the organization’s legacy of excellence into governance
+								transformation. With deep domain expertise and strategic
+								consulting, karan complements karan in driving innovation and
+								efficiency across public sector operations.</p>
+							<p>Through research-driven insights and policy-oriented
+								interventions, karan focuses on strengthening key governance
+								domains — General Administration, Public Finance, and Licensing
+								& Compliance. It reimagines administrative processes, enhances
+								institutional frameworks, and promotes data-informed
+								decision-making to build responsive and transparent governance
+								systems.</p>
+						</div>
+
+						<!-- <div class="row mt-4 mb-4">
+							<div class="col-md-12 col-xl-4 col-lg-6">
+								<div class="card coe-card" style="border: 1px solid #c80808;">
+									<h5 class="mb-2" style="color: #c80808;">
+										<span>Public Finance </span>
+									</h5>
+									<p style="color: #c80808;">Single source of truth for the
+										financials of a State.</p>
+								</div>
+							</div>
+							<div class="col-md-12 col-xl-4 col-lg-6">
+								<div class="card coe-card" style="border: 1px solid #01458e;">
+									<h5 class="mb-2" style="color: #01458e;">
+										<span>Licensing &amp; Compliance </span>
+									</h5>
+									<p style="color: #01458e;">Better and faster service
+										delivery to the citizens of the State.</p>
+								</div>
+							</div>
+							<div class="col-md-12 col-xl-4 col-lg-6">
+								<div class="card coe-card" style="border: 1px solid #066b37;">
+									<h5 class="mb-2" style="color: #066b37;">
+										<span>General Administration </span>
+									</h5>
+									<p style="color: #066b37;">Improved efficiency within the
+										organization and departments.</p>
+								</div>
+							</div>
+						</div>
+						<a class="primary-btn1 btn-hover mt-3" href="/service-details"> Our
+							Services Developed By @sgk125 - github
+							<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+								viewBox="0 0 12 12">
+								<path fill-rule="evenodd" clip-rule="evenodd"
+									data-attr-sgk="breadcrumbv1"
+									d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+								</path>
+							</svg> <span></span>
+						</a> -->
+					</div>
+				</div>
+				<div class="col-xl-4">
+					<div class="row h-100">
+						<div class="d-flex align-items-center">
+							<img class="rounded-4"
+								th:src="@{website/img/karan/karan Image.png}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<section id="flip" class="flip-section fullImage fadein visible">
+		<div class="flipp-container">
+			<div class="container-fluid one">
+				<div class="row coe-home">
+					<div
+						class="col-md-6 col-lg-4 col-sm-12 domain coe-homedomain fadein visible">
+						<div class="flip-container"
+							ontouchstart="this.classList.toggle('hover');">
+							<div class="flipper">
+								<div class="front">
+									<!-- front content -->
+									<img
+										src=" "
+										class="img-responsive" alt="Public Finance">
+									<div class="block-content">
+										<h2>Public Finance</h2>
+										<p>Single source of truth for the financials of a State.</p>
+									</div>
+								</div>
+								<div class="back">
+									<div class="back-flipcard">
+										<!-- back content -->
+										<h3>Public Finance</h3>
+										<p>Public Finance is a vital pillar of effective
+											governance and sustainable service delivery. At karan, we
+											apply domain expertise to strengthen all aspects of public
+											finance — from revenue mobilization and expenditure
+											management to debt sustainability and fiscal accountability.
+											Through research, reform, and capacity-building, we help
+											governments create transparent and resilient financial
+											systems that deliver measurable impact.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div
+						class="col-md-6 col-lg-4 col-sm-12 domain coe-homedomain fadein visible">
+						<div class="flip-container"
+							ontouchstart="this.classList.toggle('hover');">
+							<div class="flipper">
+								<div class="front">
+									<!-- front content -->
+									<img
+										src=" "
+										class="img-responsive" alt="Licensing &amp; Compliance">
+									<div class="block-content">
+										<h2>Licensing &amp; Compliance</h2>
+										<p>Better and faster service delivery to the citizens of
+											the State.</p>
+									</div>
+								</div>
+								<div class="back">
+									<!-- back content -->
+									<div class="back-flipcard">
+										<h3>Licensing &amp; Compliance</h3>
+										<p>Licensing and Compliance Management ensures regulatory
+											efficiency and institutional accountability. At karan, we
+											streamline permits, licensing, and compliance through process
+											re-engineering, policy reform, and capacity enhancement. Our
+											approach enables transparent, citizen-centric, and
+											technology-driven regulatory frameworks that bring greater
+											order and efficiency to governance.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div
+						class="col-md-6 col-lg-4 col-sm-12 domain coe-homedomain fadein visible">
+						<div class="flip-container"
+							ontouchstart="this.classList.toggle('hover');">
+							<div class="flipper">
+								<div class="front">
+									<!-- front content -->
+									<img
+										src=" "
+										class="img-responsive" alt="General Administration">
+									<div class="block-content">
+										<h2>General Administration</h2>
+										<p>Improved efficiency within the organization and
+											departments.</p>
+									</div>
+								</div>
+								<div class="back">
+									<!-- back content -->
+									<div class="back-flipcard">
+										<h3>General Administration</h3>
+										<p>General Administration drives efficiency and
+											coordination across organizations and government entities. At
+											karan, we provide expertise in planning, organizing, and
+											managing administrative operations in areas like human
+											resources and financial governance. Through structural
+											reforms, process optimization, and leadership development, we
+											help institutions enhance administrative effectiveness and
+											governance outcomes.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Start Solution section -->
+	<!--<div class="solution-section pt-90 mb-130">
+		<div class="container-fluid one">
+			<div class="row g-4">
+				<div
+					class="col-lg-12   gap-lg-5 gap-4 d-flex flex-lg-nowrap flex-wrap align-items-start justify-content-between mb-50">
+					<div class="section-title1 title-and-underline  one align-items-center">
+						<h2 style="text-align: justify;"> What We Do</h2>
+					</div>
+					<a class="explore-btn" th:href="@{/services}">
+						Know More
+						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+						</svg>
+					</a>
+				</div>
+
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 d-flex  position-relative">
+							<div class="row g-4 justify-content-center">
+								<div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
+									<div class="k-card-2 style-2">
+										<div class="sl-no">
+											<h3>01</h3>
+										</div>
+										<div class="icon">
+											<img th:src="@{/website/img/icons/consultation.svg}"
+												alt="Consulting Support" width="60" height="60">
+										</div>
+										<div class="content">
+											<h5>Consulting Support</h5>
+											<p>
+												Bringing specialized knowledge and expertise in Public Administration to
+												help identify administrative and operational bottlenecks. Designing
+												efficient, achievable and practical deliverables that improve governance
+												efficiency and regulatory outcomes.
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
+									<div class="k-card-2 style-2">
+										<div class="sl-no">
+											<h3>02</h3>
+										</div>
+										<div class="icon">
+											<img th:src="@{/website/img/icons/speech.svg}"
+												alt="Capacity-Building Programs" width="60" height="60">
+										</div>
+										<div class="content">
+											<h5>Capacity-Building Programs</h5>
+											<p>
+												Delivering focused training aimed at knowledge building in specific
+												areas of Public Administration to respective Government Officials and
+												relevant entities.
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
+									<div class="k-card-2 style-2">
+										<div class="sl-no">
+											<h3>03</h3>
+										</div>
+										<div class="icon">
+											<img th:src="@{/website/img/icons/solution.svg}"
+												alt="Solution-Focused Workshops" width="60" height="60">
+										</div>
+										<div class="content">
+											<h5>Solution-Focused Workshops</h5>
+											<p>
+												Conducting intensive, hands-on workshops in Public Administration to
+												build capabilities, generate practical insights, and craft immediate
+												actionable roadmaps for government and institutional improvement.
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
+									<div class="k-card-2 style-2">
+										<div class="sl-no">
+											<h3>04</h3>
+										</div>
+										<div class="icon">
+											<img th:src="@{/website/img/icons/study.svg}" alt="Research & Publications"
+												width="60" height="60">
+										</div>
+										<div class="content">
+											<h5>Research & Publications</h5>
+											<p>
+												Creating data-driven reports, white papers, briefs, and practical guides
+												that spotlight innovations in governance, document ongoing reforms, and
+												highlight replicable success stories across various sectors.
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
+									<div class="k-card-2 style-2">
+										<div class="sl-no">
+											<h3>05</h3>
+										</div>
+										<div class="icon">
+											<img th:src="@{/website/img/icons/study.svg}" alt="Applied Case Studies"
+												width="60" height="60">
+										</div>
+										<div class="content">
+											<h5>Applied Case Studies</h5>
+											<p>
+												Presenting successful on-ground initiatives and reforms as insightful
+												case studies that others can learn from, adapt, or replicate in their
+												respective administrative contexts.
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
+									<div class="k-card-2 style-2">
+										<div class="sl-no">
+											<h3>06</h3>
+										</div>
+										<div class="icon">
+											<img th:src="@{/website/img/icons/training.svg}"
+												alt="Lecture Series by Experts" width="60" height="60">
+										</div>
+										<div class="content">
+											<h5>Lecture Series by Experts</h5>
+											<p>
+												Facilitating in-depth dialogues that bring together domain specialists,
+												government officers, and passionate individuals to brainstorm, share
+												insights, and develop recommendations that address real-world governance
+												challenges.
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
+									<div class="k-card-2 style-2">
+										<div class="sl-no">
+											<h3>08</h3>
+										</div>
+										<div class="icon">
+											<img th:src="@{/website/img/icons/innovation.svg}"
+												alt="Individual & Institutional Collaboration" width="60" height="60">
+										</div>
+										<div class="content">
+											<h5>Individual & Institutional Collaboration</h5>
+											<p>
+												Working closely with experts and institutions in the field of public
+												administration to gather domain knowledge and co-develop impactful
+												initiatives that strengthen the services offered by karan.
+											</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
+									<div class="k-card-2 style-2">
+										<div class="sl-no">
+											<h3>07</h3>
+										</div>
+										<div class="icon">
+											<img th:src="@{/website/img/icons/analysis.svg}" alt="Domain Consulting"
+												width="60" height="60">
+										</div>
+										<div class="content">
+											<h5>Domain Consulting</h5>
+											<p>
+												Working closely with experts and institutions in the field of public
+												administration to gather domain knowledge and co-develop impactful
+												initiatives that strengthen the services offered by karan.
+											</p>
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>-->
+
+	<div class="fact-and-benefits-section pt-90 mb-90">
+		<div class="container-fluid one">
+			<div class="">
+				<div
+					class="mb-2 align-items-center justify-content-between py-4 row">
+					<div class="col-lg-8 col-sm-12 title-and-underline two gap-0">
+						<h3 class="section-heading">Services</h3>
+						<h5 class="section-heading-brief">The Centre for Governance Transformation and Process Innovation</h5>
+					</div>
+					<a class="explore-btn col-lg-4 justify-content-end col-sm-12"
+						href="/service-details"> Explore More <svg
+							xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+							viewBox="0 0 12 12">
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+							</path>
+						</svg>
+					</a>
+				</div>
+			</div>
+			<div class="row g-4">
+				<div class="col-lg-4">
+					<div class="k-card-2 style-2">
+
+						<div class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+								viewBox="0 0 60 60">
+								<path
+									d="M30 53.3344C29.6946 53.3344 29.4546 53.0944 29.4546 52.7889C29.4546 52.4835 29.6946 52.2435 30 52.2435C42.2618 52.2435 52.2436 42.2616 52.2436 29.9998C52.2436 17.738 42.2618 7.75619 30 7.75619C29.6946 7.75619 29.4546 7.51619 29.4546 7.21074C29.4546 6.90528 29.6946 6.66528 30 6.66528C42.8836 6.66528 53.3346 17.1162 53.3346 29.9998C53.3346 36.1853 50.88 42.1198 46.5055 46.4944C42.1309 50.8907 36.1964 53.3453 30 53.3344Z">
+								</path>
+								<path
+									d="M30 48.8835C29.6946 48.8835 29.4546 48.6435 29.4546 48.338C29.4546 48.0326 29.6946 47.7926 30 47.7926C39.8073 47.7926 47.7927 39.8071 47.7927 29.9998C47.7927 20.1926 39.8073 12.2071 30 12.2071C29.6946 12.2071 29.4546 11.9671 29.4546 11.6617C29.4546 11.3562 29.6946 11.1162 30 11.1162C40.4182 11.1162 48.8836 19.5926 48.8836 29.9998C48.8836 40.4071 40.4182 48.8835 30 48.8835Z">
+								</path>
+								<path
+									d="M30 44.4435C29.6946 44.4435 29.4546 44.2035 29.4546 43.898C29.4546 43.5926 29.6946 43.3526 30 43.3526C37.3746 43.3526 43.3527 37.3744 43.3527 29.9999C43.3527 22.6253 37.3746 16.658 30 16.658C29.6946 16.658 29.4546 16.418 29.4546 16.1126C29.4546 15.8071 29.6946 15.5671 30 15.5671C37.9636 15.5671 44.4436 22.0471 44.4436 30.0108C44.4436 37.9744 37.9636 44.4435 30 44.4435Z">
+								</path>
+								<path
+									d="M30 57.7744C14.6618 57.7744 2.22546 45.3381 2.22546 29.9999C2.22546 29.6944 2.46546 29.4544 2.77091 29.4544H20.5527C20.8582 29.4544 21.0982 29.6944 21.0982 29.9999C21.0982 34.9199 25.0909 38.9017 30 38.9017C34.9091 38.9017 38.9018 34.909 38.9018 29.9999C38.9018 25.0799 34.92 21.0981 30 21.0981C29.6945 21.0981 29.4545 20.8581 29.4545 20.5526C29.4545 20.2472 29.6945 20.0072 30 20.0072C35.52 20.0072 39.9927 24.4799 39.9927 29.9999C39.9927 35.5199 35.52 39.9926 30 39.9926C24.6873 39.9926 20.3127 35.8472 20.0182 30.5453H3.31637C3.61091 45.0108 15.4691 56.6835 30 56.6835C44.7164 56.6835 56.6836 44.7163 56.6836 29.9999C56.6836 15.2835 44.7164 3.31625 30 3.31625C29.6945 3.31625 29.4545 3.07625 29.4545 2.7708C29.4545 2.46534 29.6945 2.22534 30 2.22534C45.3382 2.22534 57.7745 14.6726 57.7745 30.0108C57.7745 37.3744 54.8509 44.4435 49.6364 49.6472C44.4436 54.8617 37.3745 57.7962 30 57.7744Z">
+								</path>
+								<path
+									d="M30 35.5526C29.6946 35.5526 29.4546 35.3126 29.4546 35.0071C29.4546 34.7016 29.6946 34.4616 30 34.4616C32.4655 34.4616 34.4618 32.4653 34.4618 30.0107C34.4618 27.5453 32.4655 25.5489 30.0109 25.5489C29.7055 25.5489 29.4655 25.3089 29.4655 25.0035C29.4655 24.698 29.7055 24.458 30.0109 24.458C33.0764 24.458 35.5636 26.9453 35.5636 29.9998C35.5527 33.0653 33.0655 35.5526 30 35.5526Z">
+								</path>
+							</svg>
+						</div>
+						<div class="content">
+							<h5>Consulting Support</h5>
+							<p>We provide specialized expertise in public administration
+								to identify bottlenecks, redesign workflows, and deliver
+								actionable strategies that improve governance efficiency and
+								outcomes.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="k-card-2 style-2">
+						<div class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+								viewBox="0 0 60 60">
+								<path
+									d="M34.6964 57.5756C34.5039 57.5759 34.3161 57.517 34.1583 57.4069L22.897 49.5187C22.7732 49.4324 22.6721 49.3173 22.6023 49.1835C22.5325 49.0497 22.4961 48.9009 22.4961 48.75C22.4961 48.5991 22.5325 48.4503 22.6023 48.3165C22.6721 48.1827 22.7732 48.0676 22.897 47.9813L34.1583 40.0912C34.2987 39.9923 34.4636 39.9338 34.635 39.9222C34.8064 39.9107 34.9777 39.9464 35.1301 40.0255C35.2826 40.1047 35.4104 40.2242 35.4996 40.371C35.5887 40.5178 35.6358 40.6863 35.6358 40.8581V44.9906H38.4351C40.8961 44.9958 43.3311 44.4874 45.5845 43.4981C45.8124 43.3996 46.07 43.395 46.3013 43.4852C46.5326 43.5754 46.7191 43.7532 46.8201 43.98C46.9191 44.2079 46.924 44.4656 46.8338 44.6971C46.7435 44.9286 46.5654 45.115 46.3383 45.2156C43.8408 46.3106 41.182 46.8656 38.4333 46.8656H34.6945C34.4459 46.8656 34.2074 46.7669 34.0316 46.591C33.8558 46.4152 33.757 46.1768 33.757 45.9281V42.66L25.0683 48.75L33.7589 54.8363V51.555C33.7589 51.3064 33.8576 51.0679 34.0335 50.8921C34.2093 50.7163 34.4477 50.6175 34.6964 50.6175H38.4351C48.2564 50.6175 56.2476 42.6263 56.2476 32.805V25.3125C56.2476 25.0639 56.3464 24.8254 56.5222 24.6496C56.698 24.4738 56.9365 24.375 57.1851 24.375C57.4338 24.375 57.6722 24.4738 57.848 24.6496C58.0239 24.8254 58.1226 25.0639 58.1226 25.3125V32.8069C58.1226 43.6631 49.2914 52.4944 38.4351 52.4944H35.6339V56.6381C35.6344 56.7614 35.6105 56.8835 35.5635 56.9975C35.5166 57.1114 35.4476 57.215 35.3604 57.3021C35.2732 57.3893 35.1697 57.4583 35.0557 57.5053C34.9418 57.5522 34.8196 57.5761 34.6964 57.5756Z" />
+								<path
+									d="M48.8138 42.1875C48.8138 41.6719 49.2357 41.25 49.7513 41.25C50.267 41.25 50.6888 41.6719 50.6888 42.1875C50.6888 42.7031 50.267 43.125 49.7513 43.125C49.5029 43.1245 49.2647 43.0256 49.089 42.8499C48.9133 42.6742 48.8143 42.436 48.8138 42.1875ZM20.312 56.8369C20.1473 56.8374 19.9855 56.7941 19.8432 56.7113L13.3538 52.9631C11.1106 51.6759 9.14481 49.9567 7.57008 47.905C5.99535 45.8533 4.84293 43.5098 4.17947 41.01C3.50276 38.5134 3.32833 35.9072 3.66628 33.3427C4.00423 30.7781 4.84784 28.3061 6.14822 26.07L7.54884 23.6438L3.95822 21.5719C3.81035 21.4856 3.68887 21.3606 3.60689 21.2103C3.52492 21.06 3.48557 20.8902 3.4931 20.7192C3.50062 20.5482 3.55474 20.3825 3.64961 20.24C3.74447 20.0975 3.87647 19.9836 4.03134 19.9106L16.4945 14.1019C16.6311 14.0388 16.7809 14.0095 16.9313 14.0164C17.0817 14.0233 17.2282 14.0662 17.3585 14.1416C17.4888 14.2169 17.5991 14.3225 17.6801 14.4494C17.7611 14.5762 17.8104 14.7207 17.8238 14.8706L19.0257 28.5675C19.0418 28.7387 19.0103 28.911 18.9347 29.0654C18.8591 29.2198 18.7424 29.3503 18.5974 29.4426C18.4523 29.5349 18.2846 29.5854 18.1127 29.5884C17.9409 29.5915 17.7715 29.5471 17.6232 29.46L14.042 27.3938L12.6413 29.82C11.4071 31.9495 10.6306 34.3129 10.3613 36.7594C10.3303 37.0049 10.2049 37.2287 10.0117 37.3834C9.81853 37.5381 9.57272 37.6115 9.32634 37.5881C9.20396 37.5746 9.08545 37.5371 8.97757 37.4778C8.86968 37.4184 8.77455 37.3384 8.69759 37.2423C8.62063 37.1462 8.56336 37.0359 8.52904 36.9176C8.49473 36.7994 8.48404 36.6755 8.49759 36.5531C8.79759 33.8419 9.64509 31.26 11.0195 28.8844L12.8888 25.6463C13.0135 25.4313 13.2183 25.2745 13.4583 25.2102C13.6983 25.1459 13.954 25.1793 14.1695 25.3031L17.0026 26.9381L16.0745 16.3669L6.45572 20.85L9.29822 22.4906C9.51246 22.616 9.66852 22.8209 9.73243 23.0607C9.79634 23.3006 9.76293 23.5559 9.63947 23.7713L7.77009 27.0094C6.59492 29.0327 5.83258 31.2689 5.52716 33.5887C5.22173 35.9085 5.37929 38.2659 5.99072 40.5244C6.59045 42.7866 7.63288 44.9075 9.05768 46.7642C10.4825 48.6209 12.2613 50.1766 14.2913 51.3413L19.1251 54.1331L19.1645 54.1538L20.7807 55.0894C20.9585 55.193 21.0973 55.3522 21.1756 55.5425C21.2539 55.7328 21.2675 55.9435 21.2142 56.1423C21.1609 56.341 21.0437 56.5167 20.8806 56.6423C20.7176 56.7678 20.5177 56.8362 20.312 56.8369Z" />
+								<path
+									d="M9.88399 40.2113C10.0452 40.3039 10.1753 40.4424 10.2578 40.609C10.3403 40.7757 10.3715 40.963 10.3474 41.1474C10.3233 41.3318 10.245 41.5049 10.1225 41.6448C9.99996 41.7846 9.83867 41.885 9.65905 41.9331C9.47944 41.9812 9.28958 41.975 9.11353 41.9151C8.93747 41.8552 8.78315 41.7445 8.6701 41.5968C8.55705 41.4492 8.49036 41.2713 8.47848 41.0858C8.4666 40.9002 8.51007 40.7153 8.60337 40.5544C8.7284 40.3398 8.93315 40.1834 9.17302 40.1191C9.41289 40.0548 9.66844 40.088 9.88399 40.2113ZM49.4334 27.12C49.2966 27.1199 49.1616 27.0898 49.0377 27.0319L36.5765 21.2232C36.4211 21.1507 36.2886 21.037 36.1933 20.8945C36.098 20.7519 36.0436 20.586 36.0361 20.4147C36.0285 20.2434 36.0681 20.0733 36.1505 19.923C36.2329 19.7726 36.3549 19.6477 36.5034 19.5619L40.0827 17.4957L38.6821 15.0694C37.4555 12.9355 35.7978 11.0804 33.8146 9.62253C33.3965 9.31503 33.3065 8.72815 33.6159 8.3119C33.9252 7.89565 34.514 7.8094 34.9246 8.11315C37.1171 9.72318 38.9493 11.7732 40.304 14.1319L42.1734 17.37C42.2354 17.4765 42.2758 17.5942 42.2921 17.7164C42.3084 17.8386 42.3004 17.9628 42.2685 18.0818C42.2366 18.2009 42.1815 18.3124 42.1063 18.41C42.031 18.5077 41.9372 18.5895 41.8302 18.6507L38.999 20.2857L48.6159 24.7669L49.5421 14.1975L46.7015 15.8382C46.4859 15.9615 46.2304 15.9946 45.9905 15.9303C45.7506 15.866 45.5459 15.7096 45.4209 15.495L43.5515 12.2569C42.3867 10.2269 40.8306 8.44809 38.9736 7.02359C37.1165 5.59908 34.9953 4.55716 32.7327 3.95815C30.4743 3.346 28.1168 3.18807 25.7969 3.49351C23.477 3.79894 21.2408 4.56168 19.2177 5.73753L14.3709 8.5369C14.3638 8.54197 14.3563 8.54636 14.3484 8.55003L12.7302 9.48378C12.5163 9.58981 12.2699 9.61037 12.0413 9.54127C11.8127 9.47217 11.619 9.31859 11.4996 9.11178C11.3802 8.90496 11.3441 8.66043 11.3985 8.42791C11.453 8.19538 11.5939 7.99233 11.7927 7.86003L18.284 4.11378C20.52 2.81406 22.9918 1.97097 25.556 1.63335C28.1202 1.29572 30.7259 1.47028 33.2221 2.1469C35.7227 2.80909 38.067 3.96099 40.1192 5.53583C42.1713 7.11067 43.8905 9.07714 45.1771 11.3213L46.5777 13.7475L50.1665 11.6757C50.3149 11.59 50.484 11.5467 50.6553 11.5504C50.8267 11.5542 50.9937 11.6048 51.1383 11.6968C51.2828 11.7888 51.3994 11.9187 51.4754 12.0723C51.5513 12.2259 51.5837 12.3974 51.569 12.5682L50.3671 26.265C50.3465 26.4985 50.2392 26.7157 50.0664 26.874C49.8935 27.0322 49.6677 27.12 49.4334 27.12Z" />
+								<path
+									d="M31.0605 7.48499C30.9537 7.55122 30.8346 7.59529 30.7105 7.6146C30.5863 7.63391 30.4595 7.62806 30.3376 7.59739C30.2158 7.56673 30.1013 7.51188 30.0011 7.4361C29.9008 7.36033 29.8168 7.26517 29.7541 7.15629C29.6914 7.04741 29.6512 6.92703 29.6359 6.8023C29.6206 6.67757 29.6305 6.55104 29.6651 6.43023C29.6997 6.30942 29.7582 6.19679 29.8372 6.09905C29.9162 6.0013 30.014 5.92043 30.1248 5.86124C30.3395 5.7466 30.5904 5.71995 30.8244 5.78694C31.0584 5.85392 31.2572 6.00928 31.3787 6.22018C31.5002 6.43107 31.535 6.68096 31.4756 6.917C31.4162 7.15304 31.2673 7.35673 31.0605 7.48499Z" />
+							</svg>
+						</div>
+						<div class="content">
+							<h5>Capacity-Building Programs</h5>
+							<p>Focused training programs designed to enhance the
+								knowledge and skills of government officials and public sector
+								entities, enabling them to respond effectively to emerging
+								challenges.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="k-card-2 style-2">
+						<div class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+								viewBox="0 0 60 60">
+								<g>
+									<path
+									d="M30.0972 2.0979C22.7923 2.0979 16.8497 8.03863 16.8497 15.3445C16.8497 22.6494 22.7923 28.592 30.0972 28.592C37.4022 28.592 43.3447 22.6494 43.3447 15.3445C43.3457 8.0414 37.4013 2.0979 30.0972 2.0979ZM30.0972 26.7512C23.809 26.7512 18.6933 21.6336 18.6933 15.3472C18.6933 9.05994 23.809 3.94418 30.0972 3.94418C36.3864 3.94418 41.5012 9.05994 41.5012 15.3472C41.5022 21.6336 36.3882 26.7512 30.0972 26.7512ZM13.2475 57.9011C20.5524 57.9011 26.495 51.9613 26.495 44.6545C26.495 37.3505 20.5524 31.408 13.2475 31.408C5.94257 31.408 0 37.3505 0 44.6545C0 51.9595 5.94165 57.9011 13.2475 57.9011ZM13.2475 33.2487C19.5357 33.2487 24.6515 38.3654 24.6515 44.6536C24.6515 50.9382 19.5357 56.0567 13.2475 56.0567C6.95927 56.0567 1.84352 50.9391 1.84352 44.6536C1.84352 38.3654 6.95835 33.2487 13.2475 33.2487ZM46.7534 31.4052C39.4476 31.4052 33.5059 37.3478 33.5059 44.6536C33.5059 51.9595 39.4476 57.9002 46.7534 57.9002C54.0583 57.9002 60 51.9595 60 44.6536C60.0018 37.3505 54.0574 31.4052 46.7534 31.4052ZM46.7534 56.0576C40.4661 56.0576 35.3494 50.9419 35.3494 44.6545C35.3494 38.3691 40.4661 33.2515 46.7534 33.2515C53.0398 33.2515 58.1565 38.3691 58.1565 44.6545C58.1583 50.9428 53.0416 56.0576 46.7534 56.0576Z" />
+								</g>
+							</svg>
+						</div>
+						<div class="content">
+							<h5>Research & Publications</h5>
+							<p>We develop data-driven reports, case studies, and
+								knowledge resources that highlight governance best practices,
+								success stories, and reform opportunities.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="k-card-2 style-2">
+						<div class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+								viewBox="0 0 60 60">
+								<path
+									d="M17.6768 11.1353L16.3065 9.03891L18.7166 7.65105L19.8422 9.88664L17.6768 11.1353ZM29.9916 7.48254V4.98047L27.2168 5.13199L27.4909 7.6193L29.9916 7.48254ZM24.7774 8.0884L24.1999 5.65242L21.5304 6.44414L22.3772 8.79949L24.7774 8.0884ZM35.3914 5.56441L32.6437 5.11969L32.3821 7.60699L34.8533 8.00766L35.3914 5.56441ZM9.255 21.1405L6.95004 20.1559L5.99836 22.7678L8.39859 23.4911L9.255 21.1405ZM11.8707 16.596L9.85934 15.1056L8.3277 17.4243L10.493 18.6825L11.8707 16.596ZM7.7673 26.169L5.2984 25.7463L4.98047 28.5047L7.48113 28.6513L7.7673 26.169ZM15.4649 12.7747L13.8502 10.864L11.8264 12.7673L13.642 14.4898L15.4649 12.7747ZM50.5835 20.8083L52.8713 19.787L51.5944 17.3168L49.4337 18.5873L50.5835 20.8083ZM40.9066 7.4727L38.335 6.40254L37.503 8.76281L39.8128 9.72551L40.9066 7.4727ZM52.5166 31.0433L55.0195 31.1557L54.995 28.3826L52.4946 28.5413L52.5166 31.0433ZM52.1518 25.8122L54.6134 25.3504L53.9477 22.6505L51.5525 23.3835L52.1518 25.8122ZM49.8813 14.7855L48.0707 12.677L46.2625 14.4093L47.8946 16.3077L49.8813 14.7855ZM45.8222 10.6075L43.5735 8.97293L42.2133 11.0742L44.2391 12.5452L45.8222 10.6075ZM42.5631 48.6962L43.9601 50.7731L46.1793 49.097L44.5597 47.1888L42.5631 48.6962ZM32.7954 52.3441L33.1036 54.829L35.8443 54.333L35.262 51.8994L32.7954 52.3441ZM37.8946 51.0956L38.7731 53.4388L41.3223 52.3196L40.187 50.089L37.8946 51.0956ZM46.5488 45.2855L48.3888 46.9861L50.1604 44.8457L48.1465 43.3601L46.5488 45.2855ZM47.5301 30C47.5301 39.6707 39.6758 47.5137 29.9916 47.5137C20.3071 47.5137 12.4528 39.6707 12.4528 30C12.4528 20.3295 20.3071 12.4863 29.9916 12.4863C39.6757 12.4863 47.5301 20.3295 47.5301 30ZM45.0245 30C45.0245 21.7221 38.2809 14.9883 29.9916 14.9883C21.702 14.9883 14.9584 21.722 14.9584 30C14.9584 38.278 21.702 45.0118 29.9916 45.0118C38.2809 45.0118 45.0245 38.278 45.0245 30ZM51.6698 36.2159L54.0799 36.9049L54.6966 34.1927L52.2253 33.7773L51.6698 36.2159ZM49.644 41.0511L51.8264 42.2802L53.0573 39.7879L50.7499 38.8082L49.644 41.0511ZM8.41559 36.5627L6.01793 37.2909L6.97465 39.9004L9.27703 38.9109L8.41559 36.5627ZM11.8707 47.2767L13.8991 49.1776L15.5088 47.2597L13.6812 45.5494L11.8707 47.2767ZM27.2779 54.8755L29.9914 55.0195V52.5176L27.547 52.3856L27.2779 54.8755ZM7.48594 31.4025L4.98527 31.5564L5.30824 34.3148L7.77727 33.8873L7.48594 31.4025ZM10.52 41.3639L8.35699 42.6295L9.89613 44.9459L11.905 43.4482L10.52 41.3639ZM16.3579 50.9954L18.7705 52.3759L19.8961 50.1402L17.7232 48.8966L16.3579 50.9954ZM21.5893 53.578L24.2586 54.3622L24.8312 51.9263L22.4284 51.2202L21.5893 53.578Z" />
+							</svg>
+						</div>
+						<div class="content">
+							<h5>Innovation Lab</h5>
+							<p>A dedicated space for ideation and experimentation, where
+								experts and institutions collaborate to design forward-looking
+								solutions and adopt best practices for public administration.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="k-card-2 style-2">
+						<div class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+								viewBox="0 0 60 60">
+								<g clip-path="url(#clip0_1252_1755)">
+									<path
+									d="M53.4545 0C49.8447 0 46.9091 2.93564 46.9091 6.54545C46.9091 7.67454 47.196 8.73709 47.7011 9.66545L36.9785 20.388C35.4538 19.1936 33.5729 18.5445 31.636 18.5443C29.6992 18.5441 27.8181 19.1928 26.2931 20.3869L17.9269 12.0207C18.3279 11.3558 18.5417 10.5947 18.5455 9.81818C18.5455 7.41164 16.5884 5.45455 14.1818 5.45455C11.7753 5.45455 9.81818 7.41164 9.81818 9.81818C9.81818 12.2247 11.7753 14.1818 14.1818 14.1818C14.9891 14.1818 15.7353 13.9473 16.3844 13.5633L24.7505 21.9295C23.5581 23.4551 22.9104 25.3358 22.9104 27.2722C22.9104 29.2085 23.5581 31.0892 24.7505 32.6149L10.9353 46.4313C9.73569 45.3357 8.17002 44.728 6.54545 44.7273C2.93564 44.7273 0 47.6629 0 51.2727C0 54.8825 2.93564 57.8182 6.54545 57.8182C10.1553 57.8182 13.0909 54.8825 13.0909 51.2727C13.0923 50.1828 12.82 49.11 12.2989 48.1527L26.2942 34.1575C27.5267 35.1184 28.9959 35.7287 30.5465 35.9236V47.0073C27.456 47.5287 25.092 50.2167 25.092 53.4545C25.092 57.0644 28.0276 60 31.6375 60C35.2473 60 38.1829 57.0644 38.1829 53.4545C38.1829 50.2178 35.8189 47.5298 32.7284 47.0073V35.9236C34.279 35.7287 35.7482 35.1184 36.9807 34.1575L45.3469 42.5236C44.9452 43.1888 44.7311 43.9503 44.7273 44.7273C44.7273 47.1338 46.6844 49.0909 49.0909 49.0909C51.4975 49.0909 53.4545 47.1338 53.4545 44.7273C53.4545 42.3207 51.4975 40.3636 49.0909 40.3636C48.2836 40.3636 47.5374 40.5982 46.8884 40.9822L38.5222 32.616C39.7146 31.0903 40.3624 29.2096 40.3624 27.2733C40.3624 25.3369 39.7146 23.4562 38.5222 21.9305L49.0658 11.3869C50.2649 12.4826 51.8303 13.0903 53.4545 13.0909C57.0644 13.0909 60 10.1553 60 6.54545C60 2.93564 57.0644 0 53.4545 0ZM12 9.81818C12 8.61491 12.9785 7.63636 14.1818 7.63636C15.3851 7.63636 16.3636 8.61491 16.3636 9.81818C16.3636 11.0215 15.3851 12 14.1818 12C12.9785 12 12 11.0215 12 9.81818ZM6.54545 55.6364C4.13891 55.6364 2.18182 53.6793 2.18182 51.2727C2.18182 48.8662 4.13891 46.9091 6.54545 46.9091C8.952 46.9091 10.9091 48.8662 10.9091 51.2727C10.9091 53.6793 8.952 55.6364 6.54545 55.6364ZM36 53.4545C36 55.8611 34.0429 57.8182 31.6364 57.8182C29.2298 57.8182 27.2727 55.8611 27.2727 53.4545C27.2727 51.048 29.2298 49.0909 31.6364 49.0909C34.0429 49.0909 36 51.048 36 53.4545ZM31.6364 33.8182C28.0265 33.8182 25.0909 30.8825 25.0909 27.2727C25.0909 23.6629 28.0265 20.7273 31.6364 20.7273C35.2462 20.7273 38.1818 23.6629 38.1818 27.2727C38.1818 30.8825 35.2462 33.8182 31.6364 33.8182ZM51.2727 44.7273C51.2727 45.9305 50.2942 46.9091 49.0909 46.9091C47.8876 46.9091 46.9091 45.9305 46.9091 44.7273C46.9091 43.524 47.8876 42.5455 49.0909 42.5455C50.2942 42.5455 51.2727 43.524 51.2727 44.7273ZM53.4545 10.9091C51.048 10.9091 49.0909 8.952 49.0909 6.54545C49.0909 4.13891 51.048 2.18182 53.4545 2.18182C55.8611 2.18182 57.8182 4.13891 57.8182 6.54545C57.8182 8.952 55.8611 10.9091 53.4545 10.9091Z" />
+								</g>
+							</svg>
+						</div>
+						<div class="content">
+							<h5>Business Process Reengineering (BPR)</h5>
+							<p>Leveraging decades of domain experience to radically
+								redesign administrative and financial processes, improving
+								efficiency, transparency, and performance.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="k-card-2 style-2">
+						<div class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+								viewBox="0 0 60 60">
+								<g>
+									<path
+									d="M47.1064 22.209C48.2706 22.5673 49.4348 22.9255 50.4198 23.3732C50.778 23.5523 51.4049 23.3732 51.584 22.8359C51.7631 22.3882 51.584 21.8508 51.0467 21.6717C49.9721 21.224 48.8079 20.8658 47.5542 20.5076C47.1064 20.3284 46.5691 20.6867 46.4795 21.1344C46.3004 21.6717 46.6586 22.1195 47.1064 22.209ZM33.1362 20.0598C34.3004 20.0598 35.4646 20.1493 36.7183 20.3285C37.3452 20.3285 37.6139 19.9702 37.7034 19.5225C37.7034 19.0747 37.3452 18.627 36.8974 18.5374C35.7333 18.4479 34.4795 18.3583 33.3154 18.2687C32.778 18.2687 32.4198 18.627 32.4198 19.1643C32.2407 19.7016 32.6885 20.0598 33.1362 20.0598ZM25.9721 20.1493C26.0616 20.1493 26.0616 20.1493 25.9721 20.1493C27.1363 20.0598 28.39 20.0598 29.5542 20.0598C30.0915 20.0598 30.4497 19.612 30.4497 19.1643C30.4497 18.7165 30.0019 18.2687 29.5542 18.2687C28.39 18.2687 27.1363 18.2687 25.9721 18.3583C25.5243 18.3583 25.0765 18.8061 25.0765 19.2538V19.3434C25.1661 19.7911 25.5243 20.1493 25.9721 20.1493ZM12.181 22.3882C13.2557 22.0299 14.4198 21.7613 15.584 21.4926C15.7631 21.4926 15.8527 21.4031 16.0318 21.224V21.3135C16.0318 21.7613 16.3004 22.1195 16.7482 22.209C17.196 22.2986 17.6437 22.0299 17.7333 21.4926C17.8228 20.9553 17.9124 20.5076 18.0019 20.0598V20.1493C18.0915 20.5971 18.4497 20.8658 18.8974 20.8658H19.0765C20.2407 20.6867 21.4049 20.5076 22.5691 20.418C23.0168 20.3284 23.4646 19.9702 23.3751 19.4329C23.3751 18.9852 22.9273 18.627 22.39 18.627C21.1363 18.7165 19.9721 18.8956 18.8079 19.0747C18.5392 19.1643 18.2706 19.3434 18.0915 19.612C18.181 19.0747 18.2706 18.5374 18.4497 18.0896C18.5392 17.5523 18.181 17.1046 17.7333 17.015C17.2855 16.9255 16.7482 17.1941 16.6586 17.7314C16.4795 18.5374 16.3004 19.4329 16.2109 20.3285C16.0318 19.9702 15.6736 19.7911 15.2258 19.8807C14.0616 20.1493 12.8079 20.5076 11.7333 20.7762C11.2855 20.9553 11.0168 21.4926 11.1064 21.9404C11.196 22.2986 11.6437 22.5673 12.181 22.3882ZM5.82282 25.1643C6.71834 24.627 7.70342 24.0896 8.8676 23.5523C9.31536 23.3732 9.49446 22.8359 9.31536 22.3882C9.13625 21.9404 8.59894 21.7613 8.15118 21.9404C6.89745 22.4777 5.82282 23.015 4.83774 23.6419C4.38998 23.9105 4.30043 24.5374 4.56909 24.8956C4.83774 25.3434 5.37506 25.5225 5.82282 25.1643Z" />
+									<path
+									d="M59.5537 30C59.5537 13.7015 46.3 0.447754 30.0015 0.447754C13.7029 0.447754 0.449219 13.7015 0.449219 30C0.449219 46.2985 13.7029 59.5522 30.0015 59.5522C46.3 59.5522 59.5537 46.2985 59.5537 30ZM57.4044 25.5224C55.882 24 54.4492 23.3731 54.3597 23.2836C53.9119 23.0149 53.3746 23.194 53.1955 23.6418C52.9268 24.0895 53.1059 24.6269 53.5537 24.8955C54.6283 25.5224 55.5238 26.1492 56.2403 26.8657C56.5985 27.2239 57.2253 27.2239 57.5835 26.6866C57.6731 27.403 57.7626 28.2089 57.7626 28.9254C57.6731 29.194 57.8522 30.1791 57.7626 30C57.7626 33.3134 52.5686 36.7164 44.0612 38.597C44.4194 35.9104 44.688 33.0448 44.688 30C44.688 26.9552 44.5089 24.0895 44.0612 21.3134C44.4194 21.2239 44.688 20.9552 44.688 20.6866C44.7776 20.1492 44.5089 19.7015 43.9716 19.6119C43.8821 19.6119 43.7925 19.6119 43.7029 19.5224C42.3597 12 39.494 5.99999 35.9119 2.86566C46.9268 5.28357 55.5238 14.2388 57.4044 25.5224ZM25.0761 2.68656C25.0761 2.77611 25.1656 2.95522 25.1656 3.04477C25.4343 3.49253 25.9716 3.58208 26.4194 3.31343C27.4044 2.68656 28.3895 2.32835 29.3746 2.2388C36.5388 2.05969 40.3 12.1791 41.7328 19.1642C40.3 18.8955 40.4791 18.9851 40.3895 18.8955C39.7626 18.8955 39.4044 19.2537 39.4044 19.7015C39.4044 20.3284 39.7627 20.6866 40.2104 20.6866C40.9268 20.7761 41.5537 20.8657 42.1806 21.0448C42.6283 23.8209 42.897 26.8657 42.897 30C42.897 33.1343 42.6283 36.0895 42.1806 38.9552C38.5985 39.5821 34.4791 39.9403 30.0015 39.9403C25.5238 39.9403 21.4044 39.5821 17.7328 38.8657C17.5537 38.5075 17.1955 38.2388 16.7477 38.3284C16.5686 38.3284 16.3895 38.5075 16.3 38.597C7.52385 36.7164 2.24026 33.3134 2.24026 29.9104C2.24026 29.0149 2.59847 28.1194 3.31489 27.2239C3.6731 26.8657 3.58355 26.2388 3.22534 25.9701C3.04623 25.791 2.77758 25.791 2.59847 25.791C4.29996 14.1492 13.4343 4.74626 25.0761 2.68656ZM2.59847 34.4776C5.19549 37.0746 10.0313 39.1343 16.3 40.4776C16.4791 41.3731 16.6582 42.1791 16.8373 42.9851C16.9268 43.4328 17.4641 43.791 17.9119 43.6119C18.4492 43.5224 18.7179 42.9851 18.5388 42.5373C18.3597 42 18.2701 41.3731 18.1806 40.7463C21.7626 41.3731 25.7925 41.7313 30.0015 41.7313C34.2104 41.7313 38.2403 41.3731 41.8224 40.7463C39.8522 50.597 35.1955 57.6716 30.0015 57.6716C29.0164 57.6716 27.9418 57.403 26.9567 56.8657C26.5089 56.597 25.9716 56.8657 25.7925 57.2239V57.3134C13.8821 55.6119 4.56862 46.2985 2.59847 34.4776ZM35.9119 57.1343C39.5835 54 42.3597 48 43.7029 40.4776C49.8821 39.2239 54.7179 37.0746 57.3149 34.4776C55.5238 45.7612 46.9268 54.7164 35.9119 57.1343Z" />
+									<path
+									d="M20.7762 49.1641C20.3284 48.179 19.8807 47.0148 19.5224 45.9402C19.3433 45.4924 18.806 45.2238 18.3583 45.4029C17.9105 45.582 17.6419 46.0297 17.821 46.567C18.1792 47.7312 18.6269 48.8954 19.1642 49.97C19.3433 50.4178 19.8807 50.5969 20.3284 50.4178C20.6866 50.1491 20.9553 49.7014 20.7762 49.1641ZM24.4478 54.985C23.7314 54.179 23.015 53.2835 22.3881 52.2984C22.1195 51.8506 21.5822 51.7611 21.1344 52.0297C20.6866 52.2984 20.5971 52.8357 20.8657 53.2835C21.5822 54.4476 22.2986 55.4327 23.1045 56.2387C23.4627 56.5969 24.0001 56.5969 24.3583 56.2387C24.7165 55.8805 24.806 55.3432 24.4478 54.985ZM16.209 29.4626C16.7463 29.4626 17.1045 29.1044 17.1045 28.567C17.1045 27.4029 17.1941 26.2387 17.2836 25.0745C17.2836 24.6267 16.9254 24.179 16.4777 24.0894C16.0299 23.9999 15.5822 24.4476 15.4926 24.8954C15.403 26.0596 15.3135 27.2238 15.3135 28.4775C15.2239 28.6566 15.4926 29.4626 16.209 29.4626ZM18.1792 15.3133C18.6269 15.4924 19.1642 15.2238 19.3433 14.6864C19.7016 13.5223 20.0598 12.4476 20.5075 11.373C20.6866 10.8357 20.5075 10.3879 20.0598 10.2088C19.612 10.0297 19.0747 10.2088 18.8956 10.6566C18.4478 11.7312 18.0001 12.8954 17.6419 14.1491C17.4627 14.5073 17.6419 15.1342 18.1792 15.3133ZM17.1941 32.0596C17.1941 31.6118 16.7463 31.1641 16.2986 31.1641C15.8508 31.1641 15.403 31.6118 15.403 32.0596C15.403 33.2238 15.4926 34.4775 15.6717 35.6417C15.6717 36.0894 16.0299 36.5372 16.5672 36.5372C17.1941 36.5372 17.5523 35.9103 17.4627 35.5521C17.2836 34.4775 17.1941 33.3133 17.1941 32.0596ZM20.7762 8.5969C21.2239 8.86555 21.7613 8.68645 22.0299 8.23869C22.6568 7.16406 23.2836 6.26854 24.0001 5.46257C24.3583 5.10436 24.2687 4.56704 23.9105 4.20884C23.5523 3.94018 22.9254 3.94018 22.6568 4.29839C21.8508 5.19391 21.1344 6.17899 20.5075 7.34316C20.2389 7.79093 20.418 8.41779 20.7762 8.5969Z" />
+								</g>
+							</svg>
+						</div>
+						<div class="content">
+							<h5>Collaborations & Expert Lectures</h5>
+							<p>Engaging with leading thinkers, institutions, and
+								practitioners through collaborations, seminars, and lecture
+								series that provide actionable insights for governance
+								transformation.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="project-section mb-90"
+		th:if="${allBlogs!= null and !allBlogs.isEmpty()}">
+		<div class="container-fluid one">
+			<div class="">
+				<div
+					class="mb-2 align-items-center justify-content-between py-4 row">
+					<div class="col-lg-8 col-sm-12 title-and-underline two gap-0">
+						<h3 class="section-heading">Case Studies</h3>
+						<h5 class="section-heading-brief">From Challenges to Change -Real Stories of Governance Reinvention.</h5>
+					</div>
+					<a class="explore-btn col-lg-4 justify-content-end col-sm-12"
+						href="/research-publications"> Explore More <svg
+							xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+							viewBox="0 0 12 12">
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+							</path>
+						</svg>
+					</a>
+				</div>
+			</div>
+
+			<div class="row g-4">
+				<div class="col-lg-12">
+					<div class="row">
+						<div class="col-lg-4" th:each="blog, iterStat : ${allBlogs}"
+							th:if="${iterStat.index < 3}">
+							<div class="card-casestudy">
+
+								<div class="card-media rounded-4">
+									<img th:if="${blog.thumbnailImage != null}"
+										th:src="@{/uploads/blogs/thumbnails/{img}(img=${blog.thumbnailImage})}"
+										alt="Blog Image" /> <img
+										th:if="${blog.thumbnailImage == null}"
+										th:src="@{/website/img/default-thumbnail.jpg}"
+										alt="Default Image" />
+
+									<div class="card-overlay">
+										<span class="tag top" th:text="${blog.category.name}">Case
+											Study</span>
+										<h3 class="overlay-title">
+											<a th:text="${blog.title}"
+												th:href="@{'/research-publications/' + ${blog.slug}}"></a>
+										</h3>
+									</div>
+								</div>
+
+								<div class="card-content p-5">
+									<header class="card-header">
+										<span class="card-date" th:text="${blog.category.name}">December
+											27, 2021</span>
+										<h3>
+											<a th:text="${blog.title}"
+												th:href="@{'/research-publications/' + ${blog.slug}}">Case
+												Study Title</a>
+										</h3>
+									</header>
+									<div class="card-desc">
+										<p>Lorem ipsum dolor sit amet consectetur adipisicing
+											elit. Tempore vero natus rem necessitatibus itaque
+											perferendis nulla laborum debitis eius delectus, dolor optio.
+											Modi, laboriosam amet.</p>
+									</div>
+									<footer class="card-footer">
+										<a class="explore-btn"
+											th:href="@{'/research-publications/' + ${blog.slug}}">
+											Read More <svg xmlns="http://www.w3.org/2000/svg" width="12"
+												height="12" viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</footer>
+								</div>
+								<div class="card-border">
+									<span class="top"></span> <span class="right"></span> <span
+										class="bottom"></span> <span class="left"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="fact-and-benefits-section pt-10 mb-90">
+		<div class="container-fluid one">
+			<div class="key-differentiaters-bg">
+				<div class="row g-4">
+					<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-2">
+						<div class="section-title1 title-and-underline two ">
+							<h3 class="section-heading">Key Differentiators</h3>
+							<h5 class="section-heading-brief">Redefining Governance
+								through purpose and precision.</h5>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="courses-container col-lg-4">
+						<div class="course">
+							<div class="course-preview">
+								<img th:src="@{website/img/key/Deepdomain.png}" alt="">
+							</div>
+							<div class="course-info">
+								<h2>Deep Domain Expertise.</h2>
+							</div>
+						</div>
+					</div>
+					<div class="courses-container col-lg-4">
+						<div class="course">
+							<div class="course-preview">
+								<img
+									th:src="@{website/img/key/Seasoned Professionals with Governance Experience.png}"
+									alt="">
+							</div>
+							<div class="course-info">
+								<h2>Led by a team of Seasoned Professionals with Governance
+									Experience.</h2>
+							</div>
+						</div>
+					</div>
+					<div class="courses-container col-lg-4">
+						<div class="course">
+							<div class="course-preview">
+								<img th:src="@{website/img/key/Mentorship.png}" alt="">
+							</div>
+							<div class="course-info">
+								<h2>Mentorship from Experienced e-Governance Leaders.</h2>
+							</div>
+						</div>
+					</div>
+					<div class="courses-container col-lg-4">
+						<div class="course">
+							<div class="course-preview">
+								<img th:src="@{website/img/key/Implementation of Solutions.png}"
+									alt="">
+							</div>
+							<div class="course-info">
+								<h2>Successful implementation of Solutions in key areas of
+									Governance.</h2>
+							</div>
+						</div>
+					</div>
+					<div class="courses-container col-lg-4">
+						<div class="course">
+							<div class="course-preview">
+								<img
+									th:src="@{website/img/key/Local Operational challenge-01.png}"
+									alt="">
+							</div>
+							<div class="course-info">
+								<h2>Understanding local operational challenges.</h2>
+							</div>
+						</div>
+					</div>
+					<div class="courses-container col-lg-4">
+						<div class="course">
+							<div class="course-preview">
+								<img
+									th:src="@{website/img/key/Local Change Through Global Best Practices.png}"
+									alt="">
+							</div>
+							<div class="course-info">
+								<h2>Driving Local Change Through Global Best Practices.</h2>
+							</div>
+						</div>
+					</div>
+					<div class="courses-container col-lg-4">
+						<div class="course">
+							<div class="course-preview">
+								<img th:src="@{website/img/key/ExperiencedTalent Pool.png}"
+									alt="">
+							</div>
+							<div class="course-info">
+								<h2>Dedicated and Experienced Talent Pool.</h2>
+							</div>
+						</div>
+					</div>
+					<div class="courses-container col-lg-4">
+						<div class="course">
+							<div class="course-preview">
+								<img
+									th:src="@{website/img/key/Specialists and Premier Institutions.png}"
+									alt="">
+							</div>
+							<div class="course-info">
+								<h2>Engagements with Specialists and Premier Institutions.</h2>
+							</div>
+						</div>
+					</div>
+					<div class="courses-container col-lg-4">
+						<div class="course">
+							<div class="course-preview">
+								<img
+									th:src="@{website/img/key/Promoting Evidence-Driven Decisions.png}"
+									alt="">
+							</div>
+							<div class="course-info">
+								<h2>Promoting Evidence-Driven Decisions.</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="col-lg-3">
+					<div class="k-card-2 style-2">
+						<div class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+								viewBox="0 0 60 60">
+								<path fill-rule="evenodd" clip-rule="evenodd"
+									d="M53.7866 29.4154C53.642 29.414 53.503 29.3595 53.3961 29.2622C53.2891 29.165 53.2216 29.0318 53.2065 28.888C52.6816 23.2037 50.1856 17.8818 46.1507 13.8436C42.1158 9.80549 36.7958 7.30528 31.1119 6.77584C30.9664 6.75043 30.8357 6.67125 30.7458 6.55399C30.656 6.43674 30.6135 6.28999 30.6267 6.14286C30.64 5.99572 30.7081 5.85895 30.8175 5.75968C30.9269 5.66041 31.0697 5.6059 31.2174 5.60695C37.1726 6.15956 42.7473 8.77693 46.9764 13.006C51.2054 17.2351 53.8228 22.8097 54.3754 28.765C54.3827 28.8459 54.3732 28.9274 54.3474 29.0045C54.3216 29.0815 54.2802 29.1524 54.2257 29.2127C54.1713 29.2729 54.1049 29.3213 54.0308 29.3546C53.9568 29.388 53.8766 29.4057 53.7954 29.4066L53.7866 29.4154ZM28.8269 56.8359C14.6772 56.8359 3.16406 45.3228 3.16406 31.1731C3.16406 24.731 5.55457 18.579 9.90494 13.8331C14.2004 9.13787 20.091 6.21136 26.4276 5.62453C26.5762 5.62103 26.7206 5.67387 26.8319 5.77243C26.9431 5.87099 27.013 6.00798 27.0275 6.15592C27.0419 6.30385 26.9999 6.45178 26.9098 6.57002C26.8197 6.68826 26.6883 6.76806 26.5418 6.79341C20.4577 7.3332 14.7984 10.1387 10.685 14.6541C6.57174 19.1694 4.30465 25.0651 4.33295 31.1731C4.33993 37.6671 6.92277 43.8932 11.5148 48.4852C16.1068 53.0772 22.3328 55.66 28.8269 55.667C34.9348 55.6953 40.8305 53.4282 45.3459 49.3149C49.8612 45.2016 52.6668 39.5422 53.2065 33.4581C53.2319 33.3126 53.3111 33.1819 53.4284 33.0921C53.5456 33.0022 53.6924 32.9597 53.8395 32.9729C53.9867 32.9862 54.1234 33.0543 54.2227 33.1637C54.322 33.2731 54.3765 33.4159 54.3754 33.5636C53.7871 39.9016 50.8572 45.7927 46.1581 50.0862C41.4122 54.4366 35.2602 56.8359 28.8269 56.8359Z" />
+								<path fill-rule="evenodd" clip-rule="evenodd"
+									d="M51.5618 31.7532H31.1722C31.0296 31.7357 30.8982 31.6666 30.803 31.5589C30.7078 31.4513 30.6552 31.3125 30.6552 31.1688C30.6552 31.025 30.7078 30.8863 30.803 30.7786C30.8982 30.671 31.0296 30.6019 31.1722 30.5843H51.5618C51.7045 30.6019 51.8358 30.671 51.9311 30.7786C52.0263 30.8863 52.0789 31.025 52.0789 31.1688C52.0789 31.3125 52.0263 31.4513 51.9311 31.5589C51.8358 31.6666 51.7045 31.7357 51.5618 31.7532ZM28.7729 53.9533C28.6168 53.9533 28.467 53.8913 28.3565 53.7808C28.2461 53.6704 28.1841 53.5206 28.1841 53.3645V51.8528C28.1739 51.7701 28.1814 51.6861 28.2062 51.6064C28.2309 51.5268 28.2722 51.4533 28.3275 51.3909C28.3828 51.3284 28.4506 51.2784 28.5267 51.2442C28.6027 51.2099 28.6851 51.1922 28.7685 51.1922C28.8519 51.1922 28.9344 51.2099 29.0104 51.2442C29.0864 51.2784 29.1543 51.3284 29.2096 51.3909C29.2648 51.4533 29.3062 51.5268 29.3309 51.6064C29.3556 51.6861 29.3631 51.7701 29.353 51.8528V53.3645C29.353 53.6897 29.0893 53.9533 28.7729 53.9533ZM28.7729 48.7944C28.6183 48.7944 28.4698 48.7336 28.3596 48.625C28.2494 48.5165 28.1864 48.369 28.1841 48.2143V46.7027C28.1739 46.6199 28.1814 46.5359 28.2062 46.4563C28.2309 46.3767 28.2722 46.3032 28.3275 46.2407C28.3828 46.1783 28.4506 46.1283 28.5267 46.094C28.6027 46.0598 28.6851 46.042 28.7685 46.042C28.8519 46.042 28.9344 46.0598 29.0104 46.094C29.0864 46.1283 29.1543 46.1783 29.2096 46.2407C29.2648 46.3032 29.3062 46.3767 29.3309 46.4563C29.3556 46.5359 29.3631 46.6199 29.353 46.7027V48.2143C29.353 48.5395 29.0893 48.7944 28.7729 48.7944ZM28.7729 43.6442C28.6183 43.6443 28.4698 43.5834 28.3596 43.4749C28.2494 43.3664 28.1864 43.2188 28.1841 43.0642V41.5526C28.1739 41.4698 28.1814 41.3858 28.2062 41.3062C28.2309 41.2265 28.2722 41.153 28.3275 41.0906C28.3828 41.0281 28.4506 40.9781 28.5267 40.9439C28.6027 40.9096 28.6851 40.8919 28.7685 40.8919C28.8519 40.8919 28.9344 40.9096 29.0104 40.9439C29.0864 40.9781 29.1543 41.0281 29.2096 41.0906C29.2648 41.153 29.3062 41.2265 29.3309 41.3062C29.3556 41.3858 29.3631 41.4698 29.353 41.5526V43.0642C29.353 43.3806 29.0893 43.6442 28.7729 43.6442ZM28.7729 38.4941C28.6183 38.4941 28.4698 38.4333 28.3596 38.3248C28.2494 38.2162 28.1864 38.0687 28.1841 37.9141V36.4024C28.1739 36.3196 28.1814 36.2357 28.2062 36.156C28.2309 36.0764 28.2722 36.0029 28.3275 35.9404C28.3828 35.878 28.4506 35.828 28.5267 35.7937C28.6027 35.7595 28.6851 35.7418 28.7685 35.7418C28.8519 35.7418 28.9344 35.7595 29.0104 35.7937C29.0864 35.828 29.1543 35.878 29.2096 35.9404C29.2648 36.0029 29.3062 36.0764 29.3309 36.156C29.3556 36.2357 29.3631 36.3196 29.353 36.4024V37.9141C29.353 38.2304 29.0893 38.4941 28.7729 38.4941ZM28.8257 29.4155C28.7483 29.4155 28.6718 29.4002 28.6003 29.3706C28.5289 29.341 28.464 29.2977 28.4093 29.243C28.3546 29.1883 28.3112 29.1234 28.2816 29.052C28.252 28.9805 28.2368 28.9039 28.2368 28.8266V8.43698C28.2368 8.28081 28.2989 8.13104 28.4093 8.02061C28.5197 7.91018 28.6695 7.84814 28.8257 7.84814C28.9818 7.84814 29.1316 7.91018 29.242 8.02061C29.3525 8.13104 29.4145 8.28081 29.4145 8.43698V28.8266C29.4145 29.1518 29.1508 29.4155 28.8257 29.4155Z" />
+								<path fill-rule="evenodd" clip-rule="evenodd"
+									d="M28.827 4.33271C28.3608 4.33271 27.9137 4.51789 27.5841 4.84753C27.2545 5.17717 27.0693 5.62425 27.0693 6.09043C27.0693 6.55661 27.2545 7.0037 27.5841 7.33333C27.9137 7.66297 28.3608 7.84816 28.827 7.84816C29.2932 7.84816 29.7403 7.66297 30.0699 7.33333C30.3996 7.0037 30.5847 6.55661 30.5847 6.09043C30.5847 5.62425 30.3996 5.17717 30.0699 4.84753C29.7403 4.51789 29.2932 4.33271 28.827 4.33271ZM28.827 9.02584C28.0485 9.02584 27.3019 8.71657 26.7514 8.16608C26.2009 7.61558 25.8916 6.86895 25.8916 6.09043C25.8916 5.31192 26.2009 4.56528 26.7514 4.01479C27.3019 3.46429 28.0485 3.15503 28.827 3.15503C29.6055 3.15503 30.3522 3.46429 30.9027 4.01479C31.4532 4.56528 31.7624 5.31192 31.7624 6.09043C31.7624 6.86895 31.4532 7.61558 30.9027 8.16608C30.3522 8.71657 29.6055 9.02584 28.827 9.02584ZM28.827 29.4155C28.3608 29.4155 27.9137 29.6007 27.5841 29.9303C27.2545 30.2599 27.0693 30.707 27.0693 31.1732C27.0693 31.6394 27.2545 32.0865 27.5841 32.4161C27.9137 32.7457 28.3608 32.9309 28.827 32.9309C29.2932 32.9309 29.7403 32.7457 30.0699 32.4161C30.3996 32.0865 30.5847 31.6394 30.5847 31.1732C30.5847 30.707 30.3996 30.2599 30.0699 29.9303C29.7403 29.6007 29.2932 29.4155 28.827 29.4155ZM28.827 34.0998C28.4286 34.1216 28.0299 34.062 27.6553 33.9246C27.2808 33.7871 26.9381 33.5748 26.6484 33.3005C26.3586 33.0261 26.1278 32.6956 25.9701 32.3291C25.8124 31.9626 25.7311 31.5678 25.7311 31.1688C25.7311 30.7698 25.8124 30.375 25.9701 30.0085C26.1278 29.642 26.3586 29.3115 26.6484 29.0371C26.9381 28.7628 27.2808 28.5505 27.6553 28.413C28.0299 28.2756 28.4286 28.216 28.827 28.2378C29.5766 28.2789 30.282 28.6056 30.7981 29.1507C31.3142 29.6959 31.6019 30.4181 31.6019 31.1688C31.6019 31.9195 31.3142 32.6417 30.7981 33.1869C30.282 33.732 29.5766 34.0587 28.827 34.0998ZM53.901 29.4155C53.4348 29.4155 52.9877 29.6007 52.6581 29.9303C52.3284 30.2599 52.1433 30.707 52.1433 31.1732C52.1433 31.6394 52.3284 32.0865 52.6581 32.4161C52.9877 32.7457 53.4348 32.9309 53.901 32.9309C54.3672 32.9309 54.8142 32.7457 55.1439 32.4161C55.4735 32.0865 55.6587 31.6394 55.6587 31.1732C55.6587 30.707 55.4735 30.2599 55.1439 29.9303C54.8142 29.6007 54.3672 29.4155 53.901 29.4155ZM53.901 34.0998C53.5155 34.0992 53.1339 34.0227 52.778 33.8747C52.4221 33.7266 52.0988 33.5099 51.8266 33.2369C51.5545 32.964 51.3387 32.64 51.1917 32.2837C51.0448 31.9273 50.9694 31.5455 50.97 31.16C50.9706 30.7745 51.047 30.3929 51.1951 30.037C51.3432 29.6811 51.5599 29.3578 51.8328 29.0857C52.1058 28.8135 52.4297 28.5977 52.7861 28.4508C53.1425 28.3038 53.5243 28.2284 53.9098 28.229C54.6883 28.229 55.4349 28.5383 55.9854 29.0888C56.5359 29.6393 56.8452 30.3859 56.8452 31.1644C56.8452 31.9429 56.5359 32.6896 55.9854 33.24C55.4349 33.7905 54.6795 34.0998 53.901 34.0998ZM8.14736 31.8148H6.63571C6.47954 31.8148 6.32977 31.7527 6.21934 31.6423C6.10891 31.5319 6.04687 31.3821 6.04688 31.2259C6.04687 31.0698 6.10891 30.92 6.21934 30.8096C6.32977 30.6991 6.47954 30.6371 6.63571 30.6371H8.14736C8.30353 30.6371 8.4533 30.6991 8.56373 30.8096C8.67416 30.92 8.7362 31.0698 8.7362 31.2259C8.7362 31.3821 8.67416 31.5319 8.56373 31.6423C8.4533 31.7527 8.30353 31.8148 8.14736 31.8148ZM13.2975 31.8148H11.7771C11.6209 31.8148 11.4711 31.7527 11.3607 31.6423C11.2503 31.5319 11.1882 31.3821 11.1882 31.2259C11.1882 31.0698 11.2503 30.92 11.3607 30.8096C11.4711 30.6991 11.6209 30.6371 11.7771 30.6371H13.2887C13.4449 30.6371 13.5947 30.6991 13.7051 30.8096C13.8155 30.92 13.8775 31.0698 13.8775 31.2259C13.8775 31.3821 13.8155 31.5319 13.7051 31.6423C13.5947 31.7527 13.4449 31.8148 13.2887 31.8148H13.2975ZM18.4476 31.8148H16.936C16.7798 31.8148 16.63 31.7527 16.5196 31.6423C16.4092 31.5319 16.3472 31.3821 16.3472 31.2259C16.3472 31.0698 16.4092 30.92 16.5196 30.8096C16.63 30.6991 16.7798 30.6371 16.936 30.6371H18.4476C18.6038 30.6371 18.7536 30.6991 18.864 30.8096C18.9744 30.92 19.0365 31.0698 19.0365 31.2259C19.0365 31.3821 18.9744 31.5319 18.864 31.6423C18.7536 31.7527 18.6038 31.8148 18.4476 31.8148ZM23.5978 31.8148H22.0861C21.93 31.8148 21.7802 31.7527 21.6698 31.6423C21.5593 31.5319 21.4973 31.3821 21.4973 31.2259C21.4973 31.0698 21.5593 30.92 21.6698 30.8096C21.7802 30.6991 21.93 30.6371 22.0861 30.6371H23.5978C23.7539 30.6371 23.9037 30.6991 24.0141 30.8096C24.1246 30.92 24.1866 31.0698 24.1866 31.2259C24.1866 31.3821 24.1246 31.5319 24.0141 31.6423C23.9037 31.7527 23.7539 31.8148 23.5978 31.8148Z" />
+							</svg>
+						</div>
+						<div class="content">
+							<h5>Individual & Institutional Collaboration</h5>
+							<p>Working closely with experts and institutions in the field
+								of public administration to gather domain knowledge and
+								co-develop impactful initiatives that strengthen the services
+								offered by karan..</p>
+						</div>
+					</div>
+				</div> -->
+	<!-- <div class="col-lg-3">
+					<div class="k-card-2 style-2">
+						<div class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+								viewBox="0 0 60 60">
+								<g>
+									<path
+									d="M30 0.703125C38.3203 0.703125 45.8203 3.98438 51.2109 9.25781C56.6016 14.5312 60 21.9141 60 30C60 38.0859 56.6016 45.4688 51.2109 50.7422C45.8203 56.0156 38.3203 59.2969 30 59.2969C21.6797 59.2969 14.1797 56.0156 8.78906 50.7422C3.39844 45.4688 0 38.0859 0 30C0 21.9141 3.39844 14.5312 8.78906 9.25781C14.1797 3.98438 21.6797 0.703125 30 0.703125ZM50.2734 10.3125C45 5.15625 37.8516 2.10938 30 2.10938C22.1484 2.10938 15 5.15625 9.72656 10.3125C4.57031 15.3516 1.40625 22.2656 1.40625 30C1.40625 37.7344 4.57031 44.6484 9.72656 49.6875C15 54.8438 22.1484 57.8906 30 57.8906C37.8516 57.8906 45 54.8438 50.2734 49.6875C55.4297 44.6484 58.5938 37.7344 58.5938 30C58.5938 22.2656 55.4297 15.3516 50.2734 10.3125Z" />
+									<path
+									d="M30 5.74219C29.6484 5.74219 29.2969 5.97656 29.2969 6.32812C29.2969 6.79688 29.6484 7.03125 30 7.03125H46.5234C46.875 7.03125 47.2266 6.79688 47.2266 6.32812C47.2266 5.97656 46.875 5.74219 46.5234 5.74219H30ZM30 11.6016C29.6484 11.6016 29.2969 11.9531 29.2969 12.3047C29.2969 12.6562 29.6484 13.0078 30 13.0078H52.9688C53.4375 13.0078 53.6719 12.6562 53.6719 12.3047C53.6719 11.9531 53.4375 11.6016 52.9688 11.6016H30ZM30 17.4609C29.6484 17.4609 29.2969 17.8125 29.2969 18.1641C29.2969 18.5156 29.6484 18.8672 30 18.8672H56.7188C57.0703 18.8672 57.4219 18.5156 57.4219 18.1641C57.4219 17.8125 57.0703 17.4609 56.7188 17.4609H30ZM30 23.4375C29.6484 23.4375 29.2969 23.6719 29.2969 24.1406C29.2969 24.4922 29.6484 24.7266 30 24.7266H58.7109C59.0625 24.7266 59.4141 24.4922 59.4141 24.1406C59.4141 23.6719 59.0625 23.4375 58.7109 23.4375H30ZM30 29.2969C29.6484 29.2969 29.2969 29.6484 29.2969 30C29.2969 30.3516 29.6484 30.7031 30 30.7031H59.2969C59.6484 30.7031 60 30.3516 60 30C60 29.6484 59.6484 29.2969 59.2969 29.2969H30ZM30 35.2734C29.6484 35.2734 29.2969 35.5078 29.2969 35.8594C29.2969 36.3281 29.6484 36.5625 30 36.5625H58.7109C59.0625 36.5625 59.4141 36.3281 59.4141 35.8594C59.4141 35.5078 59.0625 35.2734 58.7109 35.2734H30ZM30 41.1328C29.6484 41.1328 29.2969 41.4844 29.2969 41.8359C29.2969 42.1875 29.6484 42.5391 30 42.5391H56.7188C57.0703 42.5391 57.4219 42.1875 57.4219 41.8359C57.4219 41.4844 57.0703 41.1328 56.7188 41.1328H30ZM30 46.9922C29.6484 46.9922 29.2969 47.3438 29.2969 47.6953C29.2969 48.0469 29.6484 48.3984 30 48.3984H52.9688C53.4375 48.3984 53.6719 48.0469 53.6719 47.6953C53.6719 47.3438 53.4375 46.9922 52.9688 46.9922H30ZM30 52.9688C29.6484 52.9688 29.2969 53.2031 29.2969 53.6719C29.2969 54.0234 29.6484 54.2578 30 54.2578H46.5234C46.875 54.2578 47.2266 54.0234 47.2266 53.6719C47.2266 53.2031 46.875 52.9688 46.5234 52.9688H30Z" />
+								</g>
+							</svg>
+						</div>
+						<div class="content">
+							<h5>Domain Consulting</h5>
+							<p>Working closely with experts and institutions in the field
+								of public administration to gather domain knowledge and
+								co-develop impactful initiatives that strengthen the services
+								offered by karan.</p>
+						</div>
+					</div>
+				</div> -->
+
+	<!-- End Solution section -->
+	<!-- Start Solution section -->
+	<!-- <div class="about-top">
+			<div class="container-fluid one  ">
+				<div class="row g-4">
+					<div class="col-xxl-8 col-lg-7">
+						<div class="about-content pr--95">
+							<div class="section-title1 title-and-underline two white mb-50">
+								<h2>Where Insight Meets Impact</h2>
+								<p class="text-white pt-4">karan has led governance reforms
+									through hands-on consulting, capacity building, and policy
+									research across key public sectors. With deep roots in
+									administration and academic collaboration, we turn real-world
+									challenges into scalable solutions that drive institutional
+									transformation.</p>
+							</div>
+							<a class="primary-btn1 btn-hover" th:href="@{/about-us}">
+								About More <svg xmlns="http://www.w3.org/2000/svg" width="12"
+									height="12" viewBox="0 0 12 12">
+									<path fill-rule="evenodd" clip-rule="evenodd"
+										d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+									</path>
+								</svg> <span></span>
+							</a>
+						</div>
+					</div>
+					<div class="col-xxl-4 col-lg-5">
+						<div class="about-img ">
+							<img th:src="@{/website/img/karan/stairs.jpg}"
+								style="height: 693px; width: 596px; object-fit: cover;" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="about-bottom">
+			<div class="container-fluid one  ">
+				<div class="row">
+					<div class="col-xxl-8 col-lg-7">
+						<div class="three-columns">
+							<div class="column pl-0">Successfully supported multiple
+								Govt. departments in streamlining administrative processes.</div>
+							<div class="column">Delivered over 50+ capacity-building
+								programs for public officials across sectors.</div>
+							<div class="column">Produced impactful research and policy
+								briefs that informed state-level governance reforms.</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+	<div class="about-section2 mb-90">
+		<div class="associate-partners-section">
+			<div class="container-fluid one">
+				<div class="row g-4">
+					<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-0">
+						<div class="section-title1 title-and-underline two gap-0">
+							<h3 class="section-heading">News and Events</h3>
+							<h5 class="section-heading-brief">Stay informed about our latest initiatives, collaborations, and achievements in governance excellence.</h5>
+						</div>
+					</div>
+				</div>
+
+				<div class="news-sliderr whitepaper-grid">
+					<div class="whitepaper-card" th:each="paper : ${whitepapers}">
+						<!-- image -->
+						<!-- <img th:src="@{'/whitepapers/image/' + ${paper.id}}"
+							alt="Whitepaper Image" /> -->
+						<img th:src="@{/website/img/inner-pages/aboutus-2.jpg}">
+						<div class="card-overlay">
+							<span class="tag top"> Events <span class="mx-2">|</span>
+								<span class=""> 16 Sep 2025 </span>
+							</span>
+						</div>
+
+						<!-- content -->
+						<div class="card-content">
+							<h3 th:text="${paper.title}">Whitepaper Title</h3>
+							<p th:text="${paper.description}">Short description of the
+								whitepaper.</p>
+
+							<a class="explore-btn py-2"
+								th:href="@{'/whitepapers/pdf/' + ${paper.slug}}" target="_blank">
+								Read More <svg xmlns="http://www.w3.org/2000/svg" width="12"
+									height="12" viewBox="0 0 12 12">
+									<path fill-rule="evenodd" clip-rule="evenodd"
+										d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+									</path>
+								</svg>
+							</a>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="about-section2 mb-90">
+		<div class="associate-partners-section">
+			<div class="container-fluid one">
+				<div class="row g-4">
+					<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-0">
+						<div class="section-title1 title-and-underline two gap-0">
+							<h3 class="section-heading">Associations</h3>
+							<h5 class="section-heading-brief">Collaborating with
+								Institutions that Drive Public Sector Excellence.</h5>
+						</div>
+					</div>
+				</div>
+
+				<div class="sliderr ">
+					<div>
+						<img th:src="@{/website/img/icons/Gift.png}">
+					</div>
+					<div>
+						<img th:src="@{/website/img/icons/Kdisc.png}">
+					</div>
+					<div>
+						<img th:src="@{/website/img/icons/asap.png}">
+					</div>
+					<div>
+						<img th:src="@{/website/img/icons/CMP.png}">
+					</div>
+					<div>
+						<img th:src="@{/website/img/icons/LSGD.png}">
+					</div>
+					<div>
+						<img th:src="@{/website/img/icons/Kdisc.png}">
+					</div>
+					<div>
+						<img th:src="@{/website/img/icons/Gift.png}">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- End Solution section -->
+
+	<!-- <div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<div class="project-card">
+									<div class="project-img">
+										<img th:src="@{/website/img/project/project-01.jpg}" alt="">
+									</div>
+									<div class="project-content">
+										<div class="category-title">
+											<div class="category">
+												<a th:href="@{/case-studies}">Technology</a>
+											</div>
+											<h4><a th:href="@{/case-study-details}">Information Technology (IT)</a></h4>
+										</div>
+										<a class="explore-btn" th:href="@{/case-study-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="project-card">
+									<div class="project-img">
+										<img th:src="@{/website/img/project/project-02.jpg}" alt="">
+									</div>
+									<div class="project-content">
+										<div class="category-title">
+											<div class="category">
+												<a th:href="@{/case-studies}">Business</a>
+											</div>
+											<h4><a th:href="@{/case-study-details}">International Business</a></h4>
+										</div>
+										<a class="explore-btn" th:href="@{/case-study-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="project-card">
+									<div class="project-img">
+										<img th:src="@{/website/img/project/project-03.jpg}" alt="">
+									</div>
+									<div class="project-content">
+										<div class="category-title">
+											<div class="category">
+												<a th:href="@{/case-studies}">Marketing</a>
+											</div>
+											<h4><a th:href="@{/case-study-details}">Marketing Research</a></h4>
+										</div>
+										<a class="explore-btn" th:href="@{/case-study-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="project-card">
+									<div class="project-img">
+										<img th:src="@{/website/img/project/project-04.jpg}" alt="">
+									</div>
+									<div class="project-content">
+										<div class="category-title">
+											<div class="category">
+												<a th:href="@{/case-studies}">Business</a>
+											</div>
+											<h4><a th:href="@{/case-study-details}">Human Resources</a></h4>
+										</div>
+										<a class="explore-btn" th:href="@{/case-study-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="project-card">
+									<div class="project-img">
+										<img th:src="@{/website/img/project/project-05.jpg}" alt="">
+									</div>
+									<div class="project-content">
+										<div class="category-title">
+											<div class="category">
+												<a th:href="@{/case-studies}">Consulting</a>
+											</div>
+											<h4><a th:href="@{/case-study-details}">Finance Consulting</a></h4>
+										</div>
+										<a class="explore-btn" th:href="@{/case-study-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="project-card">
+									<div class="project-img">
+										<img th:src="@{/website/img/project/project-01.jpg}" alt="">
+									</div>
+									<div class="project-content">
+										<div class="category-title">
+											<div class="category">
+												<a th:href="@{/case-studies}">Technology</a>
+											</div>
+											<h4><a th:href="@{/case-study-details}">Information Technology (IT)</a></h4>
+										</div>
+										<a class="explore-btn" th:href="@{/case-study-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="project-card">
+									<div class="project-img">
+										<img th:src="@{/website/img/project/project-02.jpg}" alt="">
+									</div>
+									<div class="project-content">
+										<div class="category-title">
+											<div class="category">
+												<a th:href="@{/case-studies}">Business</a>
+											</div>
+											<h4><a th:href="@{/case-study-details}">International Business</a></h4>
+										</div>
+										<a class="explore-btn" th:href="@{/bcase-study-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="project-card">
+									<div class="project-img">
+										<img th:src="@{/website/img/project/project-03.jpg}" alt="">
+									</div>
+									<div class="project-content">
+										<div class="category-title">
+											<div class="category">
+												<a th:href="@{/case-studies}">Marketing</a>
+											</div>
+											<h4><a th:href="@{/case-study-details}">Marketing Research</a></h4>
+										</div>
+										<a class="explore-btn" th:href="@{/case-study-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="project-card">
+									<div class="project-img">
+										<img th:src="@{/website/img/project/project-04.jpg}" alt="">
+									</div>
+									<div class="project-content">
+										<div class="category-title">
+											<div class="category">
+												<a th:href="@{/case-studies}">Business</a>
+											</div>
+											<h4><a th:href="@{/case-study-details}">Human Resources</a></h4>
+										</div>
+										<a class="explore-btn" th:href="@{/case-study-details}">
+											Explore More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="project-card">
+									<div class="project-img">
+										<img th:src="@{/website/img/project/project-05.jpg}" alt="">
+									</div>
+									<div class="project-content">
+										<div class="category-title">
+											<div class="category">
+												<a th:href="@{/case-studies}">Consulting</a>
+											</div>
+											<h4><a th:href="@{/case-study-details}">Finance Consulting</a></h4>
+										</div>
+										<a class="explore-btn" th:href="@{/case-study-details}">
+											Explore Blogs
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div> -->
+
+
+	<!-- <div class="swiper-wrapper">
+							<div class="swiper-slide" th:each="caseStudy : ${caseStudyCards.content}">
+								<div class="project-card">
+									<div class="project-img">
+										<img th:src="${caseStudy.thumbnailImage != null and !#strings.isEmpty(caseStudy.thumbnailImage)} 
+            ? |/uploads/case-studies/${caseStudy.thumbnailImage}|
+            : '/website/img/project/default.jpg'"
+     alt="Case Study Image" />
+										<img th:src="@{'/uploads/case-studies/thumbnails/' + ${caseStudy.thumbnailImage}}"
+											alt="Case Study Image">
+									</div>
+									<div class="project-content">
+										<div class="category-title">
+											<div class="category">
+												<a th:href="@{/case-studies}">Case Study</a>
+											</div>
+											<h4>
+												<a th:href="@{'/case-studies/' + ${caseStudy.slug}}"
+													th:text="${caseStudy.title}">Case Study Title</a>
+											</h4>
+										</div>
+										<a class="explore-btn" th:href="@{'/case-studies/' + ${caseStudy.slug}}">
+											Read More
+											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+												viewBox="0 0 12 12">
+												<path fill-rule="evenodd" clip-rule="evenodd"
+													d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z" />
+											</svg>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div> -->
+
+	<!-- 🔹 Navigation buttons -->
+	<!-- <div class="swiper-nav">
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div>
+	</div> -->
+
+	<!-- End Project Section -->
+
+	<!-- Start Blog Section -->
+	<!-- <div class="blog-section2 mb-90" th:if="${blogs != null and !blogs.isEmpty()}">
+		<div class="container-fluid one">
+			<div class="row g-4">
+				<div
+					class="col-lg-12 mb-50 gap-lg-5 gap-4 d-flex flex-lg-nowrap flex-wrap align-items-end justify-content-between">
+					<div class="section-title1 title-and-underline two">
+						<span>News & Insight</span>
+						<h2>The latest news and insights</h2>
+					</div>
+					<a class="explore-btn" th:href="@{/blogs}">
+						Explore Blogs
+						<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12">
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+							</path>
+						</svg>
+						<span></span>
+					</a>
+				</div>
+				<div class="col-lg-12" >
+					<div class="row g-4">
+						<div class="col-xl-3 col-md-6 col-lg-6 col-sm-12 blog-wrap" th:each="blog : ${blogs}">
+							<div class="blog-card2">
+								<div class="blog-img">
+									<img th:if="${blog.thumbnailImage != null}"
+										th:src="@{/uploads/blogs/thumbnails/{img}(img=${blog.thumbnailImage})}"
+										alt="Blog Image" />
+									<img th:if="${blog.thumbnailImage == null}"
+										th:src="@{/website/img/default-thumbnail.jpg}" alt="Default Image" />
+								</div>
+								<div class="blog-content">
+									<h4>
+										<a th:href="@{'/blog/' + ${blog.slug}}" th:text="${blog.title}">Blog Title</a>
+									</h4>
+									<a class="explore-btn" th:href="@{'/blog/' + ${blog.slug}}">
+										Read More
+										<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+											viewBox="0 0 12 12">
+											<path fill-rule="evenodd" clip-rule="evenodd"
+												d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+											</path>
+										</svg>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>  -->
+
+</main>
+
+</html>

@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{layouts/karan-layout}">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header"
+	th:content="${_csrf.headerName}" />
+
+<head>
+<title>karan - Our Story</title>
+
+<link rel="icon" type="image/x-icon"
+	th:href="@{/website/img/favicon.png}" />
+</head>
+<main role="main" class="" layout:fragment="content">
+	<div class="breadcrumb-banner"
+		style="background-image: linear-gradient(270deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, 0.55) 101.02%), url(../website/img/banner/About-us-banner.jpg);">
+
+		<div class="container-fluid one ">
+			<nav aria-label="breadcrumb" class="breadcrumb-wrapper">
+				<ol class="breadcrumb-custom">
+					<li><a th:href="@{/}">Home</a></li>
+					<li class="active">About</li>
+				</ol>
+			</nav>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="banner-content">
+						<h1>
+							Empowering Governance Through  <br /> Insight, Innovation, and Impact.
+						</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- End Breadcrumb Section -->
+
+	<!-- about section -->
+	<div class="about-section pt-90 mb-90 bg-white"
+		style="background: #fff;">
+		<div class="container-fluid one ">
+			<div class="row g-xl-4 gy-5">
+				<div class="col-xl-7">
+					<div class="about-content pr--95">
+						<div class=" title-and-underline two mb-20 gap-0">
+							<h3 class="section-heading">About Us</h3>
+							<h3 class="section-subheading">Centre for Public
+								Administration Reinvention and Transformation (karan)</h3>
+							<p class="pt-4">The Centre for Public Administration
+								Reinvention and Transformation (karan) is dedicated to
+								redefining and reshaping governance in India. With a vision to
+								strengthen public systems through knowledge, innovation, and
+								reform, karan serves as a hub for research-driven consulting,
+								institutional restructuring, and capacity enhancement in the
+								public sector.</p>
+							<p>Bringing together experts in public policy, economics, and
+								governance, karan designs practical, data-informed, and
+								sustainable solutions that help government departments adapt to
+								emerging socio-economic and digital realities. Through research,
+								reform, and collaboration, karan empowers institutions to
+								become more transparent, responsive, and citizen-centric.</p>
+							 
+						</div>
+						<a class="primary-btn1 btn-hover" th:href="@{/service-details}">
+							Our Services <svg xmlns="http://www.w3.org/2000/svg" width="12"
+								height="12" viewBox="0 0 12 12">
+								<path fill-rule="evenodd" clip-rule="evenodd"
+									data-attr-sgk="breadcrumbv1"
+									d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+								</path>
+							</svg> <span></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xl-5">
+					<div class="row h-100">
+						<div class="d-flex align-items-center">
+							<img class="rounded-4"
+								th:src="@{/website/img/inner-pages/aboutus-2.jpg}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- about section -->
+
+	<!-- Start Mission section -->
+
+	<section class="accordion_two_section mb-90 container-fluid one">
+		<div class="row g-4">
+			<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-2">
+				<div class="team-heading">
+					<h3 class="section-heading text-center ">Board of Directors</h3>
+					<h5 class="section-heading-brief text-center">Meet the Board of Directors guiding karan’s vision and strategic direction.</h5>
+				</div>
+			</div>
+		</div>
+
+		<div class=" mt-4">
+			<div class=" ">
+				<div class="board-directers statement-content row">
+					<div class="col-lg-6">
+						<div class="blog-slider__item">
+							<div class="col-lg-6 p-4 h-100">
+								<img
+									src=""
+									alt="">
+							</div>
+							<div
+								class="blog-slider__content statement-content-bottom col-lg-6">
+								<div class="board-quotes">
+									<p>"To thrive, every part of the enterprise must embrace
+										data, AI, and agile thinking to unlock resilience and redefine
+										growth."</p>
+								</div>
+								<div class="board-name mt-2">
+									<h3>Ajith Kumar</h3>
+									<p>Chief Executive Officer</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="blog-slider__item">
+							<div class="col-lg-6 p-4 h-100">
+								<img
+									src=""
+									alt="">
+							</div>
+							<div
+								class="blog-slider__content statement-content-bottom col-lg-6">
+								<div class="board-quotes">
+									<p>"Technology is no longer a support function—it’s the
+										foundation and agile thinking to unlock resilience and
+										redefine growth."</p>
+								</div>
+								<div class="board-name mt-2">
+									<h3>Maya Vijay</h3>
+									<p>Director of karan</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- <div class="mission-section mb-90 ">
+		<div class="container-fluid one ">
+		<div class="leadership-section">
+			<div class="row g-lg-4 gy-5">
+				<div class="col-lg-4 d-flex" id="sticky-col" th:if="${ceo != null and !ceo.isEmpty()}">
+					<div class="mission-img sticky-box flex-grow-1 align-content-center" th:object="${ceo[0]}">
+						<img th:src="@{*{photoUrl}}" alt="CEO Image"
+							onerror="this.onerror=null;this.src='/website/img/karan/ceo.jpg';" />
+							style="max-height: 645px;"
+					</div>
+				</div>
+
+				<div class="col-lg-8 pl--55 pl-mobile-55" id="main-content">
+					<div class="mission-content-wrap content">
+					<div class="row g-4">
+				<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-0">
+					<div class="section-title1 title-and-underline two gap-0">
+						<h3 class="section-heading">Visionaries at the Helm</h3>
+						<h5 class="section-heading-brief">Empowering progress with strategic vision and experience</h5>
+					</div>
+				</div>
+			</div>
+						<div class="mission-content-top">
+							<p class="pt-0">"Technology is no longer a support function—it’s the foundation. To
+								thrive, every part of
+								the enterprise must embrace data, AI, and agile thinking to unlock resilience and
+								redefine growth."</p>
+							<h5>Mr. Ajith Kumar, <span>Company CEO</span></h5>
+						</div>
+						<div class="row ">
+							<div class="col-sm-6 mb-4 mb-sm-0">
+								<div class="vision-area">
+									<div class="mission-vision-header">
+										<h3 class="mb-0">Our Vision</h3>
+									</div>
+									<div class="mission-vision-desc1">
+										<p>To lead the transformation of Public Administration by fostering
+											institutional collaboration, excelling in the domain, and conducting
+											world-class research thereby ensuring effective governance that can handle
+											real challenges and promote overall excellence.</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 ">
+								<div class="mission-area">
+									<div class=" mission-vision-header ">
+										<h3 class="mb-0">Our Mission</h3>
+									</div>
+									<div class="mission-vision-desc1">
+										<p>Empowering Government and Public Sector Enterprises through strategic
+											insights and collaborative action to drive transformative improvements in
+											governance and service delivery, ensuring inclusiveness, effectiveness,
+											transparency and accountability.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div> -->
+	<!-- End Mission section -->
+
+	<!-- Start People Section -->
+	<div class="people-section2 mb-90" id="ourPeoples"
+		th:if="${team != null and !team.isEmpty()}">
+		<div class="container-fluid one">
+			<div class="row g-4 mt-0">
+				<div
+					class="col-lg-12 d-flex about-content pt-0 flex-column mb-2 mt-0 align-items-center">
+					<div
+						class="section-title1 title-and-underline two gap-0 text-center justify-content-center align-items-center">
+						<h3 class="section-heading">Leadership Team</h3>
+						<!-- 						<h5 class="section-heading-brief">Excellent Service Provided by Our Superb Consultants</h5> -->
+						<p>Meet the visionary leadership team driving karan’s mission of innovation and governance excellence.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="row justify-content-center mb-4">
+						<div class="col-xl-3 col-lg-4 col-sm-6"
+							th:each="member, iterStat : ${team}"
+							th:if="${iterStat.index < 2}">
+							<!-- Card here -->
+							<div class="people-card3">
+								<div class="people-img">
+									<img th:src="@{${member.photoUrl}}" th:alt="${member.name}" />
+								</div>
+								<div class="people-content text-center">
+									<div class="name-degi">
+										<h5>
+											<a th:text="${member.name}" href="#"></a>
+										</h5>
+										<span th:text="${member.position}"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row justify-content-center">
+						<div class="col-xl-3 col-lg-4 col-sm-6"
+							th:each="member, iterStat : ${team}"
+							th:if="${iterStat.index >= 2}">
+							<!-- Card here -->
+							<div class="people-card3">
+								<div class="people-img">
+									<img th:src="@{${member.photoUrl}}" th:alt="${member.name}" />
+								</div>
+								<div class="people-content text-center">
+									<div class="name-degi">
+										<h5>
+											<a th:text="${member.name}" href="#"></a>
+										</h5>
+										<span th:text="${member.position}"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End People Section -->
+
+	<section class="accordion-highlights mb-90" style="background: #fff;">
+		<div class="container-fluid one">
+			<div class="">
+				<div
+					class="mb-2 align-items-center justify-content-between py-4 row">
+					<div class="col-lg-8 col-sm-12 title-and-underline two gap-0">
+						<h3 class="section-heading">Services</h3>
+						<h5 class="section-heading-brief">Our Core services that drive governance transformation through innovation, expertise, and collaboration. </h5>
+					</div>
+					<a class="explore-btn col-lg-4 justify-content-end col-sm-12"
+						href="/service-details"> Explore More <svg
+							xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+							viewBox="0 0 12 12">
+							<path fill-rule="evenodd" clip-rule="evenodd"
+								d="M10.1865 1.06237L0 11.2484L0.751627 12L10.9376 1.81347V8.85645H12V0H3.14355V1.06237H10.1865Z">
+							</path>
+						</svg>
+					</a>
+				</div>
+			</div>
+
+			<div class="row_flex">
+				<div class="row_inner">
+					<div class="accordion accordion_active">
+						<div class="accordion_intro">
+							<h4>Consulting Support</h4>
+						</div>
+
+					</div>
+					<div class="accordion">
+						<div class="accordion_intro">
+							<h4>Capacity-Building Programs</h4>
+						</div>
+
+					</div>
+					<div class="accordion">
+						<div class="accordion_intro">
+							<h4>Research & Publications</h4>
+						</div>
+
+					</div>
+					<div class="accordion">
+						<div class="accordion_intro">
+							<h4>Innovation Lab</h4>
+						</div>
+
+					</div>
+					<div class="accordion">
+						<div class="accordion_intro">
+							<h4>Business Process Reengineering (BPR)</h4>
+						</div>
+
+					</div>
+					<div class="accordion">
+						<div class="accordion_intro">
+							<h4>Collaborations & Expert Lectures</h4>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="row_inner accordion_images">
+
+					<div class="accordion_contentt active">
+						<div class="card-casestudy">
+							<div class="card-media">
+								<img th:src="@{/website/img/inner-pages/consulting support.jpg}"
+									class="accordion_image">
+								<div class="card-overlay service-content col-lg-6">
+									<span class="tag top">Consulting Support</span>
+									<h3 class="overlay-title">We provide specialized expertise
+										in public administration to identify bottlenecks, redesign
+										workflows, and deliver actionable strategies that improve
+										governance efficiency and outcomes.</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion_contentt">
+						<div class="card-casestudy">
+							<div class="card-media">
+								<img
+									th:src="@{/website/img/inner-pages/Capacity-Building Programs.jpg}"
+									class="accordion_image">
+								<div class="card-overlay service-content col-lg-6">
+									<span class="tag top">Capacity-Building Programs</span>
+									<h3 class="overlay-title">Focused training programs
+										designed to enhance the knowledge and skills of government
+										officials and public sector entities, enabling them to respond
+										effectively to emerging challenges.</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion_contentt">
+						<div class="card-casestudy">
+							<div class="card-media">
+								<img
+									th:src="@{/website/img/inner-pages/Research and  publications.jpg}"
+									class="accordion_image">
+								<div class="card-overlay service-content col-lg-6">
+									<span class="tag top">Research & Publications</span>
+									<h3 class="overlay-title">We develop data-driven reports,
+										case studies, and knowledge resources that highlight
+										governance best practices, success stories, and reform
+										opportunities.</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion_contentt">
+						<div class="card-casestudy">
+							<div class="card-media">
+								<img th:src="@{/website/img/inner-pages/Innovation Lab.jpg}"
+									class="accordion_image">
+								<div class="card-overlay service-content col-lg-6">
+									<span class="tag top">Innovation Lab</span>
+									<h3 class="overlay-title">A dedicated space for ideation
+										and experimentation, where experts and institutions
+										collaborate to design forward-looking solutions and adopt best
+										practices for public administration.</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion_contentt">
+						<div class="card-casestudy">
+							<div class="card-media">
+								<img
+									th:src="@{/website/img/inner-pages/Business Process Reengineering.jpg}"
+									class="accordion_image">
+								<div class="card-overlay service-content col-lg-6">
+									<span class="tag top">Business Process Reengineering
+										(BPR)</span>
+									<h3 class="overlay-title">Leveraging decades of domain
+										experience to radically redesign administrative and financial
+										processes, improving efficiency, transparency, and
+										performance.</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion_contentt">
+						<div class="card-casestudy">
+							<div class="card-media">
+								<img
+									th:src="@{/website/img/inner-pages/Collaborations & Expert Lectures.jpg}"
+									class="accordion_image">
+								<div class="card-overlay service-content col-lg-6">
+									<span class="tag top">Collaborations & Expert Lectures</span>
+									<h3 class="overlay-title">Engaging with leading thinkers,
+										institutions, and practitioners through collaborations,
+										seminars, and lecture series that provide actionable insights
+										for governance transformation.</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Start Testimonial section -->
+	<!-- <div class="testimonial-section2 mb-90">
+		<div class="container-fluid one">
+		
+		<div class="row g-4 mt-0">
+				<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-0">
+					<div class="section-title1 title-and-underline two gap-0">
+						<h3 class="section-heading">From Vision to Impact</h3>
+						<h5 class="section-heading-brief">Excellent Service Provided by Our Superb Consultants</h5>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="tastimonial-wrap2">
+						<div class="sriper testimonial-slider2 mb-30">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<div class="testimonial-card">
+										<div class="testimonal-content text-center">
+											<span>Transformational Insights</span>
+											<p>karan's consulting team helped us redefine our department's workflow,
+												ensuring better transparency and improved citizen engagement. Their
+												strategic approach made a measurable difference in our public service
+												delivery.</p>
+											<div class="author-area">
+												<div class="content">
+													<h6>Ms. Kavya Menon</h6>
+													<span>Deputy Secretary, Govt. of Kerala</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="swiper-slide">
+									<div class="testimonial-card">
+										<div class="testimonal-content text-center">
+											<span>Policy Made Practical</span>
+											<p>We partnered with karan for a governance innovation pilot. Their
+												data-backed recommendations and hands-on training workshops brought
+												real, actionable changes to our local governance model.</p>
+											<div class="author-area">
+												<div class="content">
+													<h6>Dr. Alok Verma</h6>
+													<span>IAS Officer, State Planning Board</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="swiper-slide">
+									<div class="testimonial-card">
+										<div class="testimonal-content text-center">
+											<span>Structured, Strategic Support</span>
+											<p>karan’s evaluation of our e-governance initiative was thorough and
+												insightful. Their feedback helped us scale the system more efficiently
+												across districts while aligning with administrative priorities.</p>
+											<div class="author-area">
+												<div class="content">
+													<h6>Mrs. Meera Radhakrishnan</h6>
+													<span>Joint Director, Digital Kerala Mission</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="swiper-slide">
+									<div class="testimonial-card">
+										<div class="testimonal-content text-center">
+											<span>People-Centric Governance</span>
+											<p>Thanks to karan’s participatory model, we successfully conducted
+												community consultations across panchayats. Their facilitation ensured
+												inclusive policymaking and increased trust between citizens and
+												officials.</p>
+											<div class="author-area">
+												<div class="content">
+													<h6>Mr. Anish Kumar</h6>
+													<span>Panchayat President, Palakkad</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="slider-btn-area">
+							<div class="franctional-pagi2"></div>
+							<span class="dash"></span>
+							<div class="slider-btn-group w-100">
+								<div class="slider-btn prev-3">
+									<svg xmlns="http://www.w3.org/2000/svg" width="15" height="11" viewBox="0 0 15 11">
+										<path fill-rule="evenodd" clip-rule="evenodd"
+											d="M0.416666 5.9668H15V4.7168H0.416666V5.9668Z" />
+										<path fill-rule="evenodd" clip-rule="evenodd"
+											d="M1.04115 4.7168C3.98115 4.7168 6.38281 7.3018 6.38281 10.0585V10.6835H5.13281V10.0585C5.13281 7.96596 3.26448 5.9668 1.04115 5.9668H0.416979V4.7168H1.04115Z" />
+										<path fill-rule="evenodd" clip-rule="evenodd"
+											d="M1.04115 5.96667C3.98115 5.96667 6.38281 3.38167 6.38281 0.625V0H5.13281V0.625C5.13281 2.71833 3.26448 4.71667 1.04115 4.71667H0.416979V5.96667H1.04115Z" />
+									</svg>
+								</div>
+								<div class="slider-btn next-3">
+									<svg xmlns="http://www.w3.org/2000/svg" width="15" height="11" viewBox="0 0 15 11">
+										<path fill-rule="evenodd" clip-rule="evenodd"
+											d="M14.5833 5.9668H0V4.7168H14.5833V5.9668Z" />
+										<path fill-rule="evenodd" clip-rule="evenodd"
+											d="M13.9589 4.7168C11.0189 4.7168 8.61719 7.3018 8.61719 10.0585V10.6835H9.86719V10.0585C9.86719 7.96596 11.7355 5.9668 13.9589 5.9668H14.583V4.7168H13.9589Z" />
+										<path fill-rule="evenodd" clip-rule="evenodd"
+											d="M13.9589 5.96667C11.0189 5.96667 8.61719 3.38167 8.61719 0.625V0H9.86719V0.625C9.86719 2.71833 11.7355 4.71667 13.9589 4.71667H14.583V5.96667H13.9589Z" />
+									</svg>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<!-- End Testimonial section -->
+
+
+	<!-- <div class="services-tab-section mb-130">
+		<div class="container-fluid one ">
+			<div class="row">
+				<div
+					class="col-lg-12  gap-lg-5 gap-4 d-flex flex-lg-nowrap flex-wrap align-items-start justify-content-between mb-70">
+					<div class="section-title1 title-and-underline one">
+
+						<h2>Join our team</h2>
+					</div>
+
+				</div>
+				<div class="col-lg-12">
+					<div class="row justify-content-center ">
+						<div class="people-left-content">
+							<div class="find-job-card">
+								<span></span>
+								<div class="icon">
+									<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
+										<path fill-rule="evenodd" clip-rule="evenodd"
+											d="M35.6529 3.71829L0 39.3693L2.63069 42L38.2817 6.34713V30.9976H42V0H11.0024V3.71829H35.6529Z">
+										</path>
+									</svg>
+								</div>
+								<div class="content">
+									<h5>Be the Change-Maker!</h5>
+									<p>Passionate about transforming public service and driving meaningful impact? <a
+											th:href="@{/careers}">Explore Careers</a> and be a part of something bigger.
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+
+	<div class="service-details-faq-section bg-white mb-90" id="faq">
+		<div class="container-fluid one">
+			<div class="row g-4 mt-0">
+				<div class="col-lg-12 d-flex about-content flex-column mb-2 mt-0">
+					<div class="section-title1 title-and-underline two gap-0">
+						<h3 class="section-heading">FAQ's</h3>
+						<h5 class="section-heading-brief">Everything You Need to Know
+							About karan.</h5>
+					</div>
+				</div>
+			</div>
+
+			<div class="row g-4">
+				<div class="col-lg-12">
+					<div class="row faq-wrap px-0 justify-content-center">
+						<div class="accordion col-lg-6" id="accordionExample">
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingOne">
+									<button class="accordion-button" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseOne"
+										aria-expanded="true" aria-controls="collapseOne">
+										What is karan?</button>
+								</h2>
+								<div id="collapseOne" class="accordion-collapse collapse show"
+									aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+									<div class="accordion-body">karan, the Centre for Public
+										Administration Reinvention and Transformation, is a premier
+										governance think tank and consulting institution based in
+										Thiruvananthapuram, Kerala. It serves as a facilitator and
+										knowledge hub, bringing together policymakers, administrators,
+										academicians and domain experts to explore, deliberate and
+										advance the frontiers of public administration. Through its
+										focus on research, reform and strategic transformation, karan
+										drives evidence-based governance innovation and institutional
+										excellence.</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingTwo">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+										aria-expanded="false" aria-controls="collapseTwo">
+										What kind of services does karan offer?</button>
+								</h2>
+								<div id="collapseTwo" class="accordion-collapse collapse"
+									aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+									<div class="accordion-body">karan provides consultancy
+										services in General Administration, Public Finance and
+										Licensing & Compliance through a blend of domain consulting,
+										research and policy advisory, capacity-building initiatives
+										and strategic support aimed at advancing governance reforms
+										and strengthening institutional frameworks.</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingThree">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseThree"
+										aria-expanded="false" aria-controls="collapseThree">
+										How does karan differ from other consulting organizations?</button>
+								</h2>
+								<div id="collapseThree" class="accordion-collapse collapse"
+									aria-labelledby="headingThree"
+									data-bs-parent="#accordionExample">
+									<div class="accordion-body">Unlike technology-focused
+										firms, karan emphasizes domain depth — combining research,
+										policy insights and administrative expertise to ensure reforms
+										are contextually sound and institutionally sustainable.</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingFour">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseFour"
+										aria-expanded="false" aria-controls="collapseFour">
+										Does karan collaborate with governments directly?</button>
+								</h2>
+								<div id="collapseFour" class="accordion-collapse collapse"
+									aria-labelledby="headingFour"
+									data-bs-parent="#accordionExample">
+									<div class="accordion-body">Yes. karan works closely
+										with government departments and directorates to provide policy
+										inputs, conduct process re-engineering and design reform
+										strategies tailored to administrative needs.</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingFive">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseFive"
+										aria-expanded="false" aria-controls="collapseFive">
+										Does karan engage in implementation or only advisory work?</button>
+								</h2>
+								<div id="collapseFive" class="accordion-collapse collapse"
+									aria-labelledby="headingFive"
+									data-bs-parent="#accordionExample">
+									<div class="accordion-body">karan primarily focuses on
+										domain consulting and reform design, but also partners with
+										karan and other entities for integrated implementation
+										involving both policy and technology.</div>
+								</div>
+							</div>
+
+							<!--  -->
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingSix">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseSix"
+										aria-expanded="false" aria-controls="collapseSix">
+										What kind of training programs does karan conduct?</button>
+								</h2>
+								<div id="collapseSix" class="accordion-collapse collapse"
+									aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+									<div class="accordion-body">karan offers leadership
+										development programs, governance innovation workshops, public
+										policy seminars and customized training modules for
+										bureaucrats and government officials.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading7">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse7"
+										aria-expanded="false" aria-controls="collapse7">Are
+										these programs available to non-government participants?</button>
+								</h2>
+								<div id="collapse7" class="accordion-collapse collapse"
+									aria-labelledby="heading7" data-bs-parent="#accordionExample">
+									<div class="accordion-body">Select programs, especially
+										those on public policy and administration innovation, are open
+										to researchers, development professionals and academic
+										participants.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading8">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse8"
+										aria-expanded="false" aria-controls="collapse8">Does
+										karan provide certification for training programs?</button>
+								</h2>
+								<div id="collapse8" class="accordion-collapse collapse"
+									aria-labelledby="heading8" data-bs-parent="#accordionExample">
+									<div class="accordion-body">Yes. Participants receive
+										completion certificates jointly issued by karan and
+										collaborating academic or government institutions, where
+										applicable.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading9">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse9"
+										aria-expanded="false" aria-controls="collapse9">Does
+										karan undertake commissioned research projects?</button>
+								</h2>
+								<div id="collapse9" class="accordion-collapse collapse"
+									aria-labelledby="heading9" data-bs-parent="#accordionExample">
+									<div class="accordion-body">Yes. karan conducts
+										commissioned studies and policy research for government
+										departments, development agencies and institutional partners.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading10">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse10"
+										aria-expanded="false" aria-controls="collapse10">Can
+										research institutions or think tanks collaborate with karan?</button>
+								</h2>
+								<div id="collapse10" class="accordion-collapse collapse"
+									aria-labelledby="heading10" data-bs-parent="#accordionExample">
+									<div class="accordion-body">Absolutely. karan actively
+										partners with universities, think tanks and policy
+										institutions to promote joint research, innovation and
+										knowledge exchange.</div>
+								</div>
+							</div>
+
+
+						</div>
+
+						<div class="accordion col-lg-6" id="accordionExample1">
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading11">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse11"
+										aria-expanded="false" aria-controls="collapse11">How
+										does karan ensure the quality of its research and consulting
+										outputs?</button>
+								</h2>
+								<div id="collapse11" class="accordion-collapse collapse"
+									aria-labelledby="heading11" data-bs-parent="#accordionExample1">
+									<div class="accordion-body">All outputs undergo rigorous
+										peer review, validation and expert scrutiny to ensure
+										methodological soundness and practical relevance.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading12">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse12"
+										aria-expanded="false" aria-controls="collapse12">How
+										can a government department collaborate with karan?</button>
+								</h2>
+								<div id="collapse12" class="accordion-collapse collapse"
+									aria-labelledby="heading12" data-bs-parent="#accordionExample1">
+									<div class="accordion-body">Departments can engage karan
+										through direct consultation, project-based MoUs or by
+										participating in capacity-building and reform initiatives
+										tailored to their administrative needs.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading13">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse13"
+										aria-expanded="false" aria-controls="collapse13">
+										Does karan provide end-to-end consulting support?</button>
+								</h2>
+								<div id="collapse13" class="accordion-collapse collapse"
+									aria-labelledby="heading13" data-bs-parent="#accordionExample1">
+									<div class="accordion-body">Yes. karan offers end-to-end
+										domain consulting from diagnostic assessment and policy
+										formulation to process redesign, capacity building and
+										performance monitoring.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading14">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse14"
+										aria-expanded="false" aria-controls="collapse14">
+										What is the process for initiating a project with karan?</button>
+								</h2>
+								<div id="collapse14" class="accordion-collapse collapse"
+									aria-labelledby="heading14" data-bs-parent="#accordionExample1">
+									<div class="accordion-body">Interested organizations can
+										contact karan through the official website or email. A
+										preliminary consultation will be scheduled to understand
+										objectives, assess requirements and outline a proposal.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading15">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse15"
+										aria-expanded="false" aria-controls="collapse15">How
+										is karan related to karan?</button>
+								</h2>
+								<div id="collapse15" class="accordion-collapse collapse"
+									aria-labelledby="heading15" data-bs-parent="#accordionExample1">
+									<div class="accordion-body">karan is a sister concern of
+										karan Consulting, extending its legacy in governance solutions.
+										While karan focuses on technology-driven implementations,
+										karan provides domain expertise through research, policy
+										reform and institutional restructuring.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading16">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse16"
+										aria-expanded="false" aria-controls="collapse16">Who
+										are the key stakeholders karan works with?</button>
+								</h2>
+								<div id="collapse16" class="accordion-collapse collapse"
+									aria-labelledby="heading16" data-bs-parent="#accordionExample1">
+									<div class="accordion-body">karan collaborates with
+										central and state governments, public sector undertakings,
+										training institutions and academic and research bodies to
+										design and implement governance reforms.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading17">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse17"
+										aria-expanded="false" aria-controls="collapse17">Has
+										karan worked on any notable projects?</button>
+								</h2>
+								<div id="collapse17" class="accordion-collapse collapse"
+									aria-labelledby="heading17" data-bs-parent="#accordionExample1">
+									<div class="accordion-body">Yes. karan’s team members
+										have contributed to multiple governance transformation
+										initiatives, fiscal reforms and institutional strengthening
+										projects across India in partnership with karan and government
+										departments.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading18">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse18"
+										aria-expanded="false" aria-controls="collapse18">Is
+										karan a government organization or a private entity?</button>
+								</h2>
+								<div id="collapse18" class="accordion-collapse collapse"
+									aria-labelledby="heading18" data-bs-parent="#accordionExample1">
+									<div class="accordion-body">karan is an independent
+										professional entity that works in close collaboration with
+										government institutions, focusing on public sector
+										transformation.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading19">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse19"
+										aria-expanded="false" aria-controls="collapse19">How
+										can someone join or work with karan?</button>
+								</h2>
+								<div id="collapse19" class="accordion-collapse collapse"
+									aria-labelledby="heading19" data-bs-parent="#accordionExample1">
+									<div class="accordion-body">Professionals interested in
+										governance consulting, policy research or training can reach
+										out through the careers or partnership section on the official
+										website.</div>
+								</div>
+							</div>
+
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="heading20">
+									<button class="accordion-button collapsed" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapse20"
+										aria-expanded="false" aria-controls="collapse20">How
+										can I contact karan for inquiries or partnerships?</button>
+								</h2>
+								<div id="collapse20" class="accordion-collapse collapse"
+									aria-labelledby="heading20" data-bs-parent="#accordionExample1">
+									<div class="accordion-body">You can reach karan via
+										email at karunakaran1.dn@gmail.com or through the contact form available
+										on the official website.</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</main>
+
+
+</html>

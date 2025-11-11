@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<meta id="_csrf" name="_csrf" th:content="${_csrf.token}" />
+<meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}" />
+
+<head>
+	<title>karan Admin - Contact applications</title>
+
+
+
+	<link rel="icon" type="image/x-icon" th:href="@{/website/img/favicon.png}" />
+</head>
+<main role="main" class="" layout:fragment="content">
+
+
+	<div class="pt-5 mt-5">
+		<div class="container mt-4">
+			<div class="p-4 rounded shadow-sm bg-light mb-4 border border-1">
+				<div class="d-flex align-items-center">
+					<h3 class="mb-0">📩 Contact Form Submissions</h3>
+				</div>
+			</div>
+
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped align-middle">
+					<thead class="table-dark">
+						<tr>
+							<th>#</th>
+							<th>Submitted On</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Company</th>
+							<th>Consulting Area</th>
+							<th>Message</th>
+						</tr>
+					</thead>
+					<tbody th:if="${contactForms != null and contactForms.size() > 0}">
+						<tr th:each="form, stat : ${contactForms}">
+							<td th:text="${stat.index + 1}">1</td>
+							<td th:text="${#dates.format(form.submittedOn, 'dd-MM-yyyy')}"></td>
+							<td th:text="${form.name}">John Doe</td>
+							<td th:text="${form.email}">john@example.com</td>
+							<td th:text="${form.company}">Acme Corp</td>
+							<td th:text="${form.consultingArea}">Digital Transformation</td>
+							<td th:text="${form.message}">We would like to...</td>
+						</tr>
+					</tbody>
+
+					<tbody th:if="${contactForms == null or contactForms.size() == 0}">
+						<tr>
+							<td colspan="7" style="text-align: center;">No submissions found.</td>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+
+	</div>
+
+
+</main>
+
+</html>
